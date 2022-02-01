@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "noFallthroughCasesInSwitch": true,
+    "importsNotUsedAsValues": "error",
+    "baseUrl": "src",
+    "paths": {
+      "app/*": ["app/*"],
+      "hooks/*": ["hooks/*"],
+      "components/*": ["components/*"],
+      "schema/*": ["schema/*"],
+      "utils/*": ["utils/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

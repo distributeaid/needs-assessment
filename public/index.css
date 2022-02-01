@@ -1,0 +1,17 @@
+html {
+  font-family: "Inter", "system-ui";
+}
+
+:root {
+  --bs-font-sans-serif: "Inter", "system-ui";
+  --bs-body-font-weight: 300;
+}
+
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: "Inter var", "system-ui";
+  }
+  :root {
+    --bs-font-sans-serif: "Inter var", "system-ui";
+  }
+}

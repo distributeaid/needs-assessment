@@ -1,0 +1,28 @@
+.collapsable > header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  animation: spin 4s linear infinite;
+}
+
+.chevron {
+  transform: rotate(0);
+  transition-duration: 0.25s;
+  transition-property: transform;
+}
+
+.collapsable > header[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.collapsable > div {
+  margin-top: 1rem;
+}
+
+.collapsable + .collapsable {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://distributeaid.github.io/needs-assessment/question.schema.json",
+  "title": "Questions of a section",
+  "description": "A section has multiple questions",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["text", "number", "multi-select", "single-select"]
+    }
+  },
+  "additionalProperties": false,
+  "required": ["id", "title", "required", "type"]
+}

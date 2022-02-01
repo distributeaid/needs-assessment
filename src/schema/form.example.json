@@ -1,0 +1,132 @@
+{
+  "$schema": "https://distributeaid.github.io/needs-assessment/form.schema.json",
+  "sections": [
+    {
+      "id": "basic-info",
+      "title": "Basic Info",
+      "questions": [
+        {
+          "id": "email",
+          "title": "Email Address",
+          "required": true,
+          "type": "text"
+        },
+        {
+          "id": "organization",
+          "title": "Organisation Name",
+          "required": true,
+          "type": "text"
+        },
+        {
+          "id": "region",
+          "title": "What region to you operate in?",
+          "required": true,
+          "type": "single-select",
+          "options": [
+            "Calais/Dunkirk",
+            "Paris",
+            "Chios",
+            "Samos",
+            "Lesvos",
+            "Thessaloniki/Northern Mainland Greece",
+            "Athens/Southern Mainland Greece",
+            "Lebanon",
+            "Bosnia",
+            "Serbia",
+            "Other"
+          ]
+        },
+        {
+          "id": "areainfo",
+          "title": "Would you like to tell us the exact area that you operate in?",
+          "required": false,
+          "type": "text",
+          "maxLength": 180
+        }
+      ]
+    },
+    {
+      "id": "whom-you-serve",
+      "title": "Whom you serve",
+      "questions": [
+        {
+          "id": "people-of-concern",
+          "title": "How many total 'people of concern' live in the region where you operate?",
+          "description": "e.g. total number of people living in an RIC and apartments ",
+          "required": true,
+          "type": "number",
+          "min": 1
+        },
+        {
+          "id": "people-supported-month",
+          "title": "How many unique people does your organisation support in a month?",
+          "description": "This is the number of individuals you support; if you serve the same person multiple times in a month, please do not count them multiple times!",
+          "required": true,
+          "type": "number",
+          "min": 1
+        },
+        {
+          "id": "average-people-served-month",
+          "title": "How many times on average do you serve one person over the course of a month?",
+          "description": "e.g. if you serve the same people one meal a day, you would serve an individual 30 times a month.",
+          "required": true,
+          "type": "number",
+          "min": 1
+        },
+        {
+          "id": "population-trending",
+          "title": "Is the regions population trending upwards, downwards, stagnant, or hard to say?",
+          "required": true,
+          "type": "single-select",
+          "options": ["upwards", "downwards", "stagnant", "hard to say"]
+        },
+        {
+          "id": "aid-types",
+          "title": "Which of the following types of aid does your organisation provide? Please select all that apply",
+          "comment": "if clothing is selected, this triggers the question `clothing-distribution` about which types of clothing",
+          "required": true,
+          "type": "multi-select",
+          "options": [
+            "food items",
+            "clothing",
+            "hygiene (including diapers)",
+            "Shelter and Storage",
+            "education and employability services",
+            "medical services"
+          ]
+        },
+        {
+          "id": "primary-serving",
+          "title": "Whom do you primarily serve? Pease select all that apply",
+          "required": true,
+          "type": "multi-select",
+          "options": [
+            "men",
+            "women",
+            "children",
+            "unaccompanied minors",
+            "families",
+            "disabled",
+            "LGBTQ+",
+            "Vulnerable Cases"
+          ]
+        },
+        {
+          "id": "clothing-distribution",
+          "title": "Which types of the following clothing does your organisation distribute? Please select all that apply",
+          "required": "$includes(whom-you-serve.aid-types, 'clothing')",
+          "hidden": "$includes(whom-you-serve.aid-types, 'clothing') == false",
+          "comment": "only display if clothing selected on `aid-types` and make this question required. Each answer choice triggers a page for needs data about that type of clothing if selected.",
+          "type": "multi-select",
+          "options": [
+            "Women's clothing",
+            "men's clothing",
+            "girl's clothing",
+            "boy's clothing",
+            "baby clothing"
+          ]
+        }
+      ]
+    }
+  ]
+}
