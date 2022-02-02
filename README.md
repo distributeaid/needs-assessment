@@ -22,6 +22,27 @@ The UI components are themed using
 
 [Vite](https://vitejs.dev/) is used as the frontend toolchain.
 
+## Project goals
+
+Provide a way for Distribute Aid to run needs assessment using forms that can be
+modified using low-code or zero-code approach. These forms need to provide
+validation and flow logic.
+
+The first version of the needs assessment was run using Qualtrics, however we
+will no longer have access to it without paying, and the license fees are too
+expensive for Distribute Aid.
+
+The forms that were built using Qualtrics have been documented
+[here](https://drive.google.com/drive/folders/15Kh9WszNG8q9L-ztuboc3rWKT410qlbB?usp=sharing).
+
+### Idea
+
+- Implement a form generator, that allows to describe a form using JSON
+  - custom form logic is implemented using [JSONata](https://jsonata.org/)
+    expressions.
+- Forms runs fully in browser, using local storage (no backend needed)
+- Export to CSV, JSON
+
 ## Set up
 
     npm ci
