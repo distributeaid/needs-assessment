@@ -4,6 +4,7 @@ import addFormats from 'ajv-formats'
 import addKeywords from 'ajv-keywords'
 import type { Definition } from 'components/Form'
 import { Form } from 'components/Form'
+import { useResponse } from 'hooks/useResponse'
 import { useEffect, useState } from 'react'
 import formExample from 'schema/form.example.json'
 import formSchema from 'schema/form.schema.json'
@@ -23,6 +24,7 @@ const storedFormDefinition = withLocalStorage<string>({
 })
 
 export const FormGenerator = () => {
+	const { response } = useResponse()
 	const [formDefinition, setFormDefinition] = useState<string>(
 		storedFormDefinition.get(),
 	)
@@ -49,6 +51,7 @@ export const FormGenerator = () => {
 		<main className="container mt-4">
 			<div className="row justify-content-center">
 				<section className="col-6">
+					<h2>Define the form here:</h2>
 					<label htmlFor="form-definition">
 						Provide the form definition below:
 					</label>
@@ -84,9 +87,12 @@ export const FormGenerator = () => {
 							format
 						</button>
 					)}
+					<hr />
+					<h2>Response will appear here:</h2>
+					<pre>{JSON.stringify(response, null, 2)}</pre>
 				</section>
 				<section className="col-6">
-					<p>Form will appear here:</p>
+					<h2>Form will appear here:</h2>
 					{formValid && (
 						<Form definition={JSON.parse(formDefinition) as Definition} />
 					)}

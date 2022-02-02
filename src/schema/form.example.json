@@ -10,7 +10,7 @@
           "title": "Email Address",
           "required": true,
           "format": {
-            "type": "text"
+            "type": "email"
           },
           "example": "alex@distributeaid.org"
         },

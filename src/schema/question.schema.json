@@ -44,7 +44,7 @@
           "type": "object",
           "properties": {
             "type": {
-              "const": "short-text"
+              "const": "text"
             },
             "maxLength": {
               "description": "Maximum text length",
@@ -59,12 +59,7 @@
           "type": "object",
           "properties": {
             "type": {
-              "const": "text"
-            },
-            "maxLength": {
-              "description": "Maximum text length",
-              "type": "integer",
-              "minimum": 1
+              "const": "email"
             }
           },
           "additionalProperties": false,

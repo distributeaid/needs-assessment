@@ -1,5 +1,6 @@
 import { Collapsable } from 'components/Collapsable'
-import { FunctionComponent, PropsWithChildren, useState } from 'react'
+import { useResponse } from 'hooks/useResponse'
+import type { FunctionComponent, PropsWithChildren } from 'react'
 
 type JSONatatExpression = string
 
@@ -73,7 +74,18 @@ const TextInput = ({
 	maxLength?: number
 	required: boolean
 }) => {
-	const [value, setValue] = useState<string>('')
+	const { response, update } = useResponse()
+	const value = response?.[section.id]?.[question.id] ?? ''
+	const setValue = (value: string) => {
+		const v = value.trim()
+		return update({
+			...response,
+			[section.id]: {
+				...response?.[section.id],
+				[question.id]: v.length > 0 ? v : undefined,
+			},
+		})
+	}
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
 			<input
@@ -110,14 +122,28 @@ const PositiveIntegerInput = ({
 	max?: number
 	required: boolean
 }) => {
-	const [value, setValue] = useState<string>('')
+	const { response, update } = useResponse()
+	const value = response?.[section.id]?.[question.id] ?? ''
+	const setValue = (value: string) => {
+		const v = parseInt(value, 10)
+		update({
+			...response,
+			[section.id]: {
+				...response?.[section.id],
+				[question.id]: isNaN(v) ? undefined : v,
+			},
+		})
+	}
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
 			<input
 				required={required}
 				type="number"
-				min={Math.min(1, Math.abs(min ?? 1))}
-				max={Math.min(1, Math.abs(max ?? 1))}
+				min={Math.max(1, Math.abs(min ?? 1))}
+				max={Math.min(
+					Number.MAX_SAFE_INTEGER,
+					Math.abs(max ?? Number.MAX_SAFE_INTEGER),
+				)}
 				step={1}
 				className="form-control"
 				id={`${section.id}.${question.id}`}
@@ -173,7 +199,16 @@ const SingleSelectQuestion = ({
 	question: Question
 	required: boolean
 }) => {
-	const [value, setValue] = useState<string>('')
+	const { response, update } = useResponse()
+	const value = response?.[section.id]?.[question.id] ?? ''
+	const setValue = (value: string) =>
+		update({
+			...response,
+			[section.id]: {
+				...response?.[section.id],
+				[question.id]: value === '-1' ? undefined : value,
+			},
+		})
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
 			<select
@@ -202,7 +237,16 @@ const MultiSelectQuestion = ({
 	question: Question
 	required: boolean
 }) => {
-	const [selected, setSelected] = useState<string[]>([])
+	const { response, update } = useResponse()
+	const selected: string[] = response?.[section.id]?.[question.id] ?? []
+	const setSelected = (value: string[]) =>
+		update({
+			...response,
+			[section.id]: {
+				...response?.[section.id],
+				[question.id]: value.length === 0 ? undefined : value,
+			},
+		})
 	return (
 		<div className="mb-3">
 			<p className="form-label">
@@ -224,11 +268,9 @@ const MultiSelectQuestion = ({
 							checked={selected.includes(option)}
 							onChange={({ target: { checked } }) => {
 								if (checked) {
-									setSelected((selected) => [...selected, option])
+									setSelected([...selected, option])
 								} else {
-									setSelected((selected) => [
-										...selected.filter((v) => v !== option),
-									])
+									setSelected([...selected.filter((v) => v !== option)])
 								}
 							}}
 						/>
@@ -245,7 +287,7 @@ const MultiSelectQuestion = ({
 	)
 }
 
-const Question = ({
+const QuestionComponent = ({
 	section,
 	question,
 }: {
@@ -303,10 +345,10 @@ const Question = ({
 	}
 }
 
-const Section = ({ section }: { section: Section }) => (
+const SectionComponent = ({ section }: { section: Section }) => (
 	<fieldset key={section.id}>
 		{section.questions.map((question) => (
-			<Question section={section} question={question} />
+			<QuestionComponent section={section} question={question} />
 		))}
 	</fieldset>
 )
@@ -316,7 +358,7 @@ export const Form = ({ definition }: { definition: Definition }) => {
 		<form className="form">
 			{definition.sections.map((section) => (
 				<Collapsable title={section.title} id={section.id}>
-					<Section section={section} />
+					<SectionComponent section={section} />
 				</Collapsable>
 			))}
 			<footer></footer>
