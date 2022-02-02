@@ -259,7 +259,7 @@ const MultiSelectQuestion = ({
 			</p>
 			{(question.format as MultiSelectQuestionFormat).options.map(
 				(option, i) => (
-					<div className="form-check">
+					<div className="form-check" key={i}>
 						<input
 							className="form-check-input"
 							type="checkbox"
@@ -346,9 +346,13 @@ const QuestionComponent = ({
 }
 
 const SectionComponent = ({ section }: { section: Section }) => (
-	<fieldset key={section.id}>
+	<fieldset>
 		{section.questions.map((question) => (
-			<QuestionComponent section={section} question={question} />
+			<QuestionComponent
+				section={section}
+				question={question}
+				key={question.id}
+			/>
 		))}
 	</fieldset>
 )
@@ -357,7 +361,7 @@ export const Form = ({ definition }: { definition: Definition }) => {
 	return (
 		<form className="form">
 			{definition.sections.map((section) => (
-				<Collapsable title={section.title} id={section.id}>
+				<Collapsable title={section.title} id={section.id} key={section.id}>
 					<SectionComponent section={section} />
 				</Collapsable>
 			))}
