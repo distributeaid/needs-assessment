@@ -1,49 +1,15 @@
 import { Collapsable } from 'components/Collapsable'
+import { WarningIcon } from 'components/FeatherIcons'
 import { useResponse } from 'hooks/useResponse'
+import { useValidation } from 'hooks/useValidation'
 import type { FunctionComponent, PropsWithChildren } from 'react'
-
-type JSONatatExpression = string
-
-type SingleSelectQuestionFormat = {
-	type: 'single-select'
-	options: string[]
-}
-
-type MultiSelectQuestionFormat = {
-	type: 'multi-select'
-	options: string[]
-}
-
-type Question = {
-	id: string
-	title: string
-	required?: boolean | JSONatatExpression // default: true
-	example?: string
-	format:
-		| {
-				type: 'text'
-				maxLength?: number
-		  }
-		| {
-				type: 'email'
-		  }
-		| {
-				type: 'positive-integer'
-				min?: number
-				max?: number
-		  }
-		| SingleSelectQuestionFormat
-		| MultiSelectQuestionFormat
-}
-
-type Section = {
-	id: string
-	title: string
-	questions: Question[]
-}
-export type Definition = {
-	sections: Section[]
-}
+import type {
+	Form as FormDefinition,
+	MultiSelectQuestionFormat,
+	Question,
+	Section,
+	SingleSelectQuestionFormat,
+} from 'schema/types'
 
 const QuestionInfo: FunctionComponent<
 	PropsWithChildren<{ section: Section; question: Question; required: boolean }>
@@ -62,12 +28,14 @@ const QuestionInfo: FunctionComponent<
 )
 
 const TextInput = ({
+	form,
 	section,
 	question,
 	type,
 	maxLength,
 	required,
 }: {
+	form: FormDefinition
 	section: Section
 	question: Question
 	type: 'text' | 'email'
@@ -75,14 +43,14 @@ const TextInput = ({
 	required: boolean
 }) => {
 	const { response, update } = useResponse()
+	const { validation } = useValidation({ response, form })
 	const value = response?.[section.id]?.[question.id] ?? ''
 	const setValue = (value: string) => {
-		const v = value.trim()
 		return update({
 			...response,
 			[section.id]: {
 				...response?.[section.id],
-				[question.id]: v.length > 0 ? v : undefined,
+				[question.id]: value.length > 0 ? value : undefined,
 			},
 		})
 	}
@@ -92,7 +60,9 @@ const TextInput = ({
 				type={type}
 				maxLength={maxLength}
 				required={required}
-				className="form-control"
+				className={`form-control ${
+					validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
+				}`}
 				id={`${section.id}.${question.id}`}
 				placeholder={
 					question.example !== undefined
@@ -101,6 +71,9 @@ const TextInput = ({
 				}
 				value={value}
 				onChange={({ target: { value } }) => setValue(value)}
+				onBlur={() => {
+					setValue(value.trim())
+				}}
 			/>
 			{maxLength !== undefined && (
 				<small>{maxLength - value.length} character(s) remaining</small>
@@ -115,15 +88,18 @@ const PositiveIntegerInput = ({
 	min,
 	max,
 	required,
+	form,
 }: {
 	section: Section
 	question: Question
 	min?: number
 	max?: number
 	required: boolean
+	form: FormDefinition
 }) => {
 	const { response, update } = useResponse()
 	const value = response?.[section.id]?.[question.id] ?? ''
+	const { validation } = useValidation({ response, form })
 	const setValue = (value: string) => {
 		const v = parseInt(value, 10)
 		update({
@@ -145,7 +121,9 @@ const PositiveIntegerInput = ({
 					Math.abs(max ?? Number.MAX_SAFE_INTEGER),
 				)}
 				step={1}
-				className="form-control"
+				className={`form-control ${
+					validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
+				}`}
 				id={`${section.id}.${question.id}`}
 				placeholder={
 					question.example !== undefined
@@ -174,12 +152,14 @@ const TextQuestion = ({
 	question: Question
 	maxLength?: number
 	required: boolean
+	form: FormDefinition
 }) => <TextInput {...rest} type={'text'} />
 
 const EmailQuestion = (args: {
 	section: Section
 	question: Question
 	required: boolean
+	form: FormDefinition
 }) => <TextInput {...args} type={'email'} />
 
 const PositiveIntegerQuestion = (args: {
@@ -188,19 +168,23 @@ const PositiveIntegerQuestion = (args: {
 	min?: number
 	max?: number
 	required: boolean
+	form: FormDefinition
 }) => <PositiveIntegerInput {...args} />
 
 const SingleSelectQuestion = ({
 	question,
 	section,
 	required,
+	form,
 }: {
 	section: Section
 	question: Question
 	required: boolean
+	form: FormDefinition
 }) => {
 	const { response, update } = useResponse()
 	const value = response?.[section.id]?.[question.id] ?? ''
+	const { validation } = useValidation({ response, form })
 	const setValue = (value: string) =>
 		update({
 			...response,
@@ -213,7 +197,9 @@ const SingleSelectQuestion = ({
 		<QuestionInfo section={section} question={question} required={required}>
 			<select
 				value={value}
-				className="form-control"
+				className={`form-control ${
+					validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
+				}`}
 				required={required}
 				onChange={({ target: { value } }) => setValue(value)}
 			>
@@ -232,10 +218,12 @@ const MultiSelectQuestion = ({
 	section,
 	question,
 	required,
+	form,
 }: {
 	section: Section
 	question: Question
 	required: boolean
+	form: FormDefinition
 }) => {
 	const { response, update } = useResponse()
 	const selected: string[] = response?.[section.id]?.[question.id] ?? []
@@ -247,6 +235,7 @@ const MultiSelectQuestion = ({
 				[question.id]: value.length === 0 ? undefined : value,
 			},
 		})
+	const { validation } = useValidation({ response, form })
 	return (
 		<div className="mb-3">
 			<p className="form-label">
@@ -261,7 +250,9 @@ const MultiSelectQuestion = ({
 				(option, i) => (
 					<div className="form-check" key={i}>
 						<input
-							className="form-check-input"
+							className={`form-check-input ${
+								validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
+							}`}
 							type="checkbox"
 							value={option}
 							id={`${section.id}-${question.id}-${i}`}
@@ -288,9 +279,11 @@ const MultiSelectQuestion = ({
 }
 
 const QuestionComponent = ({
+	form,
 	section,
 	question,
 }: {
+	form: FormDefinition
 	section: Section
 	question: Question
 }) => {
@@ -300,6 +293,7 @@ const QuestionComponent = ({
 		case 'text':
 			return (
 				<TextQuestion
+					form={form}
 					section={section}
 					question={question}
 					maxLength={question.format.maxLength}
@@ -309,6 +303,7 @@ const QuestionComponent = ({
 		case 'email':
 			return (
 				<EmailQuestion
+					form={form}
 					section={section}
 					question={question}
 					required={isRequired}
@@ -317,6 +312,7 @@ const QuestionComponent = ({
 		case 'positive-integer':
 			return (
 				<PositiveIntegerQuestion
+					form={form}
 					section={section}
 					question={question}
 					min={question.format.min}
@@ -327,6 +323,7 @@ const QuestionComponent = ({
 		case 'single-select':
 			return (
 				<SingleSelectQuestion
+					form={form}
 					section={section}
 					question={question}
 					required={isRequired}
@@ -335,6 +332,7 @@ const QuestionComponent = ({
 		case 'multi-select':
 			return (
 				<MultiSelectQuestion
+					form={form}
 					section={section}
 					question={question}
 					required={isRequired}
@@ -345,10 +343,17 @@ const QuestionComponent = ({
 	}
 }
 
-const SectionComponent = ({ section }: { section: Section }) => (
+const SectionComponent = ({
+	section,
+	form,
+}: {
+	form: FormDefinition
+	section: Section
+}) => (
 	<fieldset>
 		{section.questions.map((question) => (
 			<QuestionComponent
+				form={form}
 				section={section}
 				question={question}
 				key={question.id}
@@ -357,15 +362,35 @@ const SectionComponent = ({ section }: { section: Section }) => (
 	</fieldset>
 )
 
-export const Form = ({ definition }: { definition: Definition }) => {
+export const Form = ({ form }: { form: FormDefinition }) => {
+	const { response } = useResponse()
+	const { valid, sectionValidation } = useValidation({ response, form })
 	return (
 		<form className="form">
-			{definition.sections.map((section) => (
-				<Collapsable title={section.title} id={section.id} key={section.id}>
-					<SectionComponent section={section} />
+			{form.sections.map((section) => (
+				<Collapsable
+					title={
+						<>
+							{section.title}
+							{!sectionValidation[section.id] && (
+								<abbr title="Section is invalid.">
+									<WarningIcon />
+								</abbr>
+							)}
+						</>
+					}
+					id={section.id}
+					key={section.id}
+				>
+					<SectionComponent form={form} section={section} />
 				</Collapsable>
 			))}
-			<footer></footer>
+			<hr />
+			<footer className="d-flex justify-content-end">
+				<button type="button" className="btn btn-primary" disabled={!valid}>
+					submit
+				</button>
+			</footer>
 		</form>
 	)
 }

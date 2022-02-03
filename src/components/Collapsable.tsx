@@ -1,4 +1,5 @@
 import styles from 'components/Collapsable.module.css'
+import { MinusIcon, PlusIcon } from 'components/FeatherIcons'
 import { useCollapsed } from 'hooks/useCollapsed'
 
 export const Collapsable = ({
@@ -7,7 +8,7 @@ export const Collapsable = ({
 	children,
 }: {
 	id: string
-	title: string
+	title: React.ReactElement<any>
 	children: React.ReactElement<any> | (React.ReactElement<any> | null)[]
 }) => {
 	const { collapsed, toggle } = useCollapsed(id)
@@ -35,9 +36,12 @@ export const Collapsable = ({
 					tabIndex={0}
 					onKeyDown={handleKey}
 					aria-expanded="false"
+					className="d-flex justify-content-between"
 				>
-					<div>{title}</div>
-					<span>+</span>
+					<div className="d-flex  align-items-center justify-content-between flex-grow-1 me-2">
+						{title}
+					</div>
+					<PlusIcon />
 				</header>
 			</section>
 		)
@@ -51,8 +55,10 @@ export const Collapsable = ({
 				onKeyDown={handleKey}
 				aria-expanded="true"
 			>
-				<div>{title}</div>
-				<span>-</span>
+				<div className="d-flex  align-items-center justify-content-between flex-grow-1 me-2">
+					{title}
+				</div>
+				<MinusIcon />
 			</header>
 			<div>{children}</div>
 		</section>
