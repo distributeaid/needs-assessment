@@ -19,12 +19,12 @@
       "minLength": 1
     },
     "example": {
-      "description": "An exmple answer.",
+      "description": "An example answer.",
       "type": "string",
       "minLength": 1
     },
     "internalComment": {
-      "description": "An comment (should not be shown to users).",
+      "description": "A comment (should not be shown to users).",
       "type": "string",
       "minLength": 1
     },
@@ -34,7 +34,7 @@
       "default": true
     },
     "hidden": {
-      "description": "whether to hide this section, can either be statically disabled, or be a JSONata expression",
+      "description": "whether to hide this question, can either be statically disabled, or be a JSONata expression",
       "oneOf": [{ "type": "boolean" }, { "type": "string", "minLength": 1 }]
     },
     "format": {
@@ -82,10 +82,19 @@
               "description": "Maximum value",
               "type": "integer",
               "minimum": 1
+            },
+            "units": {
+              "description": "Unit of the value",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1
             }
           },
           "additionalProperties": false,
-          "required": ["type"]
+          "required": ["type", "units"]
         },
         {
           "type": "object",

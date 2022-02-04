@@ -64,7 +64,8 @@
           "description": "e.g. total number of people living in an RIC and apartments ",
           "required": true,
           "format": {
-            "type": "positive-integer"
+            "type": "positive-integer",
+            "units": ["people of concern"]
           }
         },
         {
@@ -73,7 +74,8 @@
           "description": "This is the number of individuals you support; if you serve the same person multiple times in a month, please do not count them multiple times!",
           "required": true,
           "format": {
-            "type": "positive-integer"
+            "type": "positive-integer",
+            "units": ["unique people"]
           }
         },
         {
@@ -82,7 +84,8 @@
           "description": "e.g. if you serve the same people one meal a day, you would serve an individual 30 times a month.",
           "required": true,
           "format": {
-            "type": "positive-integer"
+            "type": "positive-integer",
+            "units": ["average servings/month"]
           }
         },
         {
@@ -144,6 +147,149 @@
               "boy's clothing",
               "baby clothing"
             ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-items",
+      "title": "Food items",
+      "description": "How many food items do you need for the next three months? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the next three months.",
+      "hidden": "$includes(whom-you-serve.aid-types, 'food items') == false",
+      "questions": [
+        {
+          "id": "rice",
+          "title": "Rice",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg"]
+          }
+        },
+        {
+          "id": "potatoes",
+          "title": "Potatoes",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg"]
+          }
+        },
+        {
+          "id": "onions",
+          "title": "Onions",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg"]
+          }
+        },
+        {
+          "id": "garlic",
+          "title": "Garlic",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg"]
+          }
+        },
+        {
+          "id": "flour",
+          "title": "Flour",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg"]
+          }
+        },
+        {
+          "id": "salt",
+          "title": "Salt",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg"]
+          }
+        },
+        {
+          "id": "sugar",
+          "title": "Sugar",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg"]
+          }
+        },
+        {
+          "id": "oil",
+          "title": "Oil",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "ml"]
+          }
+        },
+        {
+          "id": "milk",
+          "title": "Milk",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "ml"]
+          }
+        },
+        {
+          "id": "canned-tomatoes",
+          "title": "Canned Tomatoes",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+          }
+        },
+        {
+          "id": "canned-beans",
+          "title": "Canned Beans",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+          }
+        },
+        {
+          "id": "canned-fish",
+          "title": "Canned Fish",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+          }
+        },
+        {
+          "id": "sweetcorn",
+          "title": "Sweetcorn",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+          }
+        },
+        {
+          "id": "tea",
+          "title": "Tea",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg", "servings"]
+          }
+        },
+        {
+          "id": "coffee",
+          "title": "Coffee",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": ["Euro pallets", "kg", "servings"]
           }
         }
       ]

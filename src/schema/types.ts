@@ -14,6 +14,7 @@ export type Question = {
 	id: string
 	title: string
 	required?: boolean | JSONatatExpression // default: true
+	hidden?: boolean | JSONatatExpression // default: true
 	example?: string
 	format:
 		| {
@@ -25,6 +26,7 @@ export type Question = {
 		  }
 		| {
 				type: 'positive-integer'
+				units: string[]
 				min?: number
 				max?: number
 		  }
@@ -35,7 +37,9 @@ export type Question = {
 export type Section = {
 	id: string
 	title: string
+	description: string
 	questions: Question[]
+	hidden?: boolean | JSONatatExpression // default: true
 }
 export type Form = {
 	sections: Section[]

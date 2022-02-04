@@ -16,12 +16,12 @@ const QuestionInfo: FunctionComponent<
 > = ({ section, question, children, required }) => (
 	<div className="mb-3">
 		<label htmlFor={`${section.id}.${question.id}`} className="form-label">
+			{question.title}{' '}
 			{!required && (
-				<>
-					<em>Optional:</em>{' '}
-				</>
+				<small>
+					<em>(optional)</em>
+				</small>
 			)}
-			{question.title}
 		</label>
 		{children}
 	</div>
@@ -89,6 +89,7 @@ const PositiveIntegerInput = ({
 	max,
 	required,
 	form,
+	units,
 }: {
 	section: Section
 	question: Question
@@ -96,43 +97,67 @@ const PositiveIntegerInput = ({
 	max?: number
 	required: boolean
 	form: FormDefinition
+	units: string[]
 }) => {
 	const { response, update } = useResponse()
-	const value = response?.[section.id]?.[question.id] ?? ''
+	const [value, unit] = response?.[section.id]?.[question.id] ?? []
 	const { validation } = useValidation({ response, form })
-	const setValue = (value: string) => {
+	const setValue = ({ value, unit }: { value: string; unit: string }) => {
 		const v = parseInt(value, 10)
 		update({
 			...response,
 			[section.id]: {
 				...response?.[section.id],
-				[question.id]: isNaN(v) ? undefined : v,
+				[question.id]: isNaN(v) ? undefined : [v, unit],
 			},
 		})
 	}
+
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
-			<input
-				required={required}
-				type="number"
-				min={Math.max(1, Math.abs(min ?? 1))}
-				max={Math.min(
-					Number.MAX_SAFE_INTEGER,
-					Math.abs(max ?? Number.MAX_SAFE_INTEGER),
+			<div className="input-group">
+				<input
+					required={required}
+					type="number"
+					min={Math.max(1, Math.abs(min ?? 1))}
+					max={Math.min(
+						Number.MAX_SAFE_INTEGER,
+						Math.abs(max ?? Number.MAX_SAFE_INTEGER),
+					)}
+					step={1}
+					className={`form-control ${
+						validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
+					}`}
+					id={`${section.id}.${question.id}`}
+					placeholder={
+						question.example !== undefined
+							? `e.g. "${question.example}"`
+							: undefined
+					}
+					value={value}
+					onChange={({ target: { value } }) =>
+						setValue({ value, unit: unit ?? units[0] })
+					}
+				/>
+				{units.length === 1 && (
+					<span className="input-group-text">{units[0]}</span>
 				)}
-				step={1}
-				className={`form-control ${
-					validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
-				}`}
-				id={`${section.id}.${question.id}`}
-				placeholder={
-					question.example !== undefined
-						? `e.g. "${question.example}"`
-						: undefined
-				}
-				value={value}
-				onChange={({ target: { value } }) => setValue(value)}
-			/>
+				{units.length > 1 && (
+					<select
+						className="form-select"
+						value={unit ?? units[0]}
+						onChange={({ target: { value: unit } }) => {
+							setValue({ value, unit })
+						}}
+					>
+						{units.map((unit) => (
+							<option value={unit} key={unit}>
+								{unit}
+							</option>
+						))}
+					</select>
+				)}
+			</div>
 			{min !== undefined && max !== undefined && (
 				<small>
 					at least {min} and at most {max}
@@ -169,6 +194,7 @@ const PositiveIntegerQuestion = (args: {
 	max?: number
 	required: boolean
 	form: FormDefinition
+	units: string[]
 }) => <PositiveIntegerInput {...args} />
 
 const SingleSelectQuestion = ({
@@ -239,12 +265,12 @@ const MultiSelectQuestion = ({
 	return (
 		<div className="mb-3">
 			<p className="form-label">
+				{question.title}{' '}
 				{!required && (
-					<>
-						<em>Optional:</em>{' '}
-					</>
+					<small>
+						<em>(optional)</em>
+					</small>
 				)}
-				{question.title}
 			</p>
 			{(question.format as MultiSelectQuestionFormat).options.map(
 				(option, i) => (
@@ -317,6 +343,7 @@ const QuestionComponent = ({
 					question={question}
 					min={question.format.min}
 					max={question.format.max}
+					units={question.format.units}
 					required={isRequired}
 				/>
 			)
@@ -351,6 +378,9 @@ const SectionComponent = ({
 	section: Section
 }) => (
 	<fieldset>
+		{section.description && (
+			<legend className="fs-6">{section.description}</legend>
+		)}
 		{section.questions.map((question) => (
 			<QuestionComponent
 				form={form}
@@ -363,7 +393,7 @@ const SectionComponent = ({
 )
 
 export const Form = ({ form }: { form: FormDefinition }) => {
-	const { response } = useResponse()
+	const { response, update } = useResponse()
 	const { valid, sectionValidation } = useValidation({ response, form })
 	return (
 		<form className="form">
@@ -386,7 +416,16 @@ export const Form = ({ form }: { form: FormDefinition }) => {
 				</Collapsable>
 			))}
 			<hr />
-			<footer className="d-flex justify-content-end">
+			<footer className="d-flex justify-content-end justify-content-between">
+				<button
+					type="button"
+					className="btn btn-outline-danger"
+					onClick={() => {
+						if (window.confirm(`Really clear the form?`)) update({})
+					}}
+				>
+					clear form
+				</button>
 				<button type="button" className="btn btn-primary" disabled={!valid}>
 					submit
 				</button>
