@@ -29,7 +29,7 @@
   "license": "AGPL-3.0-only",
   "dependencies": {
     "@nordicsemiconductor/from-env": "1.0.0",
-    "ajv": "8.9.0",
+    "ajv": "8.10.0",
     "ajv-formats": "2.1.1",
     "ajv-keywords": "5.1.0",
     "bootstrap": "5.1.3",
