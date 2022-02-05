@@ -384,7 +384,7 @@ const SectionComponent = ({
 				<legend className="fs-6">{section.description}</legend>
 			)}
 			{section.questions.map((question) => {
-				if (isHidden(question, response)) return
+				if (isHidden(question, response)) return null
 				return (
 					<QuestionComponent
 						form={form}
