@@ -1,3 +1,4 @@
+import { isHidden } from 'hooks/useResponse'
 import type { Form, MultiSelectQuestionFormat, Question } from 'schema/types'
 
 const validateResponse = (answer: any, question: Question): boolean => {
@@ -49,11 +50,13 @@ export const useValidation = ({
 	const validation: Record<string, Record<string, boolean>> = {}
 
 	for (const section of form.sections) {
+		if (isHidden(section, response)) continue
 		if (validation[section.id] === undefined) {
 			validation[section.id] = {}
 			sectionValidation[section.id] = true
 		}
 		for (const question of section.questions) {
+			if (isHidden(question, response)) continue
 			const questionResponse = response[section.id]?.[question.id]
 			validation[section.id][question.id] = validateResponse(
 				questionResponse,

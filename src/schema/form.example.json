@@ -2,7 +2,7 @@
   "$schema": "https://distributeaid.github.io/needs-assessment/form.schema.json",
   "sections": [
     {
-      "id": "basic-info",
+      "id": "basicInfo",
       "title": "Basic Info",
       "questions": [
         {
@@ -55,11 +55,11 @@
       ]
     },
     {
-      "id": "whom-you-serve",
+      "id": "whomYouServe",
       "title": "Whom you serve",
       "questions": [
         {
-          "id": "people-of-concern",
+          "id": "peopleofConcern",
           "title": "How many total 'people of concern' live in the region where you operate?",
           "description": "e.g. total number of people living in an RIC and apartments ",
           "required": true,
@@ -69,7 +69,7 @@
           }
         },
         {
-          "id": "people-supported-month",
+          "id": "peopleSupportedMonth",
           "title": "How many unique people does your organisation support in a month?",
           "description": "This is the number of individuals you support; if you serve the same person multiple times in a month, please do not count them multiple times!",
           "required": true,
@@ -79,7 +79,7 @@
           }
         },
         {
-          "id": "average-people-served-month",
+          "id": "averagePeopleServedMonth",
           "title": "How many times on average do you serve one person over the course of a month?",
           "description": "e.g. if you serve the same people one meal a day, you would serve an individual 30 times a month.",
           "required": true,
@@ -89,7 +89,7 @@
           }
         },
         {
-          "id": "population-trending",
+          "id": "populationTrending",
           "title": "Is the regions population trending upwards, downwards, stagnant, or hard to say?",
           "required": true,
           "format": {
@@ -98,7 +98,7 @@
           }
         },
         {
-          "id": "aid-types",
+          "id": "aidTypes",
           "title": "Which of the following types of aid does your organisation provide? Please select all that apply",
           "internalComment": "if clothing is selected, this triggers the question `clothing-distribution` about which types of clothing",
           "required": true,
@@ -115,7 +115,7 @@
           }
         },
         {
-          "id": "primary-serving",
+          "id": "primaryServing",
           "title": "Whom do you primarily serve? Pease select all that apply",
           "required": true,
           "format": {
@@ -133,10 +133,10 @@
           }
         },
         {
-          "id": "clothing-distribution",
+          "id": "clothingDistribution",
           "title": "Which types of the following clothing does your organisation distribute? Please select all that apply",
           "required": "$includes(whom-you-serve.aid-types, 'clothing')",
-          "hidden": "$includes(whom-you-serve.aid-types, 'clothing') == false",
+          "hidden": "$not('clothing' in whomYouServe.aidTypes)",
           "internalComment": "only display if clothing selected on `aid-types` and make this question required. Each answer choice triggers a page for needs data about that type of clothing if selected.",
           "format": {
             "type": "multi-select",
@@ -152,10 +152,10 @@
       ]
     },
     {
-      "id": "food-items",
+      "id": "foodItems",
       "title": "Food items",
       "description": "How many food items do you need for the next three months? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the next three months.",
-      "hidden": "$includes(whom-you-serve.aid-types, 'food items') == false",
+      "hidden": "$not('food items' in whomYouServe.aidTypes)",
       "questions": [
         {
           "id": "rice",
@@ -239,7 +239,7 @@
           }
         },
         {
-          "id": "canned-tomatoes",
+          "id": "cannedTomatoes",
           "title": "Canned Tomatoes",
           "required": false,
           "format": {
@@ -248,7 +248,7 @@
           }
         },
         {
-          "id": "canned-beans",
+          "id": "cannedBeans",
           "title": "Canned Beans",
           "required": false,
           "format": {
@@ -257,7 +257,7 @@
           }
         },
         {
-          "id": "canned-fish",
+          "id": "cannedFish",
           "title": "Canned Fish",
           "required": false,
           "format": {

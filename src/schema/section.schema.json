@@ -7,7 +7,9 @@
   "properties": {
     "id": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "The id of a section is used to reference it in the response, but also in JSONata expression, therefore the format is limited to the pattern.",
+      "pattern": "^[a-z]([a-zA-Z0-9]+)?$"
     },
     "title": {
       "type": "string",

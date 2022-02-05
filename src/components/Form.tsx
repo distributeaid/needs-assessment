@@ -1,6 +1,6 @@
 import { Collapsable } from 'components/Collapsable'
 import { WarningIcon } from 'components/FeatherIcons'
-import { useResponse } from 'hooks/useResponse'
+import { isHidden, useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
 import type { FunctionComponent, PropsWithChildren } from 'react'
 import type {
@@ -376,45 +376,54 @@ const SectionComponent = ({
 }: {
 	form: FormDefinition
 	section: Section
-}) => (
-	<fieldset>
-		{section.description && (
-			<legend className="fs-6">{section.description}</legend>
-		)}
-		{section.questions.map((question) => (
-			<QuestionComponent
-				form={form}
-				section={section}
-				question={question}
-				key={question.id}
-			/>
-		))}
-	</fieldset>
-)
+}) => {
+	const { response } = useResponse()
+	return (
+		<fieldset>
+			{section.description && (
+				<legend className="fs-6">{section.description}</legend>
+			)}
+			{section.questions.map((question) => {
+				if (isHidden(question, response)) return
+				return (
+					<QuestionComponent
+						form={form}
+						section={section}
+						question={question}
+						key={question.id}
+					/>
+				)
+			})}
+		</fieldset>
+	)
+}
 
 export const Form = ({ form }: { form: FormDefinition }) => {
 	const { response, update } = useResponse()
 	const { valid, sectionValidation } = useValidation({ response, form })
 	return (
 		<form className="form">
-			{form.sections.map((section) => (
-				<Collapsable
-					title={
-						<>
-							{section.title}
-							{!sectionValidation[section.id] && (
-								<abbr title="Section is invalid.">
-									<WarningIcon />
-								</abbr>
-							)}
-						</>
-					}
-					id={section.id}
-					key={section.id}
-				>
-					<SectionComponent form={form} section={section} />
-				</Collapsable>
-			))}
+			{form.sections.map((section) => {
+				if (isHidden(section, response)) return null
+				return (
+					<Collapsable
+						title={
+							<>
+								{section.title}
+								{!sectionValidation[section.id] && (
+									<abbr title="Section is invalid.">
+										<WarningIcon />
+									</abbr>
+								)}
+							</>
+						}
+						id={section.id}
+						key={section.id}
+					>
+						<SectionComponent form={form} section={section} />
+					</Collapsable>
+				)
+			})}
 			<hr />
 			<footer className="d-flex justify-content-end justify-content-between">
 				<button

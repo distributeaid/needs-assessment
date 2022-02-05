@@ -37,6 +37,7 @@
     "fast-deep-equal": "3.1.3",
     "feather-icons": "4.28.0",
     "inter-ui": "3.19.3",
+    "jsonata": "1.8.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-router-dom": "6.2.1"
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.19",
     "@nordicsemiconductor/object-to-env": "4.1.0",
+    "@swc/jest": "0.2.17",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "27.4.0",
     "@types/react": "17.0.39",
@@ -54,7 +56,6 @@
     "eslint-plugin-no-restricted-imports": "0.0.0",
     "handlebars": "4.7.7",
     "jest": "27.5.0",
-    "ts-jest": "27.1.3",
     "vite": "2.7.13"
   },
   "lint-staged": {
@@ -83,10 +84,16 @@
   },
   "prettier": "@nordicsemiconductor/asset-tracker-cloud-code-style/.prettierrc",
   "jest": {
-    "preset": "ts-jest",
     "testRegex": ".+\\.spec\\.ts$",
     "moduleNameMapper": {
       "^util/(.*)$": "<rootDir>/src/util/$1"
-    }
+    },
+    "transform": {
+      "^.+\\.(t|j)sx?$": "@swc/jest"
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts",
+      ".tsx"
+    ]
   }
 }

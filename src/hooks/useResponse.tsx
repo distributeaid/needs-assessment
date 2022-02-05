@@ -1,14 +1,17 @@
 import { createContext, FunctionComponent, useContext, useState } from 'react'
+import { evaluateJSONataExpression } from 'utils/evaluateJSONataExpression'
 import { withLocalStorage } from 'utils/withLocalStorage'
 
-const storedResponse = withLocalStorage<Record<string, any>>({
+type Response = Record<string, any>
+
+const storedResponse = withLocalStorage<Response>({
 	key: 'response',
 	defaultValue: {},
 })
 
 export const ResponseContext = createContext<{
-	response: Record<string, any>
-	update: (response: Record<string, any>) => void
+	response: Response
+	update: (response: Response) => void
 }>({
 	response: {},
 	update: () => undefined,
@@ -16,8 +19,28 @@ export const ResponseContext = createContext<{
 
 export const useResponse = () => useContext(ResponseContext)
 
+export const isHidden = (
+	{
+		hidden,
+	}: {
+		hidden?: boolean | string
+	},
+	response: Response,
+): boolean => {
+	if (hidden === undefined) return false
+	if (typeof hidden === 'boolean') {
+		return hidden
+	}
+	return evaluateJSONataExpression({
+		expression: hidden,
+		response,
+		debug: console.debug,
+		error: console.error,
+	})
+}
+
 export const ResponseProvider: FunctionComponent = ({ children }) => {
-	const [response, update] = useState<Record<string, any>>(storedResponse.get())
+	const [response, update] = useState<Response>(storedResponse.get())
 
 	return (
 		<ResponseContext.Provider
