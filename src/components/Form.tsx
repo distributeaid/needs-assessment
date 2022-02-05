@@ -6,6 +6,7 @@ import type { FunctionComponent, PropsWithChildren } from 'react'
 import type {
 	Form as FormDefinition,
 	MultiSelectQuestionFormat,
+	Option,
 	Question,
 	Section,
 	SingleSelectQuestionFormat,
@@ -97,7 +98,7 @@ const PositiveIntegerInput = ({
 	max?: number
 	required: boolean
 	form: FormDefinition
-	units: string[]
+	units: Option[]
 }) => {
 	const { response, update } = useResponse()
 	const [value, unit] = response?.[section.id]?.[question.id] ?? []
@@ -136,23 +137,23 @@ const PositiveIntegerInput = ({
 					}
 					value={value}
 					onChange={({ target: { value } }) =>
-						setValue({ value, unit: unit ?? units[0] })
+						setValue({ value, unit: unit ?? units[0].id })
 					}
 				/>
 				{units.length === 1 && (
-					<span className="input-group-text">{units[0]}</span>
+					<span className="input-group-text">{units[0].title}</span>
 				)}
 				{units.length > 1 && (
 					<select
 						className="form-select"
-						value={unit ?? units[0]}
+						value={unit ?? units[0].id}
 						onChange={({ target: { value: unit } }) => {
 							setValue({ value, unit })
 						}}
 					>
 						{units.map((unit) => (
-							<option value={unit} key={unit}>
-								{unit}
+							<option value={unit.id} key={unit.id}>
+								{unit.title}
 							</option>
 						))}
 					</select>
@@ -194,7 +195,7 @@ const PositiveIntegerQuestion = (args: {
 	max?: number
 	required: boolean
 	form: FormDefinition
-	units: string[]
+	units: Option[]
 }) => <PositiveIntegerInput {...args} />
 
 const SingleSelectQuestion = ({
@@ -231,8 +232,10 @@ const SingleSelectQuestion = ({
 			>
 				<option value={-1}>Please select</option>
 				{(question.format as SingleSelectQuestionFormat).options.map(
-					(option, i) => (
-						<option key={i}>{option}</option>
+					(option) => (
+						<option key={option.id} value={option.id}>
+							{option.title}
+						</option>
 					),
 				)}
 			</select>
@@ -280,14 +283,14 @@ const MultiSelectQuestion = ({
 								validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
 							}`}
 							type="checkbox"
-							value={option}
+							value={option.id}
 							id={`${section.id}-${question.id}-${i}`}
-							checked={selected.includes(option)}
+							checked={selected.includes(option.id)}
 							onChange={({ target: { checked } }) => {
 								if (checked) {
-									setSelected([...selected, option])
+									setSelected([...selected, option.id])
 								} else {
-									setSelected([...selected.filter((v) => v !== option)])
+									setSelected([...selected.filter((v) => v !== option.id)])
 								}
 							}}
 						/>
@@ -295,7 +298,7 @@ const MultiSelectQuestion = ({
 							className="form-check-label"
 							htmlFor={`${section.id}-${question.id}-${i}`}
 						>
-							{option}
+							{option.title}
 						</label>
 					</div>
 				),

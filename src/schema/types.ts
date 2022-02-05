@@ -1,13 +1,18 @@
 export type JSONatatExpression = string
 
+export type Option = {
+	id: string
+	title: string
+}
+
 export type SingleSelectQuestionFormat = {
 	type: 'single-select'
-	options: string[]
+	options: Option[]
 }
 
 export type MultiSelectQuestionFormat = {
 	type: 'multi-select'
-	options: string[]
+	options: Option[]
 }
 
 export type Question = {
@@ -26,7 +31,7 @@ export type Question = {
 		  }
 		| {
 				type: 'positive-integer'
-				units: string[]
+				units: Option[]
 				min?: number
 				max?: number
 		  }

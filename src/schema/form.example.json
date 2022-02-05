@@ -29,17 +29,23 @@
           "format": {
             "type": "single-select",
             "options": [
-              "Calais/Dunkirk",
-              "Paris",
-              "Chios",
-              "Samos",
-              "Lesvos",
-              "Thessaloniki/Northern Mainland Greece",
-              "Athens/Southern Mainland Greece",
-              "Lebanon",
-              "Bosnia",
-              "Serbia",
-              "Other"
+              { "id": "calais", "title": "Calais/Dunkirk" },
+              { "id": "paris", "title": "Paris" },
+              { "id": "chios", "title": "Chios" },
+              { "id": "samos", "title": "Samos" },
+              { "id": "lesvos", "title": "Lesvos" },
+              {
+                "id": "northernGreece",
+                "title": "Thessaloniki/Northern Mainland Greece"
+              },
+              {
+                "id": "southernGreece",
+                "title": "Athens/Southern Mainland Greece"
+              },
+              { "id": "lebanon", "title": "Lebanon" },
+              { "id": "bosnia", "title": "Bosnia" },
+              { "id": "serbia", "title": "Serbia" },
+              { "id": "other", "title": "Other" }
             ]
           }
         },
@@ -55,6 +61,26 @@
       ]
     },
     {
+      "id": "timeOfYear",
+      "title": "Time of year",
+      "questions": [
+        {
+          "id": "quarter",
+          "title": "Which quarter is this needs assessment for?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "options": [
+              { "id": "q1", "title": "January, February, March" },
+              { "id": "q2", "title": "April, May, June" },
+              { "id": "q3", "title": "July, August, September" },
+              { "id": "q4", "title": "October, November, December" }
+            ]
+          }
+        }
+      ]
+    },
+    {
       "id": "whomYouServe",
       "title": "Whom you serve",
       "questions": [
@@ -65,7 +91,12 @@
           "required": true,
           "format": {
             "type": "positive-integer",
-            "units": ["people of concern"]
+            "units": [
+              {
+                "id": "people",
+                "title": "people of concern"
+              }
+            ]
           }
         },
         {
@@ -75,7 +106,12 @@
           "required": true,
           "format": {
             "type": "positive-integer",
-            "units": ["unique people"]
+            "units": [
+              {
+                "id": "people",
+                "title": "unique people"
+              }
+            ]
           }
         },
         {
@@ -85,7 +121,12 @@
           "required": true,
           "format": {
             "type": "positive-integer",
-            "units": ["average servings/month"]
+            "units": [
+              {
+                "id": "servings",
+                "title": "average servings/month"
+              }
+            ]
           }
         },
         {
@@ -94,7 +135,12 @@
           "required": true,
           "format": {
             "type": "single-select",
-            "options": ["upwards", "downwards", "stagnant", "hard to say"]
+            "options": [
+              { "id": "upwards", "title": "upwards" },
+              { "id": "downwards", "title": "downwards" },
+              { "id": "stagnant", "title": "stagnant" },
+              { "id": "hardToSay", "title": "hard to say" }
+            ]
           }
         },
         {
@@ -105,12 +151,15 @@
           "format": {
             "type": "multi-select",
             "options": [
-              "food items",
-              "clothing",
-              "hygiene (including diapers)",
-              "Shelter and Storage",
-              "education and employability services",
-              "medical services"
+              { "id": "food", "title": "food items" },
+              { "id": "clothing", "title": "clothing" },
+              { "id": "hygiene", "title": "hygiene (including diapers)" },
+              { "id": "shelter", "title": "Shelter and Storage" },
+              {
+                "id": "education",
+                "title": "education and employability services"
+              },
+              { "id": "medical", "title": "medical services" }
             ]
           }
         },
@@ -121,14 +170,14 @@
           "format": {
             "type": "multi-select",
             "options": [
-              "men",
-              "women",
-              "children",
-              "unaccompanied minors",
-              "families",
-              "disabled",
-              "LGBTQ+",
-              "Vulnerable Cases"
+              { "id": "men", "title": "men" },
+              { "id": "women", "title": "women" },
+              { "id": "children", "title": "children" },
+              { "id": "unaccompaniedMinoris", "title": "unaccompanied minors" },
+              { "id": "families", "title": "families" },
+              { "id": "disabled", "title": "disabled" },
+              { "id": "lgbtqPlus", "title": "LGBTQ+" },
+              { "id": "vulnerable", "title": "Vulnerable Cases" }
             ]
           }
         },
@@ -141,11 +190,11 @@
           "format": {
             "type": "multi-select",
             "options": [
-              "Women's clothing",
-              "men's clothing",
-              "girl's clothing",
-              "boy's clothing",
-              "baby clothing"
+              { "id": "womens", "title": "Women's clothing" },
+              { "id": "mens", "title": "men's clothing" },
+              { "id": "girls", "title": "girl's clothing" },
+              { "id": "boys", "title": "boy's clothing" },
+              { "id": "babies", "title": "baby clothing" }
             ]
           }
         }
@@ -163,7 +212,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" }
+            ]
           }
         },
         {
@@ -172,7 +224,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" }
+            ]
           }
         },
         {
@@ -181,7 +236,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" }
+            ]
           }
         },
         {
@@ -190,7 +248,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" }
+            ]
           }
         },
         {
@@ -199,7 +260,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" }
+            ]
           }
         },
         {
@@ -208,7 +272,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" }
+            ]
           }
         },
         {
@@ -217,7 +284,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" }
+            ]
           }
         },
         {
@@ -226,7 +296,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "ml"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "ml", "title": "Milliliter" }
+            ]
           }
         },
         {
@@ -235,7 +308,10 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "ml"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "ml", "title": "Milliliter" }
+            ]
           }
         },
         {
@@ -244,7 +320,13 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "cans",
+                "title": "Cans (#10 kitchen size)"
+              }
+            ]
           }
         },
         {
@@ -253,7 +335,13 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "cans",
+                "title": "Cans (#10 kitchen size)"
+              }
+            ]
           }
         },
         {
@@ -262,7 +350,13 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "cans",
+                "title": "Cans (#10 kitchen size)"
+              }
+            ]
           }
         },
         {
@@ -271,7 +365,13 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "Cans (#10 kitchen size)"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "cans",
+                "title": "Cans (#10 kitchen size)"
+              }
+            ]
           }
         },
         {
@@ -280,7 +380,11 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg", "servings"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" },
+              { "id": "servings", "title": "servings" }
+            ]
           }
         },
         {
@@ -289,7 +393,155 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": ["Euro pallets", "kg", "servings"]
+            "units": [
+              { "id": "epal", "title": "Euro pallets" },
+              { "id": "kg", "title": "Kilogram" },
+              { "id": "servings", "title": "servings" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "womensClothing",
+      "title": "Women's clothing",
+      "description": "How many do you need for the selected quarter? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the selected quarter.",
+      "hidden": "$not(\"Women's clothing\" in whomYouServe.clothingDistribution)",
+      "questions": [
+        {
+          "id": "womensJackets",
+          "title": "Women's Jackets",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensJumpers",
+          "title": "Women's Jumpers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensTShirts",
+          "title": "Women's T-Shirts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensLongSlevedTops",
+          "title": "Women's Long sleeved tops",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensShorts",
+          "title": "Women's Shorts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensTrousers",
+          "title": "Women's Trousers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensPantsUnderwear",
+          "title": "Women's Pants/Underwear",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensSocks",
+          "title": "Women's Socks",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensShoes",
+          "title": "Women's Shoes",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensHats",
+          "title": "Women's Hats",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensScarves",
+          "title": "Women's Scarves",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensGloves",
+          "title": "Women's Gloves",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        },
+        {
+          "id": "womensDresses",
+          "title": "Women's Dresses",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensLeggings",
+          "title": "Women's Leggings",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensBras",
+          "title": "Women's Bras",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensHijabs",
+          "title": "Women's Hijabs",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "womensAbayas",
+          "title": "Women's Abayas",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
           }
         }
       ]

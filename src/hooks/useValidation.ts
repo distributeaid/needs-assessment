@@ -20,15 +20,15 @@ const validateResponse = (
 					(question.format.maxLength ?? Number.MAX_SAFE_INTEGER)
 			)
 		case 'single-select':
-			return question.format.options.includes(answer)
+			return question.format.options.map(({ id }) => id).includes(answer)
 		case 'multi-select':
 			return (
 				((answer ?? []) as string[]).length > 0 &&
 				((answer ?? []) as string[]).reduce((validSelection, a) => {
 					if (validSelection === false) return false
-					return (
-						question.format as MultiSelectQuestionFormat
-					).options.includes(a)
+					return (question.format as MultiSelectQuestionFormat).options
+						.map(({ id }) => id)
+						.includes(a)
 				}, true as boolean)
 			)
 		case 'positive-integer':
