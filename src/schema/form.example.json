@@ -135,7 +135,7 @@
         {
           "id": "clothingDistribution",
           "title": "Which types of the following clothing does your organisation distribute? Please select all that apply",
-          "required": "$includes(whom-you-serve.aid-types, 'clothing')",
+          "required": "'clothing' in whomYouServe.aidTypes",
           "hidden": "$not('clothing' in whomYouServe.aidTypes)",
           "internalComment": "only display if clothing selected on `aid-types` and make this question required. Each answer choice triggers a page for needs data about that type of clothing if selected.",
           "format": {

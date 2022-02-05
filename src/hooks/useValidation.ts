@@ -1,11 +1,15 @@
-import { isHidden } from 'hooks/useResponse'
+import type { Response } from 'hooks/useResponse'
+import { isHidden, isRequired } from 'hooks/useResponse'
 import type { Form, MultiSelectQuestionFormat, Question } from 'schema/types'
 
-const validateResponse = (answer: any, question: Question): boolean => {
-	// FIXME: implement JSONata expression
-	const isRequired = question.required !== false
+const validateResponse = (
+	answer: any,
+	question: Question,
+	response: Response,
+): boolean => {
+	const required = isRequired(question, response)
 	const isBlank = answer === undefined || answer.length === 0
-	if (isBlank && !isRequired) return true
+	if (isBlank && !required) return true
 	switch (question.format.type) {
 		case 'email':
 			return /.+@.+\..+/.test(answer)
@@ -38,7 +42,7 @@ export const useValidation = ({
 	response,
 	form,
 }: {
-	response: Record<string, any>
+	response: Response
 	form: Form
 }): {
 	valid: boolean
@@ -61,6 +65,7 @@ export const useValidation = ({
 			validation[section.id][question.id] = validateResponse(
 				questionResponse,
 				question,
+				response,
 			)
 			if (validation[section.id][question.id] === false) {
 				sectionValidation[section.id] = false

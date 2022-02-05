@@ -340,6 +340,10 @@ export const WarningIcon = (options?: TypedIconOptions) => (
 	/>
 )
 
+export const OkIcon = (options?: TypedIconOptions) => (
+	<FeatherIcon {...options} type="check-circle" title="O.K." color="#198754" />
+)
+
 export const MinusIcon = (options?: TypedIconOptions) => (
 	<FeatherIcon {...options} type="minus-circle" title="-" />
 )

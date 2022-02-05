@@ -1,6 +1,6 @@
 import { Collapsable } from 'components/Collapsable'
-import { WarningIcon } from 'components/FeatherIcons'
-import { isHidden, useResponse } from 'hooks/useResponse'
+import { OkIcon, WarningIcon } from 'components/FeatherIcons'
+import { isHidden, isRequired, useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
 import type { FunctionComponent, PropsWithChildren } from 'react'
 import type {
@@ -313,8 +313,8 @@ const QuestionComponent = ({
 	section: Section
 	question: Question
 }) => {
-	// FIXME: implement JSONata expression
-	const isRequired = question.required !== false
+	const { response } = useResponse()
+	const required = isRequired(question, response)
 	switch (question.format.type) {
 		case 'text':
 			return (
@@ -323,7 +323,7 @@ const QuestionComponent = ({
 					section={section}
 					question={question}
 					maxLength={question.format.maxLength}
-					required={isRequired}
+					required={required}
 				/>
 			)
 		case 'email':
@@ -332,7 +332,7 @@ const QuestionComponent = ({
 					form={form}
 					section={section}
 					question={question}
-					required={isRequired}
+					required={required}
 				/>
 			)
 		case 'positive-integer':
@@ -344,7 +344,7 @@ const QuestionComponent = ({
 					min={question.format.min}
 					max={question.format.max}
 					units={question.format.units}
-					required={isRequired}
+					required={required}
 				/>
 			)
 		case 'single-select':
@@ -353,7 +353,7 @@ const QuestionComponent = ({
 					form={form}
 					section={section}
 					question={question}
-					required={isRequired}
+					required={required}
 				/>
 			)
 		case 'multi-select':
@@ -362,7 +362,7 @@ const QuestionComponent = ({
 					form={form}
 					section={section}
 					question={question}
-					required={isRequired}
+					required={required}
 				/>
 			)
 		default:
@@ -410,7 +410,11 @@ export const Form = ({ form }: { form: FormDefinition }) => {
 						title={
 							<>
 								{section.title}
-								{!sectionValidation[section.id] && (
+								{sectionValidation[section.id] ? (
+									<abbr title="Section is valid.">
+										<OkIcon />
+									</abbr>
+								) : (
 									<abbr title="Section is invalid.">
 										<WarningIcon />
 									</abbr>

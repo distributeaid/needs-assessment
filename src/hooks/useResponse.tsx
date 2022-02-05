@@ -2,7 +2,7 @@ import { createContext, FunctionComponent, useContext, useState } from 'react'
 import { evaluateJSONataExpression } from 'utils/evaluateJSONataExpression'
 import { withLocalStorage } from 'utils/withLocalStorage'
 
-type Response = Record<string, any>
+export type Response = Record<string, any>
 
 const storedResponse = withLocalStorage<Response>({
 	key: 'response',
@@ -33,6 +33,26 @@ export const isHidden = (
 	}
 	return evaluateJSONataExpression({
 		expression: hidden,
+		response,
+		debug: console.debug,
+		error: console.error,
+	})
+}
+
+export const isRequired = (
+	{
+		required,
+	}: {
+		required?: boolean | string
+	},
+	response: Response,
+): boolean => {
+	if (required === undefined) return false
+	if (typeof required === 'boolean') {
+		return required
+	}
+	return evaluateJSONataExpression({
+		expression: required,
 		response,
 		debug: console.debug,
 		error: console.error,
