@@ -86,7 +86,8 @@
   "jest": {
     "testRegex": ".+\\.spec\\.ts$",
     "moduleNameMapper": {
-      "^util/(.*)$": "<rootDir>/src/util/$1"
+      "^utils/(.*)$": "<rootDir>/src/utils/$1",
+      "^schema/(.*)$": "<rootDir>/src/schema/$1"
     },
     "transform": {
       "^.+\\.(t|j)sx?$": "@swc/jest"

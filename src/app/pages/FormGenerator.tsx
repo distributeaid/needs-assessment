@@ -1,31 +1,20 @@
 import type { ErrorObject } from 'ajv'
-import Ajv from 'ajv'
-import addFormats from 'ajv-formats'
-import addKeywords from 'ajv-keywords'
 import { Form } from 'components/Form'
 import { useForm } from 'hooks/useForm'
 import { useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
 import formExample from 'schema/form.example.json'
-import formSchema from 'schema/form.schema.json'
-import questionSchema from 'schema/question.schema.json'
-import sectionSchema from 'schema/section.schema.json'
 import type { Form as FormDefinition } from 'schema/types'
+import { ajv, schemaUrl } from 'utils/validateSchema'
 import { withLocalStorage } from 'utils/withLocalStorage'
-
-const ajv = new Ajv({
-	schemas: [formSchema, sectionSchema, questionSchema],
-})
-addFormats(ajv)
-addKeywords(ajv)
 
 const storedFormDefinition = withLocalStorage<string>({
 	key: 'formDefinition',
 	defaultValue: JSON.stringify(formExample, null, 2),
 })
 
-const schemaUrl = `https://distributeaid.github.io/needs-assessment/form.schema.json`
+const validate = ajv.getSchema(schemaUrl)
 
 export const FormGenerator = () => {
 	const [formDefinition, setFormDefinition] = useState<string>(
@@ -38,7 +27,6 @@ export const FormGenerator = () => {
 
 	useEffect(() => {
 		try {
-			const validate = ajv.getSchema(schemaUrl)
 			if (validate !== undefined) {
 				const valid = validate(JSON.parse(formDefinition))
 				setFormErrors(validate.errors ?? [])
