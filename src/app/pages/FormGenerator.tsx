@@ -1,4 +1,6 @@
 import type { ErrorObject } from 'ajv'
+import { Collapsable } from 'components/Collapsable'
+import { OkIcon, WarningIcon } from 'components/FeatherIcons'
 import { Form } from 'components/Form'
 import { useForm } from 'hooks/useForm'
 import { useResponse } from 'hooks/useResponse'
@@ -119,12 +121,31 @@ const Response = ({ form }: { form: FormDefinition }) => {
 	})
 	return (
 		<>
-			<h2>Response will appear here:</h2>
-			<pre>{JSON.stringify(response, null, 2)}</pre>
-			<h2>{valid ? 'Response is valid' : 'Response is NOT valid'}</h2>
-			<pre>{JSON.stringify(validation, null, 2)}</pre>
-			<h3>Sections valid:</h3>
-			<pre>{JSON.stringify(sectionValidation, null, 2)}</pre>
+			<Collapsable title={<>Response JSON</>} id="response">
+				<pre>{JSON.stringify(response, null, 2)}</pre>
+			</Collapsable>
+			<Collapsable
+				title={
+					<>
+						Response validation
+						{valid ? (
+							<abbr title="Response is valid.">
+								<OkIcon />
+							</abbr>
+						) : (
+							<abbr title="Response is invalid.">
+								<WarningIcon />
+							</abbr>
+						)}
+					</>
+				}
+				id="validation"
+			>
+				<h3>Response validation:</h3>
+				<pre>{JSON.stringify(validation, null, 2)}</pre>
+				<h3>Sections validation:</h3>
+				<pre>{JSON.stringify(sectionValidation, null, 2)}</pre>
+			</Collapsable>
 		</>
 	)
 }
