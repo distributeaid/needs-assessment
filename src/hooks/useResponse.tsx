@@ -1,3 +1,4 @@
+import { useForm } from 'hooks/useForm'
 import { createContext, FunctionComponent, useContext, useState } from 'react'
 import { evaluateJSONataExpression } from 'utils/evaluateJSONataExpression'
 import { withLocalStorage } from 'utils/withLocalStorage'
@@ -61,12 +62,25 @@ export const isRequired = (
 
 export const ResponseProvider: FunctionComponent = ({ children }) => {
 	const [response, update] = useState<Response>(storedResponse.get())
+	const { form } = useForm()
 
 	return (
 		<ResponseContext.Provider
 			value={{
 				response,
 				update: (response) => {
+					// remove answers from all hidden sections and questions
+					form?.sections.forEach((section) => {
+						if (isHidden(section, response)) {
+							response[section.id] = undefined
+						} else {
+							section.questions.forEach((question) => {
+								if (isHidden(question, response)) {
+									response[section.id][question.id] = undefined
+								}
+							})
+						}
+					})
 					update(response)
 					storedResponse.set(response)
 				},

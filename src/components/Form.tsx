@@ -381,6 +381,7 @@ const SectionComponent = ({
 	section: Section
 }) => {
 	const { response } = useResponse()
+
 	return (
 		<fieldset>
 			{section.description && (
@@ -404,6 +405,7 @@ const SectionComponent = ({
 export const Form = ({ form }: { form: FormDefinition }) => {
 	const { response, update } = useResponse()
 	const { valid, sectionValidation } = useValidation({ response, form })
+
 	return (
 		<form className="form">
 			{form.sections.map((section) => {

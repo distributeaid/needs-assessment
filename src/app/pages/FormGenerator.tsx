@@ -3,6 +3,7 @@ import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import addKeywords from 'ajv-keywords'
 import { Form } from 'components/Form'
+import { useForm } from 'hooks/useForm'
 import { useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
@@ -32,8 +33,8 @@ export const FormGenerator = () => {
 	)
 	const [formErrors, setFormErrors] = useState<(ErrorObject | Error)[]>([])
 	const [formValid, setFormValid] = useState<boolean>(false)
-	const [parseFormDefinition, setParsedFormDefinition] =
-		useState<FormDefinition>()
+	const { form: parseFormDefinition, setForm: setParsedFormDefinition } =
+		useForm()
 
 	useEffect(() => {
 		try {
@@ -56,7 +57,7 @@ export const FormGenerator = () => {
 			console.error(err)
 			setFormErrors([err as Error])
 		}
-	}, [formDefinition])
+	}, [formDefinition, setParsedFormDefinition])
 
 	return (
 		<main className="container mt-4">
