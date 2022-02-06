@@ -71,10 +71,10 @@
           "format": {
             "type": "single-select",
             "options": [
-              { "id": "q1", "title": "January, February, March" },
-              { "id": "q2", "title": "April, May, June" },
-              { "id": "q3", "title": "July, August, September" },
-              { "id": "q4", "title": "October, November, December" }
+              { "id": "q1", "title": "Q1: January, February, March" },
+              { "id": "q2", "title": "Q2: April, May, June" },
+              { "id": "q3", "title": "Q3: July, August, September" },
+              { "id": "q4", "title": "Q4: October, November, December" }
             ]
           }
         }
@@ -194,7 +194,7 @@
               { "id": "mens", "title": "men's clothing" },
               { "id": "girls", "title": "girl's clothing" },
               { "id": "boys", "title": "boy's clothing" },
-              { "id": "babies", "title": "baby clothing" }
+              { "id": "baby", "title": "baby clothing" }
             ]
           }
         }
@@ -204,7 +204,7 @@
       "id": "foodItems",
       "title": "Food items",
       "description": "How many food items do you need for the next three months? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the next three months.",
-      "hidden": "$not('food items' in whomYouServe.aidTypes)",
+      "hidden": "$not('food' in whomYouServe.aidTypes)",
       "questions": [
         {
           "id": "rice",
@@ -406,7 +406,8 @@
       "id": "womensClothing",
       "title": "Women's clothing",
       "description": "How many do you need for the selected quarter? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the selected quarter.",
-      "hidden": "$not(\"Women's clothing\" in whomYouServe.clothingDistribution)",
+      "internalComment": "This set of questions should only appear to the survey taker if they checked the corresponding box on the 'Whom you serve' section",
+      "hidden": "$not('womens' in whomYouServe.clothingDistribution)",
       "questions": [
         {
           "id": "womensJackets",
@@ -477,12 +478,14 @@
           "title": "Women's Shoes",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [{ "id": "pairs", "title": "Pairs" }]
           }
         },
         {
           "id": "womensHats",
           "title": "Women's Hats",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
             "units": [{ "id": "items", "title": "Individual Items" }]
@@ -491,6 +494,8 @@
         {
           "id": "womensScarves",
           "title": "Women's Scarves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
             "units": [{ "id": "items", "title": "Individual Items" }]
@@ -499,6 +504,8 @@
         {
           "id": "womensGloves",
           "title": "Women's Gloves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
             "units": [{ "id": "pairs", "title": "Pairs" }]
@@ -542,6 +549,448 @@
           "format": {
             "type": "positive-integer",
             "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mensClothing",
+      "title": "Men's clothing",
+      "description": "How many do you need for the selected quarter? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the selected quarter.",
+      "hidden": "$not('mens' in whomYouServe.clothingDistribution)",
+      "internalComment": "This set of questions should only appear to the survey taker if they checked the corresponding box on the 'Whom you serve' section",
+      "questions": [
+        {
+          "id": "mensJackets",
+          "title": "Men's Jackets",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensJumpers",
+          "title": "Men's Jumpers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensTShirts",
+          "title": "Men's T-Shirts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensLongSlevedTops",
+          "title": "Men's Long sleeved tops",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensShorts",
+          "title": "Men's Shorts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensTrousers",
+          "title": "Men's Trousers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensPantsUnderwear",
+          "title": "Men's Pants/Underwear",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensSocks",
+          "title": "Men's Socks",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensShoes",
+          "title": "Men's Shoes",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        },
+        {
+          "id": "mensHats",
+          "title": "Men's Hats",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensScarves",
+          "title": "Men's Scarves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "mensGloves",
+          "title": "Men's Gloves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "girlsClothing",
+      "title": "Girl's clothing",
+      "description": "How many do you need for the selected quarter? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the selected quarter.",
+      "hidden": "$not('girls' in whomYouServe.clothingDistribution)",
+      "internalComment": "This set of questions should only appear to the survey taker if they checked the corresponding box on the 'Whom you serve' section",
+      "questions": [
+        {
+          "id": "girlsJackets",
+          "title": "Girl's Jackets",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsJumpers",
+          "title": "Girl's Jumpers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsTShirts",
+          "title": "Girl's T-Shirts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsLongSlevedTops",
+          "title": "Girl's Long sleeved tops",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsShorts",
+          "title": "Girl's Shorts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsTrousers",
+          "title": "Girl's Trousers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsPantsUnderwear",
+          "title": "Girl's Pants/Underwear",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsSocks",
+          "title": "Girl's Socks",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsShoes",
+          "title": "Girl's Shoes",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        },
+        {
+          "id": "girlsHats",
+          "title": "Girl's Hats",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsScarves",
+          "title": "Girl's Scarves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsGloves",
+          "title": "Girl's Gloves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        },
+        {
+          "id": "girlsDresses",
+          "title": "Girl's Dresses",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "girlsLeggings",
+          "title": "Girl's Leggings",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "boysClothing",
+      "title": "Boy's clothing",
+      "description": "How many do you need for the selected quarter? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the selected quarter.",
+      "hidden": "$not('boys' in whomYouServe.clothingDistribution)",
+      "internalComment": "This set of questions should only appear to the survey taker if they checked the corresponding box on the 'Whom you serve' section",
+      "questions": [
+        {
+          "id": "boysJackets",
+          "title": "Boy's Jackets",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysJumpers",
+          "title": "Boy's Jumpers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysTShirts",
+          "title": "Boy's T-Shirts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysLongSlevedTops",
+          "title": "Boy's Long sleeved tops",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysShorts",
+          "title": "Boy's Shorts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysTrousers",
+          "title": "Boy's Trousers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysPantsUnderwear",
+          "title": "Boy's Pants/Underwear",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysSocks",
+          "title": "Boy's Socks",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysShoes",
+          "title": "Boy's Shoes",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        },
+        {
+          "id": "boysHats",
+          "title": "Boy's Hats",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysScarves",
+          "title": "Boy's Scarves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "boysGloves",
+          "title": "Boy's Gloves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "babyClothing",
+      "title": "Baby clothing",
+      "description": "How many do you need for the selected quarter? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the selected quarter.",
+      "hidden": "$not('baby' in whomYouServe.clothingDistribution)",
+      "internalComment": "This set of questions should only appear to the survey taker if they checked the corresponding box on the 'Whom you serve' section",
+      "questions": [
+        {
+          "id": "babyJackets",
+          "title": "Baby Jackets/All-In-Ones",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babyJumpers",
+          "title": "Baby Jumpers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babyTShirts",
+          "title": "Baby T-Shirts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babyShorts",
+          "title": "Baby Shorts",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babyBodies",
+          "title": "Baby Bodies/Rombers",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babyOnesies",
+          "title": "Baby Onesies/pyjamas",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babySocks",
+          "title": "Baby Socks",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babyShoes",
+          "title": "Baby Shoes",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
+          }
+        },
+        {
+          "id": "babyHats",
+          "title": "Baby Hats",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "items", "title": "Individual Items" }]
+          }
+        },
+        {
+          "id": "babyGloves",
+          "title": "Baby Gloves",
+          "internalComment": "Q1 and Q4 only",
+          "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
+          "format": {
+            "type": "positive-integer",
+            "units": [{ "id": "pairs", "title": "Pairs" }]
           }
         }
       ]
