@@ -1,6 +1,7 @@
 import { useForm } from 'hooks/useForm'
 import { createContext, FunctionComponent, useContext, useState } from 'react'
 import { evaluateJSONataExpression } from 'utils/evaluateJSONataExpression'
+import { responseToTSV } from 'utils/responseToTSV'
 import { withLocalStorage } from 'utils/withLocalStorage'
 
 export type Response = Record<string, any>
@@ -13,9 +14,11 @@ const storedResponse = withLocalStorage<Response>({
 export const ResponseContext = createContext<{
 	response: Response
 	update: (response: Response) => void
+	download: () => void
 }>({
 	response: {},
 	update: () => undefined,
+	download: () => undefined,
 })
 
 export const useResponse = () => useContext(ResponseContext)
@@ -86,6 +89,25 @@ export const ResponseProvider: FunctionComponent = ({ children }) => {
 					})
 					update(response)
 					storedResponse.set(response)
+				},
+				download: () => {
+					if (form === undefined) return
+					const file = new File(
+						[responseToTSV(response, form)],
+						`response-${new Date().toISOString()}.tsv`,
+					)
+					const link = document.createElement('a')
+					link.style.display = 'none'
+					link.href = URL.createObjectURL(file)
+					link.download = file.name
+
+					document.body.appendChild(link)
+					link.click()
+
+					setTimeout(() => {
+						URL.revokeObjectURL(link.href)
+						link.parentNode?.removeChild(link)
+					}, 0)
 				},
 			}}
 		>

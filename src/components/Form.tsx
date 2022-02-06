@@ -235,8 +235,6 @@ const SingleSelectQuestion = ({
 	form: FormDefinition
 }) => {
 	const { response, update } = useResponse()
-	const style =
-		(question.format as SingleSelectQuestionFormat)?.style ?? 'dropdown'
 	const value = response?.[section.id]?.[question.id] ?? ''
 	const { validation } = useValidation({ response, form })
 	const setValue = (value: string) =>
@@ -497,7 +495,7 @@ const SectionComponent = ({
 }
 
 export const Form = ({ form }: { form: FormDefinition }) => {
-	const { response, update } = useResponse()
+	const { response, update, download } = useResponse()
 	const { valid, sectionValidation } = useValidation({ response, form })
 
 	return (
@@ -538,7 +536,14 @@ export const Form = ({ form }: { form: FormDefinition }) => {
 				>
 					clear form
 				</button>
-				<button type="button" className="btn btn-primary" disabled={!valid}>
+				<button
+					type="button"
+					className="btn btn-primary"
+					disabled={!valid}
+					onClick={() => {
+						download()
+					}}
+				>
 					submit
 				</button>
 			</footer>

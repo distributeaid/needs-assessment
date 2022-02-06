@@ -87,6 +87,7 @@
     "testRegex": ".+\\.spec\\.ts$",
     "moduleNameMapper": {
       "^utils/(.*)$": "<rootDir>/src/utils/$1",
+      "^hooks/(.*)$": "<rootDir>/src/hooks/$1",
       "^schema/(.*)$": "<rootDir>/src/schema/$1"
     },
     "transform": {
