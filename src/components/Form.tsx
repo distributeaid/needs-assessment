@@ -10,6 +10,7 @@ import type {
 	Question,
 	Section,
 	SingleSelectQuestionFormat,
+	TextQuestionFormat,
 } from 'schema/types'
 
 const QuestionInfo: FunctionComponent<
@@ -55,27 +56,51 @@ const TextInput = ({
 			},
 		})
 	}
+
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
-			<input
-				type={type}
-				maxLength={maxLength}
-				required={required}
-				className={`form-control ${
-					validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
-				}`}
-				id={`${section.id}.${question.id}`}
-				placeholder={
-					question.example !== undefined
-						? `e.g. "${question.example}"`
-						: undefined
-				}
-				value={value}
-				onChange={({ target: { value } }) => setValue(value)}
-				onBlur={() => {
-					setValue(value.trim())
-				}}
-			/>
+			{(question.format as TextQuestionFormat).multiLine ?? false ? (
+				<textarea
+					maxLength={maxLength}
+					required={required}
+					className={`form-control ${
+						validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
+					}`}
+					id={`${section.id}.${question.id}`}
+					placeholder={
+						question.example !== undefined
+							? `e.g. "${question.example}"`
+							: undefined
+					}
+					onChange={({ target: { value } }) => setValue(value)}
+					onBlur={() => {
+						setValue(value.trim())
+					}}
+				>
+					{value}
+				</textarea>
+			) : (
+				<input
+					type={type}
+					maxLength={maxLength}
+					required={required}
+					className={`form-control ${
+						validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
+					}`}
+					id={`${section.id}.${question.id}`}
+					placeholder={
+						question.example !== undefined
+							? `e.g. "${question.example}"`
+							: undefined
+					}
+					value={value}
+					onChange={({ target: { value } }) => setValue(value)}
+					onBlur={() => {
+						setValue(value.trim())
+					}}
+				/>
+			)}
+
 			{maxLength !== undefined && (
 				<small>{maxLength - value.length} character(s) remaining</small>
 			)}

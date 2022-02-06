@@ -373,27 +373,112 @@
           }
         },
         {
-          "id": "quarter",
-          "title": "Which quarter is this needs assessment for?",
+          "id": "winterize",
+          "title": "In which month do you winterise your warehouse?",
           "required": true,
           "format": {
             "type": "single-select",
             "options": [
               {
-                "id": "q1",
-                "title": "Q1: January, February, March"
+                "id": "january",
+                "title": "January"
               },
               {
-                "id": "q2",
-                "title": "Q2: April, May, June"
+                "id": "february",
+                "title": "February"
               },
               {
-                "id": "q3",
-                "title": "Q3: July, August, September"
+                "id": "march",
+                "title": "March"
               },
               {
-                "id": "q4",
-                "title": "Q4: October, November, December"
+                "id": "april",
+                "title": "April"
+              },
+              {
+                "id": "may",
+                "title": "May"
+              },
+              {
+                "id": "june",
+                "title": "June"
+              },
+              {
+                "id": "july",
+                "title": "July"
+              },
+              {
+                "id": "august",
+                "title": "August"
+              },
+              {
+                "id": "september",
+                "title": "September"
+              },
+              {
+                "id": "october",
+                "title": "October"
+              },
+              {
+                "id": "november",
+                "title": "November"
+              },
+              {
+                "id": "december",
+                "title": "December"
+              },
+              {
+                "id": "never",
+                "title": "I don't winterize my warehouse"
+              }
+            ]
+          }
+        },
+        {
+          "id": "clearedPallets",
+          "title": "How many pallets do you typically clear (i.e. go through or use) each month?",
+          "required": true,
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "epa",
+                "title": "Euro pallets"
+              }
+            ]
+          }
+        },
+        {
+          "id": "palletIntake",
+          "title": "How many pallets per month is your warehouse typically able to take in?",
+          "required": true,
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "epa",
+                "title": "Euro pallets"
+              }
+            ]
+          }
+        },
+        {
+          "id": "features",
+          "title": "Please tick all that you have access to",
+          "format": {
+            "type": "multi-select",
+            "options": [
+              {
+                "id": "forklift",
+                "title": "Fork lift"
+              },
+              {
+                "id": "jack",
+                "title": "Pallet Jack"
+              },
+              {
+                "id": "van",
+                "title": "Van"
               }
             ]
           }
@@ -2039,6 +2124,175 @@
                 "title": "Pairs"
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "additional",
+      "title": "Additional Information",
+      "internalComment": "The questions in this section may change for each round. This is a section for us to ask exploratory questions about things we think of that would be good to have data on; the inclusion of questions about them is purely exploratory and doesn't necessarily mean we plan to try to procure or encourage others to procure them. So the utility of asking about the same thing twice isn't that great, and we'll usually have different items we want to ask about each round.",
+      "questions": [
+        {
+          "id": "needOtherItems",
+          "title": "Are there any other items you need?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "otherItemsNeeded",
+          "title": "Please describe the other items you need:",
+          "hidden": "$not($exists(additional.needOtherItems)) or additional.needOtherItems = 'no'",
+          "required": "additional.needOtherItems = 'yes'",
+          "format": {
+            "type": "text",
+            "multiLine": true
+          }
+        },
+        {
+          "id": "dontNeedItems",
+          "title": "Is there anything you do NOT need more of that you would like to make us aware of?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "notNeededItems",
+          "title": "Please describe the items you do NOT need anymore:",
+          "hidden": "$not($exists(additional.dontNeedItems)) or additional.dontNeedItems = 'no'",
+          "required": "additional.dontNeedItems = 'yes'",
+          "format": {
+            "type": "text",
+            "multiLine": true
+          }
+        },
+        {
+          "id": "haveTooMuchItems",
+          "title": "Is there anything that you have too much of that could be reallocated or traded to other groups?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "tooMuchItems",
+          "title": "Please describe the items you have too much of and which could be reallocated or traded to other groups:",
+          "hidden": "$not($exists(additional.haveTooMuchItems)) or additional.haveTooMuchItems = 'no'",
+          "required": "additional.haveTooMuchItems = 'yes'",
+          "format": {
+            "type": "text",
+            "multiLine": true
+          }
+        },
+        {
+          "id": "fireSafetyEquipment",
+          "title": "Would you be interested in fire safety equipment? e.g. fire extinguishers, fire blankets",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "powerBanks",
+          "title": "Would you be interested in free power banks?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "other",
+          "title": "Is there anything else you would like to communicate with us at this time?",
+          "required": false,
+          "format": {
+            "type": "text",
+            "multiLine": true
+          }
+        },
+        {
+          "id": "logoUsage",
+          "title": "Thank you for your time! If you'd like, we'll be highlighting some of the organisations that filled out the needs assessment in recognition of the important work being done by grassroots organisations. Your data will not be tied to you publicly. Instead we may, for example, put your organisation's name and logo on the report. If you do not opt in, we will not do this.  If you are the only organisation to respond from your region, we will not do this.  Do you give us permission to highlight your contribution by putting your name and logo on the report?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "logoUrl",
+          "title": "Feel free to provide the URL to your logo here. Otherwise, we'll pull it off your website.",
+          "hidden": "$not($exists(additional.logoUsage)) or additional.logoUsage = 'no'",
+          "required": false,
+          "format": {
+            "type": "text"
           }
         }
       ]

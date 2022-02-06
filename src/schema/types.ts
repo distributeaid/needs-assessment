@@ -16,6 +16,12 @@ export type MultiSelectQuestionFormat = {
 	options: Option[]
 }
 
+export type TextQuestionFormat = {
+	type: 'text'
+	maxLength?: number
+	multiLine?: boolean
+}
+
 export type Question = {
 	id: string
 	title: string
@@ -23,10 +29,7 @@ export type Question = {
 	hidden?: boolean | JSONatatExpression // default: true
 	example?: string
 	format:
-		| {
-				type: 'text'
-				maxLength?: number
-		  }
+		| TextQuestionFormat
 		| {
 				type: 'email'
 		  }
