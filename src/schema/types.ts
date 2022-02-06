@@ -8,6 +8,7 @@ export type Option = {
 export type SingleSelectQuestionFormat = {
 	type: 'single-select'
 	options: Option[]
+	style?: 'dropdown' | 'radio'
 }
 
 export type MultiSelectQuestionFormat = {

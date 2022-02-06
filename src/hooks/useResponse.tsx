@@ -75,7 +75,10 @@ export const ResponseProvider: FunctionComponent = ({ children }) => {
 							response[section.id] = undefined
 						} else {
 							section.questions.forEach((question) => {
-								if (isHidden(question, response)) {
+								if (
+									isHidden(question, response) &&
+									response[section.id]?.[question.id] !== undefined
+								) {
 									response[section.id][question.id] = undefined
 								}
 							})

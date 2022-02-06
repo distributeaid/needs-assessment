@@ -29,11 +29,26 @@
           "format": {
             "type": "single-select",
             "options": [
-              { "id": "calais", "title": "Calais/Dunkirk" },
-              { "id": "paris", "title": "Paris" },
-              { "id": "chios", "title": "Chios" },
-              { "id": "samos", "title": "Samos" },
-              { "id": "lesvos", "title": "Lesvos" },
+              {
+                "id": "calais",
+                "title": "Calais/Dunkirk"
+              },
+              {
+                "id": "paris",
+                "title": "Paris"
+              },
+              {
+                "id": "chios",
+                "title": "Chios"
+              },
+              {
+                "id": "samos",
+                "title": "Samos"
+              },
+              {
+                "id": "lesvos",
+                "title": "Lesvos"
+              },
               {
                 "id": "northernGreece",
                 "title": "Thessaloniki/Northern Mainland Greece"
@@ -42,10 +57,22 @@
                 "id": "southernGreece",
                 "title": "Athens/Southern Mainland Greece"
               },
-              { "id": "lebanon", "title": "Lebanon" },
-              { "id": "bosnia", "title": "Bosnia" },
-              { "id": "serbia", "title": "Serbia" },
-              { "id": "other", "title": "Other" }
+              {
+                "id": "lebanon",
+                "title": "Lebanon"
+              },
+              {
+                "id": "bosnia",
+                "title": "Bosnia"
+              },
+              {
+                "id": "serbia",
+                "title": "Serbia"
+              },
+              {
+                "id": "other",
+                "title": "Other"
+              }
             ]
           }
         },
@@ -71,10 +98,22 @@
           "format": {
             "type": "single-select",
             "options": [
-              { "id": "q1", "title": "Q1: January, February, March" },
-              { "id": "q2", "title": "Q2: April, May, June" },
-              { "id": "q3", "title": "Q3: July, August, September" },
-              { "id": "q4", "title": "Q4: October, November, December" }
+              {
+                "id": "q1",
+                "title": "Q1: January, February, March"
+              },
+              {
+                "id": "q2",
+                "title": "Q2: April, May, June"
+              },
+              {
+                "id": "q3",
+                "title": "Q3: July, August, September"
+              },
+              {
+                "id": "q4",
+                "title": "Q4: October, November, December"
+              }
             ]
           }
         }
@@ -131,15 +170,27 @@
         },
         {
           "id": "populationTrending",
-          "title": "Is the regions population trending upwards, downwards, stagnant, or hard to say?",
+          "title": "Is the region's population trending upwards, downwards, stagnant, or hard to say?",
           "required": true,
           "format": {
             "type": "single-select",
             "options": [
-              { "id": "upwards", "title": "upwards" },
-              { "id": "downwards", "title": "downwards" },
-              { "id": "stagnant", "title": "stagnant" },
-              { "id": "hardToSay", "title": "hard to say" }
+              {
+                "id": "upwards",
+                "title": "upwards"
+              },
+              {
+                "id": "downwards",
+                "title": "downwards"
+              },
+              {
+                "id": "stagnant",
+                "title": "stagnant"
+              },
+              {
+                "id": "hardToSay",
+                "title": "hard to say"
+              }
             ]
           }
         },
@@ -151,15 +202,30 @@
           "format": {
             "type": "multi-select",
             "options": [
-              { "id": "food", "title": "food items" },
-              { "id": "clothing", "title": "clothing" },
-              { "id": "hygiene", "title": "hygiene (including diapers)" },
-              { "id": "shelter", "title": "Shelter and Storage" },
+              {
+                "id": "food",
+                "title": "food items"
+              },
+              {
+                "id": "clothing",
+                "title": "clothing"
+              },
+              {
+                "id": "hygiene",
+                "title": "hygiene (including diapers)"
+              },
+              {
+                "id": "shelter",
+                "title": "Shelter and Storage"
+              },
               {
                 "id": "education",
                 "title": "education and employability services"
               },
-              { "id": "medical", "title": "medical services" }
+              {
+                "id": "medical",
+                "title": "medical services"
+              }
             ]
           }
         },
@@ -170,14 +236,38 @@
           "format": {
             "type": "multi-select",
             "options": [
-              { "id": "men", "title": "men" },
-              { "id": "women", "title": "women" },
-              { "id": "children", "title": "children" },
-              { "id": "unaccompaniedMinoris", "title": "unaccompanied minors" },
-              { "id": "families", "title": "families" },
-              { "id": "disabled", "title": "disabled" },
-              { "id": "lgbtqPlus", "title": "LGBTQ+" },
-              { "id": "vulnerable", "title": "Vulnerable Cases" }
+              {
+                "id": "men",
+                "title": "men"
+              },
+              {
+                "id": "women",
+                "title": "women"
+              },
+              {
+                "id": "children",
+                "title": "children"
+              },
+              {
+                "id": "unaccompaniedMinoris",
+                "title": "unaccompanied minors"
+              },
+              {
+                "id": "families",
+                "title": "families"
+              },
+              {
+                "id": "disabled",
+                "title": "disabled"
+              },
+              {
+                "id": "lgbtqPlus",
+                "title": "LGBTQ+"
+              },
+              {
+                "id": "vulnerable",
+                "title": "Vulnerable Cases"
+              }
             ]
           }
         },
@@ -190,11 +280,121 @@
           "format": {
             "type": "multi-select",
             "options": [
-              { "id": "womens", "title": "Women's clothing" },
-              { "id": "mens", "title": "men's clothing" },
-              { "id": "girls", "title": "girl's clothing" },
-              { "id": "boys", "title": "boy's clothing" },
-              { "id": "baby", "title": "baby clothing" }
+              {
+                "id": "womens",
+                "title": "Women's clothing"
+              },
+              {
+                "id": "mens",
+                "title": "men's clothing"
+              },
+              {
+                "id": "girls",
+                "title": "girl's clothing"
+              },
+              {
+                "id": "boys",
+                "title": "boy's clothing"
+              },
+              {
+                "id": "baby",
+                "title": "baby clothing"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "warehouse",
+      "title": "Warehouse information",
+      "questions": [
+        {
+          "id": "operatesWarehouse",
+          "title": "Do you operate a warehouse?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "size",
+          "title": "What is the size of your warehouse, in square meters (m²)?",
+          "required": "warehouse.operatesWarehouse = 'yes'",
+          "hidden": "warehouse.operatesWarehouse = 'no'",
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "sqm",
+                "title": "m²"
+              }
+            ]
+          }
+        },
+        {
+          "id": "storageUsage",
+          "title": "How full is your storage?",
+          "format": {
+            "type": "single-select",
+            "options": [
+              {
+                "id": "p100",
+                "title": "100%"
+              },
+              {
+                "id": "p75",
+                "title": "75%"
+              },
+              {
+                "id": "p50",
+                "title": "50%"
+              },
+              {
+                "id": "p25",
+                "title": "25%"
+              },
+              {
+                "id": "p0",
+                "title": "0%"
+              }
+            ]
+          }
+        },
+        {
+          "id": "quarter",
+          "title": "Which quarter is this needs assessment for?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "options": [
+              {
+                "id": "q1",
+                "title": "Q1: January, February, March"
+              },
+              {
+                "id": "q2",
+                "title": "Q2: April, May, June"
+              },
+              {
+                "id": "q3",
+                "title": "Q3: July, August, September"
+              },
+              {
+                "id": "q4",
+                "title": "Q4: October, November, December"
+              }
             ]
           }
         }
@@ -212,7 +412,12 @@
           "title": "Cloth Masks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "masks", "title": "Individual Masks" }]
+            "units": [
+              {
+                "id": "masks",
+                "title": "Individual Masks"
+              }
+            ]
           }
         },
         {
@@ -220,7 +425,12 @@
           "title": "Surgical Style Masks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "masks", "title": "Individual Masks" }]
+            "units": [
+              {
+                "id": "masks",
+                "title": "Individual Masks"
+              }
+            ]
           }
         },
         {
@@ -228,7 +438,12 @@
           "title": "N95/FFP2 Masks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "masks", "title": "Individual Masks" }]
+            "units": [
+              {
+                "id": "masks",
+                "title": "Individual Masks"
+              }
+            ]
           }
         },
         {
@@ -236,7 +451,12 @@
           "title": "Bar Soap",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "bars100g", "title": "100g Bars" }]
+            "units": [
+              {
+                "id": "bars100g",
+                "title": "100g Bars"
+              }
+            ]
           }
         },
         {
@@ -244,7 +464,12 @@
           "title": "Liquid Soap",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "bottles250ml", "title": "250ml Bottles" }]
+            "units": [
+              {
+                "id": "bottles250ml",
+                "title": "250ml Bottles"
+              }
+            ]
           }
         },
         {
@@ -252,7 +477,12 @@
           "title": "Shampoo",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "bottles250ml", "title": "250ml Bottles" }]
+            "units": [
+              {
+                "id": "bottles250ml",
+                "title": "250ml Bottles"
+              }
+            ]
           }
         },
         {
@@ -261,7 +491,10 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "toothbrushes", "title": "Individual Toothbrushes" }
+              {
+                "id": "toothbrushes",
+                "title": "Individual Toothbrushes"
+              }
             ]
           }
         },
@@ -270,7 +503,12 @@
           "title": "Toothpaste",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "tubes100ml", "title": "100ml Tube" }]
+            "units": [
+              {
+                "id": "tubes100ml",
+                "title": "100ml Tube"
+              }
+            ]
           }
         },
         {
@@ -278,7 +516,12 @@
           "title": "Sanitary Pads",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pads", "title": "Individual Pads" }]
+            "units": [
+              {
+                "id": "pads",
+                "title": "Individual Pads"
+              }
+            ]
           }
         },
         {
@@ -286,7 +529,12 @@
           "title": "Deodorant",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "rollers100ml", "title": "100ml Roller" }]
+            "units": [
+              {
+                "id": "rollers100ml",
+                "title": "100ml Roller"
+              }
+            ]
           }
         },
         {
@@ -294,7 +542,12 @@
           "title": "Disposable Razors",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "razors", "title": "Individual Razors" }]
+            "units": [
+              {
+                "id": "razors",
+                "title": "Individual Razors"
+              }
+            ]
           }
         },
         {
@@ -302,7 +555,12 @@
           "title": "Shaving Foam",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "cans200ml", "title": "200ml Cans" }]
+            "units": [
+              {
+                "id": "cans200ml",
+                "title": "200ml Cans"
+              }
+            ]
           }
         },
         {
@@ -310,7 +568,12 @@
           "title": "Condoms",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "condoms", "title": "Individual Condoms" }]
+            "units": [
+              {
+                "id": "condoms",
+                "title": "Individual Condoms"
+              }
+            ]
           }
         },
         {
@@ -318,7 +581,12 @@
           "title": "Diapers - Size 0",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "diapersSize0", "title": "Individual Diapers" }]
+            "units": [
+              {
+                "id": "diapersSize0",
+                "title": "Individual Diapers"
+              }
+            ]
           }
         },
         {
@@ -326,7 +594,12 @@
           "title": "Diapers - Size 1",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "diapersSize1", "title": "Individual Diapers" }]
+            "units": [
+              {
+                "id": "diapersSize1",
+                "title": "Individual Diapers"
+              }
+            ]
           }
         },
         {
@@ -334,7 +607,12 @@
           "title": "Diapers - Size 2",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "diapersSize2", "title": "Individual Diapers" }]
+            "units": [
+              {
+                "id": "diapersSize2",
+                "title": "Individual Diapers"
+              }
+            ]
           }
         },
         {
@@ -342,7 +620,12 @@
           "title": "Diapers - Size 3",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "diapersSize3", "title": "Individual Diapers" }]
+            "units": [
+              {
+                "id": "diapersSize3",
+                "title": "Individual Diapers"
+              }
+            ]
           }
         },
         {
@@ -350,7 +633,12 @@
           "title": "Diapers - Size 4",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "diapersSize4", "title": "Individual Diapers" }]
+            "units": [
+              {
+                "id": "diapersSize4",
+                "title": "Individual Diapers"
+              }
+            ]
           }
         },
         {
@@ -358,7 +646,12 @@
           "title": "Diapers - Size 5",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "diapersSize5", "title": "Individual Diapers" }]
+            "units": [
+              {
+                "id": "diapersSize5",
+                "title": "Individual Diapers"
+              }
+            ]
           }
         },
         {
@@ -366,7 +659,12 @@
           "title": "Diapers - Size 6",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "diapersSize6", "title": "Individual Diapers" }]
+            "units": [
+              {
+                "id": "diapersSize6",
+                "title": "Individual Diapers"
+              }
+            ]
           }
         }
       ]
@@ -383,7 +681,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -392,7 +695,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -401,7 +709,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -410,7 +723,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -419,7 +737,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         }
       ]
@@ -436,7 +759,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -445,7 +773,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -454,7 +787,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -463,7 +801,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -472,7 +815,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -481,7 +829,12 @@
           "required": false,
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "packs", "title": "Packs of 500 sheets" }]
+            "units": [
+              {
+                "id": "packs",
+                "title": "Packs of 500 sheets"
+              }
+            ]
           }
         }
       ]
@@ -499,8 +852,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              }
             ]
           }
         },
@@ -511,8 +870,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              }
             ]
           }
         },
@@ -523,8 +888,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              }
             ]
           }
         },
@@ -535,8 +906,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              }
             ]
           }
         },
@@ -547,8 +924,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              }
             ]
           }
         },
@@ -559,8 +942,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              }
             ]
           }
         },
@@ -571,8 +960,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              }
             ]
           }
         },
@@ -583,8 +978,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "ml", "title": "Milliliter" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "ml",
+                "title": "Milliliter"
+              }
             ]
           }
         },
@@ -595,8 +996,14 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "ml", "title": "Milliliter" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "ml",
+                "title": "Milliliter"
+              }
             ]
           }
         },
@@ -607,7 +1014,10 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
               {
                 "id": "cans",
                 "title": "Cans (#10 kitchen size)"
@@ -622,7 +1032,10 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
               {
                 "id": "cans",
                 "title": "Cans (#10 kitchen size)"
@@ -637,7 +1050,10 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
               {
                 "id": "cans",
                 "title": "Cans (#10 kitchen size)"
@@ -652,7 +1068,10 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
               {
                 "id": "cans",
                 "title": "Cans (#10 kitchen size)"
@@ -667,9 +1086,18 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" },
-              { "id": "servings", "title": "servings" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              },
+              {
+                "id": "servings",
+                "title": "servings"
+              }
             ]
           }
         },
@@ -680,9 +1108,18 @@
           "format": {
             "type": "positive-integer",
             "units": [
-              { "id": "epal", "title": "Euro pallets" },
-              { "id": "kg", "title": "Kilogram" },
-              { "id": "servings", "title": "servings" }
+              {
+                "id": "epal",
+                "title": "Euro pallets"
+              },
+              {
+                "id": "kg",
+                "title": "Kilogram"
+              },
+              {
+                "id": "servings",
+                "title": "servings"
+              }
             ]
           }
         }
@@ -700,7 +1137,12 @@
           "title": "Women's Jackets",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -708,7 +1150,12 @@
           "title": "Women's Jumpers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -716,7 +1163,12 @@
           "title": "Women's T-Shirts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -724,7 +1176,12 @@
           "title": "Women's Long sleeved tops",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -732,7 +1189,12 @@
           "title": "Women's Shorts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -740,7 +1202,12 @@
           "title": "Women's Trousers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -748,7 +1215,12 @@
           "title": "Women's Pants/Underwear",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -756,7 +1228,12 @@
           "title": "Women's Socks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -764,7 +1241,12 @@
           "title": "Women's Shoes",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         },
         {
@@ -774,7 +1256,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -784,7 +1271,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -794,7 +1286,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         },
         {
@@ -802,7 +1299,12 @@
           "title": "Women's Dresses",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -810,7 +1312,12 @@
           "title": "Women's Leggings",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -818,7 +1325,12 @@
           "title": "Women's Bras",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -826,7 +1338,12 @@
           "title": "Women's Hijabs",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -834,7 +1351,12 @@
           "title": "Women's Abayas",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         }
       ]
@@ -851,7 +1373,12 @@
           "title": "Men's Jackets",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -859,7 +1386,12 @@
           "title": "Men's Jumpers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -867,7 +1399,12 @@
           "title": "Men's T-Shirts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -875,7 +1412,12 @@
           "title": "Men's Long sleeved tops",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -883,7 +1425,12 @@
           "title": "Men's Shorts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -891,7 +1438,12 @@
           "title": "Men's Trousers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -899,7 +1451,12 @@
           "title": "Men's Pants/Underwear",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -907,7 +1464,12 @@
           "title": "Men's Socks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -915,7 +1477,12 @@
           "title": "Men's Shoes",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         },
         {
@@ -925,7 +1492,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -935,7 +1507,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -945,7 +1522,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         }
       ]
@@ -962,7 +1544,12 @@
           "title": "Girl's Jackets",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -970,7 +1557,12 @@
           "title": "Girl's Jumpers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -978,7 +1570,12 @@
           "title": "Girl's T-Shirts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -986,7 +1583,12 @@
           "title": "Girl's Long sleeved tops",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -994,7 +1596,12 @@
           "title": "Girl's Shorts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1002,7 +1609,12 @@
           "title": "Girl's Trousers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1010,7 +1622,12 @@
           "title": "Girl's Pants/Underwear",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1018,7 +1635,12 @@
           "title": "Girl's Socks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1026,7 +1648,12 @@
           "title": "Girl's Shoes",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         },
         {
@@ -1036,7 +1663,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1046,7 +1678,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1056,7 +1693,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         },
         {
@@ -1064,7 +1706,12 @@
           "title": "Girl's Dresses",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1072,7 +1719,12 @@
           "title": "Girl's Leggings",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         }
       ]
@@ -1089,7 +1741,12 @@
           "title": "Boy's Jackets",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1097,7 +1754,12 @@
           "title": "Boy's Jumpers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1105,7 +1767,12 @@
           "title": "Boy's T-Shirts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1113,7 +1780,12 @@
           "title": "Boy's Long sleeved tops",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1121,7 +1793,12 @@
           "title": "Boy's Shorts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1129,7 +1806,12 @@
           "title": "Boy's Trousers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1137,7 +1819,12 @@
           "title": "Boy's Pants/Underwear",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1145,7 +1832,12 @@
           "title": "Boy's Socks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1153,7 +1845,12 @@
           "title": "Boy's Shoes",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         },
         {
@@ -1163,7 +1860,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1173,7 +1875,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1183,7 +1890,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         }
       ]
@@ -1200,7 +1912,12 @@
           "title": "Baby Jackets/All-In-Ones",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1208,7 +1925,12 @@
           "title": "Baby Jumpers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1216,7 +1938,12 @@
           "title": "Baby T-Shirts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1224,7 +1951,12 @@
           "title": "Baby Shorts",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1232,7 +1964,12 @@
           "title": "Baby Bodies/Rombers",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1240,7 +1977,12 @@
           "title": "Baby Onesies/pyjamas",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1248,7 +1990,12 @@
           "title": "Baby Socks",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1256,7 +2003,12 @@
           "title": "Baby Shoes",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         },
         {
@@ -1266,7 +2018,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "items", "title": "Individual Items" }]
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
           }
         },
         {
@@ -1276,7 +2033,12 @@
           "hidden": "timeOfYear.quarter = 'q2' or timeOfYear.quarter = 'q3'",
           "format": {
             "type": "positive-integer",
-            "units": [{ "id": "pairs", "title": "Pairs" }]
+            "units": [
+              {
+                "id": "pairs",
+                "title": "Pairs"
+              }
+            ]
           }
         }
       ]

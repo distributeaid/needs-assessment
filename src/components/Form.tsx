@@ -210,6 +210,8 @@ const SingleSelectQuestion = ({
 	form: FormDefinition
 }) => {
 	const { response, update } = useResponse()
+	const style =
+		(question.format as SingleSelectQuestionFormat)?.style ?? 'dropdown'
 	const value = response?.[section.id]?.[question.id] ?? ''
 	const { validation } = useValidation({ response, form })
 	const setValue = (value: string) =>
@@ -222,26 +224,93 @@ const SingleSelectQuestion = ({
 		})
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
-			<select
-				value={value}
-				className={`form-control ${
-					validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
-				}`}
-				required={required}
-				onChange={({ target: { value } }) => setValue(value)}
-			>
-				<option value={-1}>Please select</option>
-				{(question.format as SingleSelectQuestionFormat).options.map(
-					(option) => (
-						<option key={option.id} value={option.id}>
-							{option.title}
-						</option>
-					),
-				)}
-			</select>
+			{(question.format as SingleSelectQuestionFormat)?.style === 'radio' ? (
+				<RadioInput
+					value={value}
+					setValue={setValue}
+					isValid={validation[section.id][question.id]}
+					required={required}
+					options={(question.format as SingleSelectQuestionFormat).options}
+					id={`${section.id}.${question.id}`}
+				/>
+			) : (
+				<SelectInput
+					value={value}
+					setValue={setValue}
+					isValid={validation[section.id][question.id]}
+					required={required}
+					options={(question.format as SingleSelectQuestionFormat).options}
+				/>
+			)}
 		</QuestionInfo>
 	)
 }
+
+const SelectInput = ({
+	value,
+	setValue,
+	isValid,
+	required,
+	options,
+}: {
+	value: string
+	setValue: (value: string) => void
+	isValid: boolean
+	required: boolean
+	options: Option[]
+}) => (
+	<select
+		value={value}
+		className={`form-control ${isValid ? 'is-valid' : 'is-invalid'}`}
+		required={required}
+		onChange={({ target: { value } }) => setValue(value)}
+	>
+		<option value={-1}>Please select</option>
+		{options.map((option) => (
+			<option key={option.id} value={option.id}>
+				{option.title}
+			</option>
+		))}
+	</select>
+)
+
+const RadioInput = ({
+	value,
+	setValue,
+	isValid,
+	required,
+	options,
+	id,
+}: {
+	value: string
+	setValue: (value: string) => void
+	isValid: boolean
+	required: boolean
+	options: Option[]
+	id: string
+}) => (
+	<>
+		{options.map((option) => (
+			<div className="form-check" key={option.id}>
+				<input
+					className={`form-check-input ${isValid ? 'is-valid' : 'is-invalid'}`}
+					type="radio"
+					name={id}
+					id={`${id}.${option.id}`}
+					checked={value === option.id}
+					onClick={() => {
+						setValue(option.id)
+					}}
+					value={option.id}
+					required={required}
+				/>
+				<label className="form-check-label" htmlFor={`${id}.${option.id}`}>
+					{option.title}
+				</label>
+			</div>
+		))}
+	</>
+)
 
 const MultiSelectQuestion = ({
 	section,
