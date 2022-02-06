@@ -1,8 +1,10 @@
+import cx from 'classnames'
 import { Collapsable } from 'components/Collapsable'
 import { OkIcon, WarningIcon } from 'components/FeatherIcons'
 import { isHidden, isRequired, useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
-import type { FunctionComponent, PropsWithChildren } from 'react'
+import { FunctionComponent, PropsWithChildren, useState } from 'react'
+import { Link } from 'react-router-dom'
 import type {
 	Form as FormDefinition,
 	MultiSelectQuestionFormat,
@@ -57,15 +59,20 @@ const TextInput = ({
 		})
 	}
 
+	const hasInput = value.length > 0
+	const isValid = hasInput && (validation[section.id]?.[question.id] ?? true)
+	const isInvalid = hasInput ? !isValid : required
+
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
 			{(question.format as TextQuestionFormat).multiLine ?? false ? (
 				<textarea
 					maxLength={maxLength}
 					required={required}
-					className={`form-control ${
-						validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
-					}`}
+					className={cx('form-control', {
+						'is-valid': isValid,
+						'is-invalid': isInvalid,
+					})}
 					id={`${section.id}.${question.id}`}
 					placeholder={
 						question.example !== undefined
@@ -77,23 +84,24 @@ const TextInput = ({
 						setValue(value.trim())
 					}}
 				>
-					{value}
+					{value ?? ''}
 				</textarea>
 			) : (
 				<input
 					type={type}
 					maxLength={maxLength}
 					required={required}
-					className={`form-control ${
-						validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
-					}`}
+					className={cx('form-control', {
+						'is-valid': isValid,
+						'is-invalid': isInvalid,
+					})}
 					id={`${section.id}.${question.id}`}
 					placeholder={
 						question.example !== undefined
 							? `e.g. "${question.example}"`
 							: undefined
 					}
-					value={value}
+					value={value ?? ''}
 					onChange={({ target: { value } }) => setValue(value)}
 					onBlur={() => {
 						setValue(value.trim())
@@ -139,6 +147,10 @@ const PositiveIntegerInput = ({
 		})
 	}
 
+	const hasInput = value !== undefined && unit !== undefined
+	const isValid = hasInput && (validation[section.id]?.[question.id] ?? true)
+	const isInvalid = hasInput ? !isValid : required
+
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
 			<div className="input-group">
@@ -151,16 +163,17 @@ const PositiveIntegerInput = ({
 						Math.abs(max ?? Number.MAX_SAFE_INTEGER),
 					)}
 					step={1}
-					className={`form-control ${
-						validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
-					}`}
+					className={cx('form-control', {
+						'is-valid': isValid,
+						'is-invalid': isInvalid,
+					})}
 					id={`${section.id}.${question.id}`}
 					placeholder={
 						question.example !== undefined
 							? `e.g. "${question.example}"`
 							: undefined
 					}
-					value={value}
+					value={value ?? ''}
 					onChange={({ target: { value } }) =>
 						setValue({ value, unit: unit ?? units[0].id })
 					}
@@ -195,35 +208,7 @@ const PositiveIntegerInput = ({
 	)
 }
 
-const TextQuestion = ({
-	maxLength,
-	...rest
-}: {
-	section: Section
-	question: Question
-	maxLength?: number
-	required: boolean
-	form: FormDefinition
-}) => <TextInput {...rest} type={'text'} />
-
-const EmailQuestion = (args: {
-	section: Section
-	question: Question
-	required: boolean
-	form: FormDefinition
-}) => <TextInput {...args} type={'email'} />
-
-const PositiveIntegerQuestion = (args: {
-	section: Section
-	question: Question
-	min?: number
-	max?: number
-	required: boolean
-	form: FormDefinition
-	units: Option[]
-}) => <PositiveIntegerInput {...args} />
-
-const SingleSelectQuestion = ({
+const SingleSelectInput = ({
 	question,
 	section,
 	required,
@@ -245,13 +230,19 @@ const SingleSelectQuestion = ({
 				[question.id]: value === '-1' ? undefined : value,
 			},
 		})
+
+	const hasInput = value.length > 0
+	const isValid = hasInput && (validation[section.id]?.[question.id] ?? true)
+	const isInvalid = hasInput ? !isValid : required
+
 	return (
 		<QuestionInfo section={section} question={question} required={required}>
 			{(question.format as SingleSelectQuestionFormat)?.style === 'radio' ? (
 				<RadioInput
 					value={value}
 					setValue={setValue}
-					isValid={validation[section.id][question.id]}
+					isValid={isValid}
+					isInvalid={isInvalid}
 					required={required}
 					options={(question.format as SingleSelectQuestionFormat).options}
 					id={`${section.id}.${question.id}`}
@@ -260,7 +251,8 @@ const SingleSelectQuestion = ({
 				<SelectInput
 					value={value}
 					setValue={setValue}
-					isValid={validation[section.id][question.id]}
+					isValid={isValid}
+					isInvalid={isInvalid}
 					required={required}
 					options={(question.format as SingleSelectQuestionFormat).options}
 				/>
@@ -275,16 +267,21 @@ const SelectInput = ({
 	isValid,
 	required,
 	options,
+	isInvalid,
 }: {
 	value: string
 	setValue: (value: string) => void
 	isValid: boolean
+	isInvalid: boolean
 	required: boolean
 	options: Option[]
 }) => (
 	<select
 		value={value}
-		className={`form-control ${isValid ? 'is-valid' : 'is-invalid'}`}
+		className={cx('form-control', {
+			'is-valid': isValid,
+			'is-invalid': isInvalid,
+		})}
 		required={required}
 		onChange={({ target: { value } }) => setValue(value)}
 	>
@@ -304,10 +301,12 @@ const RadioInput = ({
 	required,
 	options,
 	id,
+	isInvalid,
 }: {
 	value: string
 	setValue: (value: string) => void
 	isValid: boolean
+	isInvalid: boolean
 	required: boolean
 	options: Option[]
 	id: string
@@ -316,13 +315,16 @@ const RadioInput = ({
 		{options.map((option) => (
 			<div className="form-check" key={option.id}>
 				<input
-					className={`form-check-input ${isValid ? 'is-valid' : 'is-invalid'}`}
+					className={cx('form-check-input', {
+						'is-valid': isValid,
+						'is-invalid': isInvalid,
+					})}
 					type="radio"
 					name={id}
 					id={`${id}.${option.id}`}
 					checked={value === option.id}
-					onClick={() => {
-						setValue(option.id)
+					onChange={({ target: { checked } }) => {
+						if (checked) setValue(option.id)
 					}}
 					value={option.id}
 					required={required}
@@ -335,7 +337,7 @@ const RadioInput = ({
 	</>
 )
 
-const MultiSelectQuestion = ({
+const MultiSelectInput = ({
 	section,
 	question,
 	required,
@@ -357,6 +359,11 @@ const MultiSelectQuestion = ({
 			},
 		})
 	const { validation } = useValidation({ response, form })
+
+	const hasInput = selected.length > 0
+	const isValid = hasInput && (validation[section.id]?.[question.id] ?? true)
+	const isInvalid = hasInput ? !isValid : required
+
 	return (
 		<div className="mb-3">
 			<p className="form-label">
@@ -371,9 +378,10 @@ const MultiSelectQuestion = ({
 				(option, i) => (
 					<div className="form-check" key={i}>
 						<input
-							className={`form-check-input ${
-								validation[section.id][question.id] ? 'is-valid' : 'is-invalid'
-							}`}
+							className={cx('form-check-input', {
+								'is-valid': isValid,
+								'is-invalid': isInvalid,
+							})}
 							type="checkbox"
 							value={option.id}
 							id={`${section.id}-${question.id}-${i}`}
@@ -413,26 +421,28 @@ const QuestionComponent = ({
 	switch (question.format.type) {
 		case 'text':
 			return (
-				<TextQuestion
+				<TextInput
 					form={form}
 					section={section}
 					question={question}
 					maxLength={question.format.maxLength}
 					required={required}
+					type={'text'}
 				/>
 			)
 		case 'email':
 			return (
-				<EmailQuestion
+				<TextInput
 					form={form}
 					section={section}
 					question={question}
 					required={required}
+					type={'email'}
 				/>
 			)
 		case 'positive-integer':
 			return (
-				<PositiveIntegerQuestion
+				<PositiveIntegerInput
 					form={form}
 					section={section}
 					question={question}
@@ -444,7 +454,7 @@ const QuestionComponent = ({
 			)
 		case 'single-select':
 			return (
-				<SingleSelectQuestion
+				<SingleSelectInput
 					form={form}
 					section={section}
 					question={question}
@@ -453,7 +463,7 @@ const QuestionComponent = ({
 			)
 		case 'multi-select':
 			return (
-				<MultiSelectQuestion
+				<MultiSelectInput
 					form={form}
 					section={section}
 					question={question}
@@ -465,7 +475,7 @@ const QuestionComponent = ({
 	}
 }
 
-const SectionComponent = ({
+export const SectionComponent = ({
 	section,
 	form,
 }: {
@@ -495,8 +505,8 @@ const SectionComponent = ({
 }
 
 export const Form = ({ form }: { form: FormDefinition }) => {
-	const { response, update, download } = useResponse()
-	const { valid, sectionValidation } = useValidation({ response, form })
+	const { response } = useResponse()
+	const { sectionValidation } = useValidation({ response, form })
 
 	return (
 		<form className="form">
@@ -526,7 +536,43 @@ export const Form = ({ form }: { form: FormDefinition }) => {
 				)
 			})}
 			<hr />
-			<footer className="d-flex justify-content-end justify-content-between">
+			<footer>
+				<FormFooter form={form} />
+			</footer>
+		</form>
+	)
+}
+
+export const FormFooter = ({ form }: { form: FormDefinition }) => {
+	const { response, update, download } = useResponse()
+	const { valid } = useValidation({ response, form })
+	const [consent, setDataUsageConsent] = useState<boolean>(false)
+
+	return (
+		<>
+			<div>
+				<div className="form-check">
+					<input
+						className="form-check-input"
+						type="checkbox"
+						value="yes"
+						id="data-usage-consent"
+						onChange={({ target: { checked } }) => {
+							setDataUsageConsent(checked)
+						}}
+						checked={consent}
+					/>
+					<label className="form-check-label" htmlFor="data-usage-consent">
+						By continuing with this form and submitting it, you agree that you
+						understand and consent to how{' '}
+						<Link to="/privacy" target="_blank">
+							we will use your data
+						</Link>{' '}
+						and who we will share it with.
+					</label>
+				</div>
+			</div>
+			<div className="d-flex justify-content-end justify-content-between mt-4">
 				<button
 					type="button"
 					className="btn btn-outline-danger"
@@ -539,14 +585,14 @@ export const Form = ({ form }: { form: FormDefinition }) => {
 				<button
 					type="button"
 					className="btn btn-primary"
-					disabled={!valid}
+					disabled={!valid || !consent}
 					onClick={() => {
 						download()
 					}}
 				>
 					submit
 				</button>
-			</footer>
-		</form>
+			</div>
+		</>
 	)
 }

@@ -53,7 +53,7 @@ export const FormGenerator = () => {
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
-				<section className="col-6">
+				<section className="col-md-6">
 					<h2>Define the form here:</h2>
 					<label htmlFor="form-definition">
 						Provide the form definition below.
@@ -103,7 +103,7 @@ export const FormGenerator = () => {
 						</>
 					)}
 				</section>
-				<section className="col-6">
+				<section className="col-md-6">
 					<h2>Form will appear here:</h2>
 					{parseFormDefinition !== undefined && (
 						<Form form={parseFormDefinition} />

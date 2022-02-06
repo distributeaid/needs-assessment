@@ -38,7 +38,6 @@ export const isHidden = (
 	return evaluateJSONataExpression({
 		expression: hidden,
 		response,
-		debug: console.debug,
 		error: console.error,
 	})
 }
@@ -58,7 +57,6 @@ export const isRequired = (
 	return evaluateJSONataExpression({
 		expression: required,
 		response,
-		debug: console.debug,
 		error: console.error,
 	})
 }
@@ -95,6 +93,9 @@ export const ResponseProvider: FunctionComponent = ({ children }) => {
 					const file = new File(
 						[responseToTSV(response, form)],
 						`response-${new Date().toISOString()}.tsv`,
+						{
+							type: 'text/tsv',
+						},
 					)
 					const link = document.createElement('a')
 					link.style.display = 'none'

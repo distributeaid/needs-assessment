@@ -4,7 +4,14 @@ import type { Form, MultiSelectQuestionFormat } from 'schema/types'
 
 export const responseToTSV = (response: Response, form: Form): string => {
 	const tsv: string[][] = []
-	tsv.push(['ID', 'Question', 'Answer', 'Answer Text', 'Unit', 'Unit Text'])
+	tsv.push([
+		'Question ID',
+		'Question Title',
+		'Answer ID',
+		'Answer Title',
+		'Unit ID',
+		'Unit Title',
+	])
 	form.sections.forEach((section) => {
 		if (isHidden(section, response)) return
 		section.questions.forEach((question) => {

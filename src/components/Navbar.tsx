@@ -51,6 +51,16 @@ export const Navbar = () => {
 						<ul className="navbar-nav me-auto">
 							<li className="nav-item">
 								<Link className="nav-link" to="/" onClick={close}>
+									Start
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link className="nav-link" to="/privacy" onClick={close}>
+									Privacy
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link className="nav-link" to="/generator" onClick={close}>
 									Form Generator
 								</Link>
 							</li>

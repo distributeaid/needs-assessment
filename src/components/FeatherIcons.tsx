@@ -351,3 +351,11 @@ export const MinusIcon = (options?: TypedIconOptions) => (
 export const PlusIcon = (options?: TypedIconOptions) => (
 	<FeatherIcon {...options} type="plus-circle" title="+" />
 )
+
+export const NextIcon = (options?: TypedIconOptions) => (
+	<FeatherIcon {...options} type="arrow-right" title="next" />
+)
+
+export const PrevIcon = (options?: TypedIconOptions) => (
+	<FeatherIcon {...options} type="arrow-left" title="next" />
+)
