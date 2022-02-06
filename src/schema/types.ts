@@ -5,21 +5,30 @@ export type Option = {
 	title: string
 }
 
+export type QuestionWithOptions = {
+	options: Option[]
+}
+
 export type SingleSelectQuestionFormat = {
 	type: 'single-select'
-	options: Option[]
 	style?: 'dropdown' | 'radio'
-}
+} & QuestionWithOptions
 
 export type MultiSelectQuestionFormat = {
 	type: 'multi-select'
-	options: Option[]
-}
+} & QuestionWithOptions
 
 export type TextQuestionFormat = {
 	type: 'text'
 	maxLength?: number
 	multiLine?: boolean
+}
+
+export type PositiveIntegerQuestionFormat = {
+	type: 'positive-integer'
+	units: Option[]
+	min?: number
+	max?: number
 }
 
 export type Question = {
@@ -33,12 +42,7 @@ export type Question = {
 		| {
 				type: 'email'
 		  }
-		| {
-				type: 'positive-integer'
-				units: Option[]
-				min?: number
-				max?: number
-		  }
+		| PositiveIntegerQuestionFormat
 		| SingleSelectQuestionFormat
 		| MultiSelectQuestionFormat
 }

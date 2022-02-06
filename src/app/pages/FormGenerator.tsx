@@ -2,6 +2,7 @@ import type { ErrorObject } from 'ajv'
 import { Collapsable } from 'components/Collapsable'
 import { OkIcon, WarningIcon } from 'components/FeatherIcons'
 import { Form } from 'components/Form'
+import { ResponseTable } from 'components/ResponseTable'
 import { useForm } from 'hooks/useForm'
 import { useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
@@ -145,6 +146,9 @@ const Response = ({ form }: { form: FormDefinition }) => {
 				<pre>{JSON.stringify(validation, null, 2)}</pre>
 				<h3>Sections validation:</h3>
 				<pre>{JSON.stringify(sectionValidation, null, 2)}</pre>
+			</Collapsable>
+			<Collapsable title={<>Response table</>} id="response-table">
+				<ResponseTable />
 			</Collapsable>
 		</>
 	)
