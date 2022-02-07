@@ -33,6 +33,8 @@ const validateResponse = (
 			)
 		case 'positive-integer':
 			return !isNaN(parseInt(answer, 10)) && parseInt(answer, 10) > 0
+		case 'non-negative-integer':
+			return !isNaN(parseInt(answer, 10)) && parseInt(answer, 10) >= 0
 		default:
 			return false
 	}

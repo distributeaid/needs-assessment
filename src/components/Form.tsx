@@ -116,7 +116,7 @@ const TextInput = ({
 	)
 }
 
-const PositiveIntegerInput = ({
+const IntegerInput = ({
 	section,
 	question,
 	min,
@@ -124,9 +124,11 @@ const PositiveIntegerInput = ({
 	required,
 	form,
 	units,
+	lowerBound,
 }: {
 	section: Section
 	question: Question
+	lowerBound?: number
 	min?: number
 	max?: number
 	required: boolean
@@ -157,7 +159,10 @@ const PositiveIntegerInput = ({
 				<input
 					required={required}
 					type="number"
-					min={Math.max(1, Math.abs(min ?? 1))}
+					min={Math.max(
+						lowerBound ?? Number.MIN_SAFE_INTEGER,
+						Math.abs(min ?? lowerBound ?? Number.MIN_SAFE_INTEGER),
+					)}
 					max={Math.min(
 						Number.MAX_SAFE_INTEGER,
 						Math.abs(max ?? Number.MAX_SAFE_INTEGER),
@@ -441,8 +446,9 @@ const QuestionComponent = ({
 				/>
 			)
 		case 'positive-integer':
+		case 'non-negative-integer':
 			return (
-				<PositiveIntegerInput
+				<IntegerInput
 					form={form}
 					section={section}
 					question={question}
@@ -450,8 +456,10 @@ const QuestionComponent = ({
 					max={question.format.max}
 					units={question.format.units}
 					required={required}
+					lowerBound={question.format.type === 'positive-integer' ? 1 : 0}
 				/>
 			)
+
 		case 'single-select':
 			return (
 				<SingleSelectInput

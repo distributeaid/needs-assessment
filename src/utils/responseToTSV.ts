@@ -33,6 +33,7 @@ export const responseToTSV = (response: Response, form: Form): string => {
 					])
 					return
 				case 'positive-integer':
+				case 'non-negative-integer':
 					tsv.push([
 						id,
 						questionText,

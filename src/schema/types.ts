@@ -24,12 +24,19 @@ export type TextQuestionFormat = {
 	multiLine?: boolean
 }
 
-export type PositiveIntegerQuestionFormat = {
-	type: 'positive-integer'
+export type IntegerQuestionFormat = {
 	units: Option[]
 	min?: number
 	max?: number
 }
+
+export type PositiveIntegerQuestionFormat = {
+	type: 'positive-integer'
+} & IntegerQuestionFormat
+
+export type NonNegativeIntegerQuestionFormat = {
+	type: 'non-negative-integer'
+} & IntegerQuestionFormat
 
 export type Question = {
 	id: string
@@ -43,6 +50,7 @@ export type Question = {
 				type: 'email'
 		  }
 		| PositiveIntegerQuestionFormat
+		| NonNegativeIntegerQuestionFormat
 		| SingleSelectQuestionFormat
 		| MultiSelectQuestionFormat
 }

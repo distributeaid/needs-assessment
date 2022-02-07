@@ -44,6 +44,7 @@ export const ResponseTable = () => {
 												case 'email':
 													return <td>{v}</td>
 												case 'positive-integer':
+												case 'non-negative-integer':
 													return (
 														<td>
 															<code>{v?.[0]}</code>{' '}
