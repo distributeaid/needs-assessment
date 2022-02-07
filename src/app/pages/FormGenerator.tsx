@@ -73,7 +73,7 @@ export const FormGenerator = () => {
 							setFormDefinition(value)
 							storedFormDefinition.set(value)
 						}}
-					></textarea>
+					/>
 					{formErrors.length > 0 && (
 						<ul>
 							{formErrors.map((error, i) => (

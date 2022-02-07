@@ -83,9 +83,8 @@ const TextInput = ({
 					onBlur={() => {
 						setValue(value.trim())
 					}}
-				>
-					{value ?? ''}
-				</textarea>
+					value={value ?? ''}
+				/>
 			) : (
 				<input
 					type={type}
