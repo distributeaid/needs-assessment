@@ -23,9 +23,7 @@ const storedFormDefinition = withLocalStorage<string>({
 const validate = ajv.getSchema(schemaUrl)
 
 export const Assessment = () => {
-	const [formDefinition, setFormDefinition] = useState<string>(
-		storedFormDefinition.get(),
-	)
+	const [formDefinition] = useState<string>(storedFormDefinition.get())
 	const [, setFormErrors] = useState<(ErrorObject | Error)[]>([])
 	const [, setFormValid] = useState<boolean>(false)
 	const { form: parsedFormDefinition, setForm: setParsedFormDefinition } =
@@ -56,13 +54,48 @@ export const Assessment = () => {
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
-				<section className="col-md-6">
-					{parsedFormDefinition !== undefined && (
-						<SectionizedForm form={parsedFormDefinition} />
-					)}
-				</section>
+				{parsedFormDefinition !== undefined && (
+					<SectionizedForm form={parsedFormDefinition} />
+				)}
 			</div>
 		</main>
+	)
+}
+
+const FormNavigation = ({
+	form,
+	navigate,
+}: {
+	form: FormDefinition
+	navigate: (id: string) => void
+}) => {
+	const { response } = useResponse()
+	const { sectionValidation } = useValidation({ response, form })
+	return (
+		<nav className="d-flex flex-column align-items-start col-md-4 mb-4">
+			{form.sections.map((section) => {
+				if (isHidden(section, response)) return null
+				return (
+					<div>
+						{sectionValidation[section.id] ? (
+							<abbr title="Section is valid.">
+								<OkIcon />
+							</abbr>
+						) : (
+							<abbr title="Section is invalid.">
+								<WarningIcon />
+							</abbr>
+						)}{' '}
+						<button
+							className="btn btn-link"
+							onClick={() => navigate(section.id)}
+						>
+							{section.title}
+						</button>
+					</div>
+				)
+			})}
+		</nav>
 	)
 }
 
@@ -102,61 +135,73 @@ const SectionizedForm = ({ form }: { form: FormDefinition }) => {
 	} while (prevSectionCandidate !== undefined && prevSection === undefined)
 
 	return (
-		<form
-			className="form"
-			onSubmit={(event) => {
-				event.preventDefault()
-			}}
-		>
-			<h2 className="d-flex justify-content-end justify-content-between">
-				{section.title}
-				{sectionValidation[section.id] ? (
-					<abbr title="Section is valid.">
-						<OkIcon />
-					</abbr>
-				) : (
-					<abbr title="Section is invalid.">
-						<WarningIcon />
-					</abbr>
-				)}
-			</h2>
-			<SectionComponent form={form} section={section} />
-			<footer className="mb-4">
-				<div className="d-flex justify-content-between mt-4 mb-4">
-					{prevSection !== undefined && (
-						<button
-							type="button"
-							className="btn btn-outline-secondary d-flex align-items-center"
-							onClick={() => {
-								if (prevSection !== undefined) setCurrentSection(prevSection.id)
-							}}
-						>
-							<PrevIcon />
-							<span>{prevSection.title}</span>
-						</button>
-					)}
-					{prevSection === undefined && <span></span>}
-					{nextSection !== undefined && (
-						<button
-							type="button"
-							className="btn btn-primary  d-flex align-items-center"
-							disabled={!sectionValidation[section.id]}
-							onClick={() => {
-								if (nextSection !== undefined) setCurrentSection(nextSection.id)
-							}}
-						>
-							<span>{nextSection.title}</span>
-							<NextIcon />
-						</button>
-					)}
-				</div>
-				{nextSection === undefined && (
-					<>
-						<hr />
-						<FormFooter form={form} />
-					</>
-				)}
-			</footer>
-		</form>
+		<>
+			<FormNavigation
+				form={form}
+				navigate={(id) => {
+					setCurrentSection(id)
+				}}
+			/>
+			<section className="col-md-6">
+				<form
+					className="form"
+					onSubmit={(event) => {
+						event.preventDefault()
+					}}
+				>
+					<h2 className="d-flex justify-content-end justify-content-between">
+						{section.title}
+						{sectionValidation[section.id] ? (
+							<abbr title="Section is valid.">
+								<OkIcon />
+							</abbr>
+						) : (
+							<abbr title="Section is invalid.">
+								<WarningIcon />
+							</abbr>
+						)}
+					</h2>
+					<SectionComponent form={form} section={section} />
+					<footer className="mb-4">
+						<div className="d-flex justify-content-between mt-4 mb-4">
+							{prevSection !== undefined && (
+								<button
+									type="button"
+									className="btn btn-outline-secondary d-flex align-items-center"
+									onClick={() => {
+										if (prevSection !== undefined)
+											setCurrentSection(prevSection.id)
+									}}
+								>
+									<PrevIcon />
+									<span>{prevSection.title}</span>
+								</button>
+							)}
+							{prevSection === undefined && <span></span>}
+							{nextSection !== undefined && (
+								<button
+									type="button"
+									className="btn btn-primary  d-flex align-items-center"
+									disabled={!sectionValidation[section.id]}
+									onClick={() => {
+										if (nextSection !== undefined)
+											setCurrentSection(nextSection.id)
+									}}
+								>
+									<span>{nextSection.title}</span>
+									<NextIcon />
+								</button>
+							)}
+						</div>
+						{nextSection === undefined && (
+							<>
+								<hr />
+								<FormFooter form={form} />
+							</>
+						)}
+					</footer>
+				</form>
+			</section>
+		</>
 	)
 }
