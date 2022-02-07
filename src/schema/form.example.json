@@ -517,7 +517,7 @@
     },
     {
       "id": "hygieneItems",
-      "title": "Hygiene tiems",
+      "title": "Hygiene items",
       "hidden": "$not('hygiene' in whomYouServe.aidTypes)",
       "description": "How many hygiene items do you need for the quarter? Remember, please do not include a need if you already have those items on hand or have a confirmed donation of those items in the quarter.",
       "internalComment": "This set of questions should only appear to the survey taker if they checked the corresponding box on the 'Whom you serve' section",
