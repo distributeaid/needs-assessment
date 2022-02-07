@@ -44,14 +44,15 @@ basicInfo.organization	Organisation Name	DA
 basicInfo.region	What region to you operate in?	lesvos	Lesvos
 basicInfo.areainfo	Would you like to tell us the exact area that you operate in?	No
 timeOfYear.quarter	Which quarter is this needs assessment for?	q1	Q1: January, February, March
-whomYouServe.peopleofConcern	How many total 'people of concern' live in the region where you operate?	10000		people	people of concern
-whomYouServe.peopleSupportedMonth	How many unique people does your organisation support in a month?	1000		people	unique people
-whomYouServe.averagePeopleServedMonth	How many times on average do you serve one person over the course of a month?	30		servings	average servings/month
-whomYouServe.populationTrending	Is the region's population trending upwards, downwards, stagnant, or hard to say?	upwards	upwards
+whomYouServe.peopleofConcern	How many people total are there in your region who may access NGO services?	10000		people	people of concern
+whomYouServe.peopleSupportedMonth	How many unique people does your organisation support in one month?	1000		people	unique people
+whomYouServe.averagePeopleServedMonth	How many times on average do you serve one person over the course of one month?	30		servings	average servings/month
+whomYouServe.populationTrending	Is the number of people you support trending upwards, downwards, stagnant, or hard to say?	upwards	upwards
 whomYouServe.aidTypes	Which of the following types of aid does your organisation provide? Please select all that apply	food, clothing	food items, clothing
 whomYouServe.primaryServing	Whom do you primarily serve? Pease select all that apply	men, women	men, women
 whomYouServe.clothingDistribution	Which types of the following clothing does your organisation distribute? Please select all that apply	womens, mens	Women's clothing, men's clothing
 warehouse.operatesWarehouse	Do you operate a warehouse?	no	no
+warehouse.warehouseInfo	Please tell us about your storage solutions:	
 warehouse.storageUsage	How full is your storage?	p0	0%
 warehouse.winterize	In which month do you winterise your warehouse?	never	I don't winterize my warehouse
 warehouse.clearedPallets	How many pallets do you typically clear (i.e. go through or use) each month?	10		epa	Euro pallets
@@ -101,11 +102,11 @@ mensClothing.mensShoes	Men's Shoes
 mensClothing.mensHats	Men's Hats				
 mensClothing.mensScarves	Men's Scarves				
 mensClothing.mensGloves	Men's Gloves				
+additional.needMedicalItems	Do you have any need for medical products?		
+additional.needElectricalItems	Do you have any need for electrical products?		
 additional.needOtherItems	Are there any other items you need?	no	no
 additional.dontNeedItems	Is there anything you do NOT need more of that you would like to make us aware of?	no	no
 additional.haveTooMuchItems	Is there anything that you have too much of that could be reallocated or traded to other groups?	no	no
-additional.fireSafetyEquipment	Would you be interested in fire safety equipment? e.g. fire extinguishers, fire blankets	no	no
-additional.powerBanks	Would you be interested in free power banks?	no	no
 additional.other	Is there anything else you would like to communicate with us at this time?	
 additional.logoUsage	Thank you for your time! If you'd like, we'll be highlighting some of the organisations that filled out the needs assessment in recognition of the important work being done by grassroots organisations. Your data will not be tied to you publicly. Instead we may, for example, put your organisation's name and logo on the report. If you do not opt in, we will not do this.  If you are the only organisation to respond from your region, we will not do this.  Do you give us permission to highlight your contribution by putting your name and logo on the report?	no	no`
 

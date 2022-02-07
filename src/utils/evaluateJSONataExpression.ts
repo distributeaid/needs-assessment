@@ -28,13 +28,13 @@ export const evaluateJSONataExpression = ({
 		'->',
 		result,
 	)
-	if (typeof result !== 'boolean') {
+	if (result !== undefined && typeof result !== 'boolean') {
 		error?.(
 			`[jsonata]`,
-			`expression did not validate to a boolean value`,
+			`expression ${expression} did not validate to a boolean value`,
 			result,
 		)
 		return false
 	}
-	return result
+	return result ?? false
 }

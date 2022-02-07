@@ -58,8 +58,20 @@
                 "title": "Athens/Southern Mainland Greece"
               },
               {
+                "id": "beirut",
+                "title": "Beirut"
+              },
+              {
+                "id": "bekka",
+                "title": "Bekka Valley"
+              },
+              {
+                "id": "saida",
+                "title": "Saida"
+              },
+              {
                 "id": "lebanon",
-                "title": "Lebanon"
+                "title": "Lebanon other"
               },
               {
                 "id": "bosnia",
@@ -68,6 +80,14 @@
               {
                 "id": "serbia",
                 "title": "Serbia"
+              },
+              {
+                "id": "ventimiglia",
+                "title": "Ventimiglia"
+              },
+              {
+                "id": "romania",
+                "title": "Romania"
               },
               {
                 "id": "other",
@@ -125,7 +145,7 @@
       "questions": [
         {
           "id": "peopleofConcern",
-          "title": "How many total 'people of concern' live in the region where you operate?",
+          "title": "How many people total are there in your region who may access NGO services?",
           "description": "e.g. total number of people living in an RIC and apartments ",
           "required": true,
           "format": {
@@ -140,7 +160,7 @@
         },
         {
           "id": "peopleSupportedMonth",
-          "title": "How many unique people does your organisation support in a month?",
+          "title": "How many unique people does your organisation support in one month?",
           "description": "This is the number of individuals you support; if you serve the same person multiple times in a month, please do not count them multiple times!",
           "required": true,
           "format": {
@@ -155,7 +175,7 @@
         },
         {
           "id": "averagePeopleServedMonth",
-          "title": "How many times on average do you serve one person over the course of a month?",
+          "title": "How many times on average do you serve one person over the course of one month?",
           "description": "e.g. if you serve the same people one meal a day, you would serve an individual 30 times a month.",
           "required": true,
           "format": {
@@ -170,7 +190,7 @@
         },
         {
           "id": "populationTrending",
-          "title": "Is the region's population trending upwards, downwards, stagnant, or hard to say?",
+          "title": "Is the number of people you support trending upwards, downwards, stagnant, or hard to say?",
           "required": true,
           "format": {
             "type": "single-select",
@@ -334,13 +354,23 @@
           "required": "warehouse.operatesWarehouse = 'yes'",
           "hidden": "warehouse.operatesWarehouse = 'no'",
           "format": {
-            "type": "positive-integer",
+            "type": "non-negative-integer",
             "units": [
               {
                 "id": "sqm",
                 "title": "m²"
               }
             ]
+          }
+        },
+        {
+          "id": "warehouseInfo",
+          "title": "Please tell us about your storage solutions:",
+          "required": "(warehouse.operatesWarehouse = 'yes' and warehouse.size[0] = 0) or warehouse.operatesWarehouse = 'no'",
+          "hidden": "warehouse.size[0] > 0",
+          "format": {
+            "type": "text",
+            "multiLine": true
           }
         },
         {
@@ -597,8 +627,21 @@
           }
         },
         {
-          "id": "sanitaryPads",
-          "title": "Sanitary Pads",
+          "id": "sanitaryPadsReusable",
+          "title": "Reusable Sanitary Pads",
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "pads",
+                "title": "Individual Pads"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sanitaryPadsDisposable",
+          "title": "Disposable Sanitary Pads",
           "format": {
             "type": "positive-integer",
             "units": [
@@ -748,6 +791,49 @@
               {
                 "id": "diapersSize6",
                 "title": "Individual Diapers"
+              }
+            ]
+          }
+        },
+        {
+          "id": "adultDiapers",
+          "title": "Adult Diapers",
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "diapersSize6",
+                "title": "Individual Diapers"
+              }
+            ]
+          }
+        },
+        {
+          "id": "washingDetergent",
+          "title": "Washing Detergent",
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "bottle1l",
+                "title": "1L bottle"
+              },
+              {
+                "id": "bag5k",
+                "title": "5k bag"
+              }
+            ]
+          }
+        },
+        {
+          "id": "bleach",
+          "title": "Bleach",
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "bottle1l",
+                "title": "1L bottle"
               }
             ]
           }
@@ -1068,8 +1154,8 @@
                 "title": "Euro pallets"
               },
               {
-                "id": "ml",
-                "title": "Milliliter"
+                "id": "l",
+                "title": "Liter"
               }
             ]
           }
@@ -1086,8 +1172,8 @@
                 "title": "Euro pallets"
               },
               {
-                "id": "ml",
-                "title": "Milliliter"
+                "id": "l",
+                "title": "Liter"
               }
             ]
           }
@@ -2134,6 +2220,64 @@
       "internalComment": "The questions in this section may change for each round. This is a section for us to ask exploratory questions about things we think of that would be good to have data on; the inclusion of questions about them is purely exploratory and doesn't necessarily mean we plan to try to procure or encourage others to procure them. So the utility of asking about the same thing twice isn't that great, and we'll usually have different items we want to ask about each round.",
       "questions": [
         {
+          "id": "needMedicalItems",
+          "title": "Do you have any need for medical products?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "medicalItemsNeeded",
+          "title": "Please describe the medical products you need:",
+          "hidden": "$not($exists(additional.needMedicalItems)) or additional.needMedicalItems = 'no'",
+          "required": "additional.needMedicalItems = 'yes'",
+          "format": {
+            "type": "text",
+            "multiLine": true
+          }
+        },
+        {
+          "id": "needElectricalItems",
+          "title": "Do you have any need for electrical products?",
+          "required": true,
+          "format": {
+            "type": "single-select",
+            "style": "radio",
+            "options": [
+              {
+                "id": "yes",
+                "title": "yes"
+              },
+              {
+                "id": "no",
+                "title": "no"
+              }
+            ]
+          }
+        },
+        {
+          "id": "electricalItemsNeeded",
+          "title": "Please describe the electrical products you need:",
+          "hidden": "$not($exists(additional.needElectricalItems)) or additional.needElectricalItems = 'no'",
+          "required": "additional.needElectricalItems = 'yes'",
+          "format": {
+            "type": "text",
+            "multiLine": true
+          }
+        },
+        {
           "id": "needOtherItems",
           "title": "Are there any other items you need?",
           "required": true,
@@ -2218,44 +2362,6 @@
           "format": {
             "type": "text",
             "multiLine": true
-          }
-        },
-        {
-          "id": "fireSafetyEquipment",
-          "title": "Would you be interested in fire safety equipment? e.g. fire extinguishers, fire blankets",
-          "required": true,
-          "format": {
-            "type": "single-select",
-            "style": "radio",
-            "options": [
-              {
-                "id": "yes",
-                "title": "yes"
-              },
-              {
-                "id": "no",
-                "title": "no"
-              }
-            ]
-          }
-        },
-        {
-          "id": "powerBanks",
-          "title": "Would you be interested in free power banks?",
-          "required": true,
-          "format": {
-            "type": "single-select",
-            "style": "radio",
-            "options": [
-              {
-                "id": "yes",
-                "title": "yes"
-              },
-              {
-                "id": "no",
-                "title": "no"
-              }
-            ]
           }
         },
         {
