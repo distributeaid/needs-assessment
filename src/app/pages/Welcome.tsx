@@ -25,8 +25,8 @@ export const Welcome = () => (
 				</p>
 				<p>
 					If you have any questions, please contact Nicole Tingle at{' '}
-					<a href="mailto:nicole@distributeaid.org">nicole@distributeaid.org</a>
-					. Thank you for your participation!
+					<a href="mailto:needs@distributeaid.org">needs@distributeaid.org</a>.
+					Thank you for your participation!
 				</p>
 				<p className="d-flex justify-content-end">
 					<Link className="btn btn-primary" to="/instructions">
