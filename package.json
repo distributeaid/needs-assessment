@@ -23,7 +23,8 @@
     "web-app",
     "spa",
     "react",
-    "vite"
+    "vite",
+    "needs-assessment"
   ],
   "author": "Distribute Aid | https://distributeaid.org/",
   "license": "AGPL-3.0-only",
