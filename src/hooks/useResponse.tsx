@@ -50,7 +50,7 @@ export const isRequired = (
 	},
 	response: Response,
 ): boolean => {
-	if (required === undefined) return true
+	if (required === undefined) return false
 	if (typeof required === 'boolean') {
 		return required
 	}

@@ -99,7 +99,6 @@
         {
           "id": "areainfo",
           "title": "Would you like to tell us the exact area that you operate in?",
-          "required": false,
           "format": {
             "type": "text",
             "maxLength": 180
@@ -852,7 +851,6 @@
         {
           "id": "tents",
           "title": "Tents",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -866,7 +864,6 @@
         {
           "id": "tarps",
           "title": "Tarps",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -880,7 +877,6 @@
         {
           "id": "sleepingBags",
           "title": "Sleeping Bags",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -894,7 +890,6 @@
         {
           "id": "blankets",
           "title": "Blankets",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -908,7 +903,6 @@
         {
           "id": "backpacks",
           "title": "Backpacks",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -922,7 +916,6 @@
         {
           "id": "suitcases",
           "title": "Suitcases",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -944,7 +937,6 @@
         {
           "id": "notepads",
           "title": "Notepads",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -958,7 +950,6 @@
         {
           "id": "pens",
           "title": "Pens",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -972,7 +963,6 @@
         {
           "id": "pencils",
           "title": "Pencils",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -986,7 +976,6 @@
         {
           "id": "pencilSharpeners",
           "title": "Pencil Sharpners",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1000,7 +989,6 @@
         {
           "id": "erasers",
           "title": "Erasers",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1014,7 +1002,6 @@
         {
           "id": "printerPaper",
           "title": "Printer Paper",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1036,7 +1023,6 @@
         {
           "id": "rice",
           "title": "Rice",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1054,7 +1040,6 @@
         {
           "id": "potatoes",
           "title": "Potatoes",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1072,7 +1057,6 @@
         {
           "id": "onions",
           "title": "Onions",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1090,7 +1074,6 @@
         {
           "id": "garlic",
           "title": "Garlic",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1108,7 +1091,6 @@
         {
           "id": "flour",
           "title": "Flour",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1126,7 +1108,6 @@
         {
           "id": "salt",
           "title": "Salt",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1144,7 +1125,6 @@
         {
           "id": "sugar",
           "title": "Sugar",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1162,7 +1142,6 @@
         {
           "id": "oil",
           "title": "Oil",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1180,7 +1159,6 @@
         {
           "id": "milk",
           "title": "Milk",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1198,7 +1176,6 @@
         {
           "id": "cannedTomatoes",
           "title": "Canned Tomatoes",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1216,7 +1193,6 @@
         {
           "id": "cannedBeans",
           "title": "Canned Beans",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1234,7 +1210,6 @@
         {
           "id": "cannedFish",
           "title": "Canned Fish",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1252,7 +1227,6 @@
         {
           "id": "sweetcorn",
           "title": "Sweetcorn",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1270,7 +1244,6 @@
         {
           "id": "tea",
           "title": "Tea",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -1292,7 +1265,6 @@
         {
           "id": "coffee",
           "title": "Coffee",
-          "required": false,
           "format": {
             "type": "positive-integer",
             "units": [
@@ -2384,7 +2356,6 @@
         {
           "id": "other",
           "title": "Is there anything else you would like to communicate with us at this time?",
-          "required": false,
           "format": {
             "type": "text",
             "multiLine": true
@@ -2413,7 +2384,6 @@
           "id": "logoUrl",
           "title": "Feel free to provide the URL to your logo here. Otherwise, we'll pull it off your website.",
           "hidden": "$not($exists(additional.logoUsage)) or additional.logoUsage = 'no'",
-          "required": false,
           "format": {
             "type": "text"
           }
