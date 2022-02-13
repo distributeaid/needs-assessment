@@ -509,7 +509,10 @@
               {
                 "id": "van",
                 "title": "Van"
-              }
+              },
+              { "id": "loadingBay", "title": "Loading Bay" },
+              { "id": "loadingRamp", "title": "Loading Ramp" },
+              { "id": "parking40ftTruck", "title": "Parking for a 40ft Truck" }
             ]
           }
         }
@@ -849,6 +852,20 @@
         {
           "id": "tents",
           "title": "Tents",
+          "required": false,
+          "format": {
+            "type": "positive-integer",
+            "units": [
+              {
+                "id": "items",
+                "title": "Individual Items"
+              }
+            ]
+          }
+        },
+        {
+          "id": "tarps",
+          "title": "Tarps",
           "required": false,
           "format": {
             "type": "positive-integer",
