@@ -3,7 +3,7 @@ import { isHidden, isRequired } from 'hooks/useResponse'
 import type { Form, MultiSelectQuestionFormat, Question } from 'schema/types'
 
 const validateResponse = (
-	answer: any,
+	answer: string | string[] | [number, string],
 	question: Question,
 	response: Response,
 ): boolean => {
@@ -12,7 +12,7 @@ const validateResponse = (
 	if (isBlank && !required) return true
 	switch (question.format.type) {
 		case 'email':
-			return /.+@.+\..+/.test(answer)
+			return /.+@.+\..+/.test(answer as string)
 		case 'text':
 			return (
 				(answer ?? '').length >= 1 &&
@@ -20,7 +20,9 @@ const validateResponse = (
 					(question.format.maxLength ?? Number.MAX_SAFE_INTEGER)
 			)
 		case 'single-select':
-			return question.format.options.map(({ id }) => id).includes(answer)
+			return question.format.options
+				.map(({ id }) => id)
+				.includes(answer as string)
 		case 'multi-select':
 			return (
 				((answer ?? []) as string[]).length > 0 &&
@@ -32,9 +34,13 @@ const validateResponse = (
 				}, true as boolean)
 			)
 		case 'positive-integer':
-			return !isNaN(parseInt(answer, 10)) && parseInt(answer, 10) > 0
+			return (
+				((answer ?? [Number.MIN_SAFE_INTEGER, '']) as [number, string])[0] > 0
+			)
 		case 'non-negative-integer':
-			return !isNaN(parseInt(answer, 10)) && parseInt(answer, 10) >= 0
+			return (
+				((answer ?? [Number.MIN_SAFE_INTEGER, '']) as [number, string])[0] >= 0
+			)
 		default:
 			return false
 	}
