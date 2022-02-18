@@ -1,4 +1,3 @@
-import type { ErrorObject } from 'ajv'
 import {
 	NextIcon,
 	OkIcon,
@@ -6,57 +5,21 @@ import {
 	WarningIcon,
 } from 'components/FeatherIcons'
 import { FormFooter, SectionComponent } from 'components/Form'
-import { useForm } from 'hooks/useForm'
+import { useAppConfig } from 'hooks/useAppConfig'
 import { isHidden, useResponse } from 'hooks/useResponse'
+import { useStoredForm } from 'hooks/useStoredForm'
 import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
-import formExample from 'schema/form.example.json'
 import type { Form as FormDefinition, Section } from 'schema/types'
-import { ajv, schemaUrl } from 'utils/validateSchema'
-import { withLocalStorage } from 'utils/withLocalStorage'
-
-const storedFormDefinition = withLocalStorage<string>({
-	key: 'formDefinition',
-	defaultValue: JSON.stringify(formExample, null, 2),
-})
-
-const validate = ajv.getSchema(schemaUrl)
 
 export const Assessment = () => {
-	const [formDefinition] = useState<string>(storedFormDefinition.get())
-	const [, setFormErrors] = useState<(ErrorObject | Error)[]>([])
-	const [, setFormValid] = useState<boolean>(false)
-	const { form: parsedFormDefinition, setForm: setParsedFormDefinition } =
-		useForm()
-
-	useEffect(() => {
-		try {
-			if (validate !== undefined) {
-				const valid = validate(JSON.parse(formDefinition))
-				setFormErrors(validate.errors ?? [])
-				setFormValid(valid as boolean)
-				if (valid === true) {
-					try {
-						setParsedFormDefinition(
-							JSON.parse(formDefinition) as FormDefinition,
-						)
-					} catch {
-						console.error(`form definition is not valid JSON`)
-					}
-				}
-			}
-		} catch (err) {
-			console.error(err)
-			setFormErrors([err as Error])
-		}
-	}, [formDefinition, setParsedFormDefinition])
+	const { formUrl } = useAppConfig()
+	const form = useStoredForm({ formUrl })
 
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
-				{parsedFormDefinition !== undefined && (
-					<SectionizedForm form={parsedFormDefinition} />
-				)}
+				{form !== undefined && <SectionizedForm form={form} />}
 			</div>
 		</main>
 	)

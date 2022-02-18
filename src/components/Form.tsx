@@ -551,7 +551,7 @@ export const Form = ({ form }: { form: FormDefinition }) => {
 }
 
 export const FormFooter = ({ form }: { form: FormDefinition }) => {
-	const { response, update, download } = useResponse()
+	const { response, update } = useResponse()
 	const { valid } = useValidation({ response, form })
 	const [consent, setDataUsageConsent] = useState<boolean>(false)
 
@@ -594,7 +594,7 @@ export const FormFooter = ({ form }: { form: FormDefinition }) => {
 					className="btn btn-primary"
 					disabled={!valid || !consent}
 					onClick={() => {
-						download()
+						// FIXME: Implement
 					}}
 				>
 					submit

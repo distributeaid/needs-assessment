@@ -3,52 +3,48 @@ import { Collapsable } from 'components/Collapsable'
 import { OkIcon, WarningIcon } from 'components/FeatherIcons'
 import { Form } from 'components/Form'
 import { ResponseTable } from 'components/ResponseTable'
+import { useAppConfig } from 'hooks/useAppConfig'
 import { useForm } from 'hooks/useForm'
+import { useFormValidator } from 'hooks/useFormValidator'
 import { useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
-import formExample from 'schema/form.example.json'
 import type { Form as FormDefinition } from 'schema/types'
-import { ajv, schemaUrl } from 'utils/validateSchema'
 import { withLocalStorage } from 'utils/withLocalStorage'
 
 const storedFormDefinition = withLocalStorage<string>({
 	key: 'formDefinition',
-	defaultValue: JSON.stringify(formExample, null, 2),
 })
-
-const validate = ajv.getSchema(schemaUrl)
 
 export const FormGenerator = () => {
 	const [formDefinition, setFormDefinition] = useState<string>(
-		storedFormDefinition.get(),
+		storedFormDefinition.get() ?? '{}',
 	)
 	const [formErrors, setFormErrors] = useState<(ErrorObject | Error)[]>([])
 	const [formValid, setFormValid] = useState<boolean>(false)
 	const { form: parseFormDefinition, setForm: setParsedFormDefinition } =
 		useForm()
+	const { schemaUrl, storageUrl } = useAppConfig()
+	const validateFn = useFormValidator({ schemaUrl })
 
 	useEffect(() => {
+		if (validateFn === undefined) return
 		try {
-			if (validate !== undefined) {
-				const valid = validate(JSON.parse(formDefinition))
-				setFormErrors(validate.errors ?? [])
-				setFormValid(valid as boolean)
-				if (valid === true) {
-					try {
-						setParsedFormDefinition(
-							JSON.parse(formDefinition) as FormDefinition,
-						)
-					} catch {
-						console.error(`form definition is not valid JSON`)
-					}
+			const valid = validateFn(JSON.parse(formDefinition))
+			setFormErrors(validateFn.errors ?? [])
+			setFormValid(valid as boolean)
+			if (valid === true) {
+				try {
+					setParsedFormDefinition(JSON.parse(formDefinition) as FormDefinition)
+				} catch {
+					console.error(`form definition is not valid JSON`)
 				}
 			}
 		} catch (err) {
 			console.error(err)
 			setFormErrors([err as Error])
 		}
-	}, [formDefinition, setParsedFormDefinition])
+	}, [formDefinition, setParsedFormDefinition, validateFn])
 
 	return (
 		<main className="container mt-4">
@@ -59,7 +55,11 @@ export const FormGenerator = () => {
 						Provide the form definition below.
 						<br />
 						The definition needs to follow the{' '}
-						<a href={schemaUrl} target={'_blank'} rel="nofollow noreferrer">
+						<a
+							href={schemaUrl.toString()}
+							target={'_blank'}
+							rel="nofollow noreferrer"
+						>
 							schema
 						</a>
 						.
@@ -86,16 +86,40 @@ export const FormGenerator = () => {
 						</ul>
 					)}
 					{formValid && <p>Form definition is valid.</p>}
-					{formValid && (
+					<fieldset className="d-flex justify-content-between">
 						<button
 							type="button"
+							className="btn btn-outline-secondary"
 							onClick={() => {
 								setFormDefinition((d) => JSON.stringify(JSON.parse(d), null, 2))
 							}}
+							disabled={!formValid}
 						>
 							format
 						</button>
-					)}
+						<button
+							type="button"
+							className="btn btn-outline-primary"
+							disabled={!formValid}
+							onClick={() => {
+								fetch(new URL('/form', storageUrl).toString(), {
+									method: 'POST',
+									mode: 'cors',
+									headers: {
+										'content-type': 'application/json',
+									},
+									body: JSON.stringify(parseFormDefinition),
+								})
+									.then((res) => {
+										console.log(res)
+										console.log(res.headers.get('Location'))
+									})
+									.catch(console.error)
+							}}
+						>
+							save
+						</button>
+					</fieldset>
 					{parseFormDefinition !== undefined && (
 						<>
 							<hr />

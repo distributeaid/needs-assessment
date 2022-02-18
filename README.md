@@ -47,6 +47,13 @@ The forms that were built using Qualtrics have been documented
 
     npm ci
 
+## Configure
+
+These environment variables must be configured:
+
+- `PUBLIC_STORAGE_URL`: URL to the storage backend
+- `PUBLIC_FORM_URL`: the URL to the form to use
+
 ## Running
 
     npm start
