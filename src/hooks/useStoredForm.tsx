@@ -29,7 +29,7 @@ export const StoredFormProvider: FunctionComponent = ({ children }) => {
 	useEffect(() => {
 		let isMounted = true
 		const formUrl = new URL(`./form/${formId}`, storageUrl)
-		console.debug(`Fetching form`, formUrl)
+		console.debug(`Fetching form`, formUrl.toString())
 		fetch(formUrl.toString(), {
 			method: 'GET',
 		})
