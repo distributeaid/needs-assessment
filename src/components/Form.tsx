@@ -511,7 +511,13 @@ export const SectionComponent = ({
 	)
 }
 
-export const Form = ({ form }: { form: FormDefinition }) => {
+export const Form = ({
+	form,
+	onSubmit,
+}: {
+	form: FormDefinition
+	onSubmit: () => void
+}) => {
 	const { response } = useResponse()
 	const { sectionValidation } = useValidation({ response, form })
 
@@ -544,13 +550,19 @@ export const Form = ({ form }: { form: FormDefinition }) => {
 			})}
 			<hr />
 			<footer>
-				<FormFooter form={form} />
+				<FormFooter form={form} onSubmit={onSubmit} />
 			</footer>
 		</form>
 	)
 }
 
-export const FormFooter = ({ form }: { form: FormDefinition }) => {
+export const FormFooter = ({
+	form,
+	onSubmit,
+}: {
+	form: FormDefinition
+	onSubmit: () => void
+}) => {
 	const { response, update } = useResponse()
 	const { valid } = useValidation({ response, form })
 	const [consent, setDataUsageConsent] = useState<boolean>(false)
@@ -594,7 +606,7 @@ export const FormFooter = ({ form }: { form: FormDefinition }) => {
 					className="btn btn-primary"
 					disabled={!valid || !consent}
 					onClick={() => {
-						// FIXME: Implement
+						onSubmit()
 					}}
 				>
 					submit

@@ -26,6 +26,7 @@ export const FormGenerator = () => {
 		useForm()
 	const { schemaUrl, storageUrl } = useAppConfig()
 	const validateFn = useFormValidator({ schemaUrl })
+	const [savedFormUrl, setSavedFormUrl] = useState<URL>()
 
 	useEffect(() => {
 		if (validateFn === undefined) return
@@ -111,8 +112,9 @@ export const FormGenerator = () => {
 									body: JSON.stringify(parseFormDefinition),
 								})
 									.then((res) => {
-										console.log(res)
-										console.log(res.headers.get('Location'))
+										setSavedFormUrl(
+											new URL(res.headers.get('Location') as string),
+										)
 									})
 									.catch(console.error)
 							}}
@@ -120,6 +122,13 @@ export const FormGenerator = () => {
 							save
 						</button>
 					</fieldset>
+					{savedFormUrl && (
+						<div className="alert alert-success mt-2">
+							Form saved:
+							<br />
+							<a href={savedFormUrl.toString()}>{savedFormUrl.toString()}</a>
+						</div>
+					)}
 					{parseFormDefinition !== undefined && (
 						<>
 							<hr />
@@ -130,7 +139,12 @@ export const FormGenerator = () => {
 				<section className="col-md-6">
 					<h2>Form will appear here:</h2>
 					{parseFormDefinition !== undefined && (
-						<Form form={parseFormDefinition} />
+						<Form
+							form={parseFormDefinition}
+							onSubmit={() => {
+								// Pass.
+							}}
+						/>
 					)}
 				</section>
 			</div>

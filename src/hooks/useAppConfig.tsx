@@ -9,7 +9,7 @@ const {
 	themeColor,
 	backgroundColor,
 	storageUrl,
-	formId,
+	defaultFormId,
 } = fromEnv({
 	version: 'PUBLIC_VERSION',
 	homepage: 'PUBLIC_HOMEPAGE',
@@ -18,7 +18,7 @@ const {
 	themeColor: 'PUBLIC_MANIFEST_THEME_COLOR',
 	backgroundColor: 'PUBLIC_MANIFEST_BACKGROUND_COLOR',
 	storageUrl: `PUBLIC_STORAGE_URL`,
-	formId: `PUBLIC_FORM_ID`,
+	defaultFormId: `PUBLIC_DEFAULT_FORM_ID`,
 })(import.meta.env)
 
 export const AppConfigContext = createContext<{
@@ -32,7 +32,7 @@ export const AppConfigContext = createContext<{
 		backgroundColor: string
 	}
 	storageUrl: URL
-	formUrl: URL
+	defaultFormId: string
 	schemaUrl: URL
 }>({
 	basename: import.meta.env.BASE_URL ?? '/',
@@ -45,8 +45,8 @@ export const AppConfigContext = createContext<{
 		backgroundColor,
 	},
 	storageUrl: new URL(storageUrl),
-	formUrl: new URL(`./form/${formId}`, storageUrl),
 	schemaUrl: new URL('./schema', storageUrl),
+	defaultFormId,
 })
 
 export const useAppConfig = () => useContext(AppConfigContext)

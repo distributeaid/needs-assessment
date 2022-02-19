@@ -5,67 +5,36 @@ import {
 	WarningIcon,
 } from 'components/FeatherIcons'
 import { FormFooter, SectionComponent } from 'components/Form'
+import { FormNavigation } from 'components/FormNavigation'
+import { FormSelector } from 'components/FormSelector'
 import { useAppConfig } from 'hooks/useAppConfig'
 import { isHidden, useResponse } from 'hooks/useResponse'
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
-import type { Form as FormDefinition, Section } from 'schema/types'
+import type { Section, StoredForm } from 'schema/types'
 
 export const Assessment = () => {
-	const { formUrl } = useAppConfig()
-	const form = useStoredForm({ formUrl })
+	const { form, error } = useStoredForm()
 
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
 				{form !== undefined && <SectionizedForm form={form} />}
+				{error !== undefined && (
+					<div className="alert alert-danger">{error.message}</div>
+				)}
 			</div>
 		</main>
 	)
 }
 
-const FormNavigation = ({
-	form,
-	navigate,
-}: {
-	form: FormDefinition
-	navigate: (id: string) => void
-}) => {
-	const { response } = useResponse()
-	const { sectionValidation } = useValidation({ response, form })
-	return (
-		<nav className="d-flex flex-column align-items-start col-md-4 mb-4">
-			{form.sections.map((section) => {
-				if (isHidden(section, response)) return null
-				return (
-					<div>
-						{sectionValidation[section.id] ? (
-							<abbr title="Section is valid.">
-								<OkIcon />
-							</abbr>
-						) : (
-							<abbr title="Section is invalid.">
-								<WarningIcon />
-							</abbr>
-						)}{' '}
-						<button
-							className="btn btn-link"
-							onClick={() => navigate(section.id)}
-						>
-							{section.title}
-						</button>
-					</div>
-				)
-			})}
-		</nav>
-	)
-}
-
-const SectionizedForm = ({ form }: { form: FormDefinition }) => {
+const SectionizedForm = ({ form }: { form: StoredForm }) => {
 	const [currentSection, setCurrentSection] = useState<string>()
 	const { response } = useResponse()
 	const { sectionValidation } = useValidation({ form, response })
+	const { storageUrl } = useAppConfig()
+	const [savedAssessmentUrl, setSavedAssessmentUrl] = useState<URL>()
 
 	useEffect(() => {
 		if (form === undefined) return
@@ -99,12 +68,6 @@ const SectionizedForm = ({ form }: { form: FormDefinition }) => {
 
 	return (
 		<>
-			<FormNavigation
-				form={form}
-				navigate={(id) => {
-					setCurrentSection(id)
-				}}
-			/>
 			<section className="col-md-6">
 				<form
 					className="form"
@@ -159,12 +122,49 @@ const SectionizedForm = ({ form }: { form: FormDefinition }) => {
 						{nextSection === undefined && (
 							<>
 								<hr />
-								<FormFooter form={form} />
+								<FormFooter
+									form={form}
+									onSubmit={() => {
+										fetch(new URL('./assessment', storageUrl).toString(), {
+											method: 'POST',
+											mode: 'cors',
+											headers: {
+												'content-type': 'application/json',
+											},
+											body: JSON.stringify({
+												form: form.$id,
+												response,
+											}),
+										})
+											.then((res) => {
+												setSavedAssessmentUrl(
+													new URL(res.headers.get('Location') as string),
+												)
+											})
+											.catch(console.error)
+									}}
+								/>
+								{savedAssessmentUrl && (
+									<div className="alert alert-success mt-4">
+										Assessment stored!
+										<br />
+										<code>{savedAssessmentUrl.toString()}</code>
+									</div>
+								)}
 							</>
 						)}
 					</footer>
 				</form>
 			</section>
+			<aside className="col-md-4">
+				<FormSelector />
+				<FormNavigation
+					form={form}
+					navigate={(id) => {
+						setCurrentSection(id)
+					}}
+				/>
+			</aside>
 		</>
 	)
 }

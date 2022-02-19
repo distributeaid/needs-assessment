@@ -65,3 +65,8 @@ export type Section = {
 export type Form = {
 	sections: Section[]
 }
+
+export type StoredForm = Form & {
+	$id: string
+	$schema: string
+}
