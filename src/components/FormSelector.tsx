@@ -26,14 +26,14 @@ export const FormSelector = () => {
 			}}
 		>
 			<div className="input-group mb-3">
-				<span className="input-group-text" id="form-id-addon">
+				<span className="input-group-text" id="form-url-addon">
 					Form ID
 				</span>
 				<input
 					type="url"
 					className="form-control"
-					placeholder="The form ID to use"
-					aria-describedby="form-id-addon"
+					placeholder="The form URL to use"
+					aria-describedby="form-url-addon"
 					value={newFormUrl}
 					onChange={({ target: { value } }) => setNewFormUrl(value)}
 				/>

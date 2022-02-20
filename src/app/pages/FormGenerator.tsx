@@ -2,6 +2,8 @@ import type { ErrorObject } from 'ajv'
 import { Collapsable } from 'components/Collapsable'
 import { OkIcon, WarningIcon } from 'components/FeatherIcons'
 import { Form } from 'components/Form'
+import { FormEditor } from 'components/FormGenerator/FormEditor'
+import { FormSource } from 'components/FormGenerator/FormSource'
 import { ResponseTable } from 'components/ResponseTable'
 import { useAppConfig } from 'hooks/useAppConfig'
 import { useForm } from 'hooks/useForm'
@@ -51,53 +53,8 @@ export const FormGenerator = () => {
 		<main className="container mt-4">
 			<div className="row justify-content-center">
 				<section className="col-md-6">
-					<h2>Define the form here:</h2>
-					<label htmlFor="form-definition">
-						Provide the form definition below.
-						<br />
-						The definition needs to follow the{' '}
-						<a
-							href={schemaUrl.toString()}
-							target={'_blank'}
-							rel="nofollow noreferrer"
-						>
-							schema
-						</a>
-						.
-					</label>
-					<textarea
-						className="form-control"
-						id="form-definition"
-						value={formDefinition}
-						onChange={({ target: { value } }) => {
-							setFormValid(false)
-							setFormDefinition(value)
-							storedFormDefinition.set(value)
-						}}
-					/>
-					{formErrors.length > 0 && (
-						<ul>
-							{formErrors.map((error, i) => (
-								<li key={i}>
-									<strong>{error.message}</strong>
-									<br />
-									{JSON.stringify(error)}
-								</li>
-							))}
-						</ul>
-					)}
-					{formValid && <p>Form definition is valid.</p>}
-					<fieldset className="d-flex justify-content-between">
-						<button
-							type="button"
-							className="btn btn-outline-secondary"
-							onClick={() => {
-								setFormDefinition((d) => JSON.stringify(JSON.parse(d), null, 2))
-							}}
-							disabled={!formValid}
-						>
-							format
-						</button>
+					<header className="d-flex justify-content-between">
+						<h2>Define the form here:</h2>
 						<button
 							type="button"
 							className="btn btn-outline-primary"
@@ -121,7 +78,7 @@ export const FormGenerator = () => {
 						>
 							save
 						</button>
-					</fieldset>
+					</header>
 					{savedFormUrl && (
 						<div className="alert alert-success mt-2">
 							Form saved:
@@ -129,12 +86,13 @@ export const FormGenerator = () => {
 							<a href={savedFormUrl.toString()}>{savedFormUrl.toString()}</a>
 						</div>
 					)}
-					{parseFormDefinition !== undefined && (
-						<>
-							<hr />
-							<Response form={parseFormDefinition} />
-						</>
-					)}
+					<hr />
+					<Collapsable title={<>Editor (work in progress)</>} id="formeditor">
+						<FormEditor />
+					</Collapsable>
+					<Collapsable title={<>JSON form definition</>} id="formsource">
+						<FormSource />
+					</Collapsable>
 				</section>
 				<section className="col-md-6">
 					<h2>Form will appear here:</h2>
@@ -145,6 +103,14 @@ export const FormGenerator = () => {
 								// Pass.
 							}}
 						/>
+					)}
+					<hr />
+					<h2>Response:</h2>
+					{parseFormDefinition !== undefined && (
+						<>
+							<hr />
+							<Response form={parseFormDefinition} />
+						</>
 					)}
 				</section>
 			</div>
