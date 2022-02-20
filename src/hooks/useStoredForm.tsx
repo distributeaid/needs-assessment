@@ -10,25 +10,24 @@ import type { StoredForm } from 'schema/types'
 
 export const StoredFormContext = createContext<{
 	form?: StoredForm
-	setFormId: (formId: string) => void
-	formId: string
+	setFormUrl: (formUrl: URL) => void
+	formUrl: URL
 	error?: Error
 }>({
-	setFormId: () => undefined,
-	formId: undefined as any,
+	setFormUrl: () => undefined,
+	formUrl: undefined as any,
 })
 
 export const useStoredForm = () => useContext(StoredFormContext)
 
 export const StoredFormProvider: FunctionComponent = ({ children }) => {
-	const { storageUrl, defaultFormId } = useAppConfig()
+	const { storageUrl, defaultFormUrl } = useAppConfig()
 	const [form, setForm] = useState<StoredForm>()
-	const [formId, setFormId] = useState<string>(defaultFormId)
+	const [formUrl, setFormUrl] = useState<URL>(defaultFormUrl)
 	const [error, setError] = useState<Error>()
 
 	useEffect(() => {
 		let isMounted = true
-		const formUrl = new URL(`./form/${formId}`, storageUrl)
 		console.debug(`Fetching form`, formUrl.toString())
 		fetch(formUrl.toString(), {
 			method: 'GET',
@@ -49,14 +48,14 @@ export const StoredFormProvider: FunctionComponent = ({ children }) => {
 		return () => {
 			isMounted = false
 		}
-	}, [formId, storageUrl])
+	}, [formUrl, storageUrl])
 
 	return (
 		<StoredFormContext.Provider
 			value={{
 				form,
-				setFormId,
-				formId,
+				setFormUrl,
+				formUrl,
 				error,
 			}}
 		>

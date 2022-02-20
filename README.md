@@ -54,7 +54,7 @@ The forms that were built using Qualtrics have been documented
 These environment variables must be configured:
 
 - `PUBLIC_STORAGE_URL`: URL to the storage backend
-- `PUBLIC_DEFAULT_FORM_ID`: the form ID of the form to use
+- `PUBLIC_DEFAULT_FORM_URL`: the form ID of the form to use
 
 ## Running
 

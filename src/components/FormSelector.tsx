@@ -1,11 +1,22 @@
+import { useAppConfig } from 'hooks/useAppConfig'
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useState } from 'react'
 
-const ulidExclusiveRegEx = /^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$/
+const isValidUrl = (url: string): boolean => {
+	try {
+		new URL(url)
+		return true
+	} catch {
+		return false
+	}
+}
 
 export const FormSelector = () => {
-	const { formId, setFormId } = useStoredForm()
-	const [newFormId, setNewFormId] = useState<string>('')
+	const { defaultFormUrl } = useAppConfig()
+	const { formUrl, setFormUrl } = useStoredForm()
+	const [newFormUrl, setNewFormUrl] = useState<string>(
+		defaultFormUrl.toString(),
+	)
 
 	return (
 		<form
@@ -19,19 +30,21 @@ export const FormSelector = () => {
 					Form ID
 				</span>
 				<input
-					type="text"
+					type="url"
 					className="form-control"
 					placeholder="The form ID to use"
 					aria-describedby="form-id-addon"
-					value={newFormId}
-					onChange={({ target: { value } }) => setNewFormId(value)}
+					value={newFormUrl}
+					onChange={({ target: { value } }) => setNewFormUrl(value)}
 				/>
 				<button
 					type="button"
 					className="btn btn-outline-secondary"
-					disabled={newFormId !== formId && !ulidExclusiveRegEx.test(newFormId)}
+					disabled={
+						newFormUrl !== formUrl.toString() && !isValidUrl(newFormUrl)
+					}
 					onClick={() => {
-						setFormId(newFormId)
+						setFormUrl(new URL(newFormUrl))
 					}}
 				>
 					change
