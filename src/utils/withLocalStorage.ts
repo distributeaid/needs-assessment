@@ -1,3 +1,5 @@
+import { parseJSON } from 'utils/parseJSON'
+
 type Freezer<T> = {
 	freeze: (unfrozen: T) => string
 	unfreeze: (frozen: string) => T
@@ -39,7 +41,7 @@ export const withLocalStorage: WithLocalStorage = <T>({
 			const stored = localStorage.getItem(key)
 			if (stored === null) return defaultValue
 			try {
-				return (freezer?.unfreeze ?? JSON.parse)(stored) as T
+				return (freezer?.unfreeze ?? parseJSON)(stored) as T
 			} catch {
 				console.error(
 					`[withLocalStorage] Failed to load stored entry for ${key} from ${stored}!`,

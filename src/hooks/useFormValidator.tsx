@@ -2,14 +2,17 @@ import Ajv, { AnySchema } from 'ajv'
 import addFormats from 'ajv-formats'
 import addKeywords from 'ajv-keywords'
 import type { AnyValidateFunction } from 'ajv/dist/core'
+import { useAppConfig } from 'hooks/useAppConfig'
 import { useEffect, useState } from 'react'
+import { parseJSON } from 'utils/parseJSON'
 
 const jsonSchemaValidator = new Ajv().getSchema(
 	'http://json-schema.org/draft-07/schema',
 )
 
-export const useFormValidator = ({ schemaUrl }: { schemaUrl: URL }) => {
+export const useFormValidator = () => {
 	const [validate, setValidate] = useState<AnyValidateFunction>()
+	const { schemaUrl } = useAppConfig()
 
 	useEffect(() => {
 		console.debug(`Fetching schema`, schemaUrl)
@@ -18,7 +21,7 @@ export const useFormValidator = ({ schemaUrl }: { schemaUrl: URL }) => {
 		})
 			.then(async (res) => res.text())
 			.then((res) => {
-				const formSchema = JSON.parse(res)
+				const formSchema = parseJSON(res)
 				const isValidJSONSchema = jsonSchemaValidator?.(formSchema)
 
 				if (isValidJSONSchema === false) {

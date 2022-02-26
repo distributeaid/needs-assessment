@@ -4,6 +4,7 @@ import { useForm } from 'hooks/useForm'
 import { useFormValidator } from 'hooks/useFormValidator'
 import { useEffect, useState } from 'react'
 import type { Form as FormDefinition } from 'schema/types'
+import { parseJSON } from 'utils/parseJSON'
 import { withLocalStorage } from 'utils/withLocalStorage'
 
 const storedFormDefinition = withLocalStorage<string>({
@@ -16,28 +17,29 @@ export const FormSource = () => {
 	)
 	const [formErrors, setFormErrors] = useState<(ErrorObject | Error)[]>([])
 	const [formValid, setFormValid] = useState<boolean>(false)
-	const { setForm: setParsedFormDefinition } = useForm()
+	const { form, setForm: setParsedFormDefinition } = useForm()
 	const { schemaUrl } = useAppConfig()
-	const validateFn = useFormValidator({ schemaUrl })
+	const validateFn = useFormValidator()
 
 	useEffect(() => {
 		if (validateFn === undefined) return
 		try {
-			const valid = validateFn(JSON.parse(formDefinition))
+			const valid = validateFn(parseJSON(formDefinition))
 			setFormErrors(validateFn.errors ?? [])
 			setFormValid(valid as boolean)
 			if (valid === true) {
-				try {
-					setParsedFormDefinition(JSON.parse(formDefinition) as FormDefinition)
-				} catch {
-					console.error(`form definition is not valid JSON`)
-				}
+				setParsedFormDefinition(parseJSON(formDefinition) as FormDefinition)
 			}
 		} catch (err) {
 			console.error(err)
 			setFormErrors([err as Error])
 		}
 	}, [formDefinition, setParsedFormDefinition, validateFn])
+
+	useEffect(() => {
+		if (form === undefined) return
+		setFormDefinition(JSON.stringify(form, null, 2))
+	}, [form])
 
 	return (
 		<>
@@ -55,7 +57,7 @@ export const FormSource = () => {
 				}}
 				onBlur={() => {
 					try {
-						setFormDefinition((d) => JSON.stringify(JSON.parse(d), null, 2))
+						setFormDefinition((d) => JSON.stringify(parseJSON(d), null, 2))
 					} catch {
 						// Pass
 					}

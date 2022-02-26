@@ -1,4 +1,3 @@
-import type { ErrorObject } from 'ajv'
 import { Collapsable } from 'components/Collapsable'
 import { OkIcon, WarningIcon } from 'components/FeatherIcons'
 import { Form } from 'components/Form'
@@ -12,6 +11,7 @@ import { useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
 import type { Form as FormDefinition } from 'schema/types'
+import { parseJSON } from 'utils/parseJSON'
 import { withLocalStorage } from 'utils/withLocalStorage'
 
 const storedFormDefinition = withLocalStorage<string>({
@@ -19,33 +19,24 @@ const storedFormDefinition = withLocalStorage<string>({
 })
 
 export const FormGenerator = () => {
-	const [formDefinition, setFormDefinition] = useState<string>(
-		storedFormDefinition.get() ?? '{}',
-	)
-	const [formErrors, setFormErrors] = useState<(ErrorObject | Error)[]>([])
+	const [formDefinition] = useState<string>(storedFormDefinition.get() ?? '{}')
 	const [formValid, setFormValid] = useState<boolean>(false)
 	const { form: parseFormDefinition, setForm: setParsedFormDefinition } =
 		useForm()
-	const { schemaUrl, storageUrl } = useAppConfig()
-	const validateFn = useFormValidator({ schemaUrl })
+	const { storageUrl } = useAppConfig()
+	const validateFn = useFormValidator()
 	const [savedFormUrl, setSavedFormUrl] = useState<URL>()
 
 	useEffect(() => {
 		if (validateFn === undefined) return
 		try {
-			const valid = validateFn(JSON.parse(formDefinition))
-			setFormErrors(validateFn.errors ?? [])
+			const valid = validateFn(parseJSON(formDefinition))
 			setFormValid(valid as boolean)
 			if (valid === true) {
-				try {
-					setParsedFormDefinition(JSON.parse(formDefinition) as FormDefinition)
-				} catch {
-					console.error(`form definition is not valid JSON`)
-				}
+				setParsedFormDefinition(parseJSON(formDefinition) as FormDefinition)
 			}
 		} catch (err) {
 			console.error(err)
-			setFormErrors([err as Error])
 		}
 	}, [formDefinition, setParsedFormDefinition, validateFn])
 

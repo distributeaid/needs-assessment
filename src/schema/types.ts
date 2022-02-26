@@ -41,8 +41,8 @@ export type NonNegativeIntegerQuestionFormat = {
 export type Question = {
 	id: string
 	title: string
-	required?: boolean | JSONatatExpression // default: true
-	hidden?: boolean | JSONatatExpression // default: true
+	required?: boolean | JSONatatExpression // default: false
+	hidden?: boolean | JSONatatExpression // default: false
 	example?: string
 	format:
 		| TextQuestionFormat
@@ -58,15 +58,15 @@ export type Question = {
 export type Section = {
 	id: string
 	title: string
-	description: string
+	description?: string
 	questions: Question[]
-	hidden?: boolean | JSONatatExpression // default: true
+	hidden?: boolean | JSONatatExpression // default: false
 }
 export type Form = {
+	$schema: string
 	sections: Section[]
 }
 
 export type StoredForm = Form & {
 	$id: string
-	$schema: string
 }

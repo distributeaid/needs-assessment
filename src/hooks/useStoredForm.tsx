@@ -1,4 +1,6 @@
+import { fromEnv } from '@nordicsemiconductor/from-env'
 import { useAppConfig } from 'hooks/useAppConfig'
+import { useFormValidator } from 'hooks/useFormValidator'
 import {
 	createContext,
 	FunctionComponent,
@@ -7,6 +9,11 @@ import {
 	useState,
 } from 'react'
 import type { StoredForm } from 'schema/types'
+import { parseJSON } from 'utils/parseJSON'
+
+const { defaultFormUrl } = fromEnv({
+	defaultFormUrl: `PUBLIC_DEFAULT_FORM_URL`,
+})(import.meta.env)
 
 export const StoredFormContext = createContext<{
 	form?: StoredForm
@@ -15,7 +22,7 @@ export const StoredFormContext = createContext<{
 	error?: Error
 }>({
 	setFormUrl: () => undefined,
-	formUrl: undefined as any,
+	formUrl: new URL(defaultFormUrl),
 })
 
 export const useStoredForm = () => useContext(StoredFormContext)
@@ -25,8 +32,10 @@ export const StoredFormProvider: FunctionComponent = ({ children }) => {
 	const [form, setForm] = useState<StoredForm>()
 	const [formUrl, setFormUrl] = useState<URL>(defaultFormUrl)
 	const [error, setError] = useState<Error>()
+	const validateForm = useFormValidator()
 
 	useEffect(() => {
+		if (validateForm === undefined) return
 		let isMounted = true
 		console.debug(`Fetching form`, formUrl.toString())
 		fetch(formUrl.toString(), {
@@ -35,8 +44,9 @@ export const StoredFormProvider: FunctionComponent = ({ children }) => {
 			.then(async (res) => res.text())
 			.then((res) => {
 				if (!isMounted) return
-				const form = JSON.parse(res)
-				setForm(form)
+				const form = parseJSON(res)
+				const valid = validateForm(form)
+				if (valid === true) setForm(form as StoredForm)
 			})
 			.catch((error) => {
 				setError(
@@ -48,7 +58,7 @@ export const StoredFormProvider: FunctionComponent = ({ children }) => {
 		return () => {
 			isMounted = false
 		}
-	}, [formUrl, storageUrl])
+	}, [formUrl, storageUrl, validateForm])
 
 	return (
 		<StoredFormContext.Provider
