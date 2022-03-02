@@ -1,4 +1,3 @@
-import { useAppConfig } from 'hooks/useAppConfig'
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useState } from 'react'
 
@@ -12,11 +11,8 @@ const isValidUrl = (url: string): boolean => {
 }
 
 export const FormSelector = () => {
-	const { defaultFormUrl } = useAppConfig()
 	const { formUrl, setFormUrl } = useStoredForm()
-	const [newFormUrl, setNewFormUrl] = useState<string>(
-		defaultFormUrl.toString(),
-	)
+	const [newFormUrl, setNewFormUrl] = useState<string>(formUrl.toString())
 
 	return (
 		<form

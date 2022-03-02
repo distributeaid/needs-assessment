@@ -43,7 +43,7 @@ export const FormGenerator = () => {
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
-				<section className="col-md-6">
+				<section className="col-md-8 col-lg-6">
 					<header className="d-flex justify-content-between">
 						<h2>Define the form here:</h2>
 						<button
@@ -85,7 +85,7 @@ export const FormGenerator = () => {
 						<FormSource />
 					</Collapsable>
 				</section>
-				<section className="col-md-6">
+				<section className="col-md-8 col-lg-6">
 					<h2>Form will appear here:</h2>
 					{parseFormDefinition !== undefined && (
 						<Form

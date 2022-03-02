@@ -6,7 +6,6 @@ import {
 } from 'components/FeatherIcons'
 import { FormFooter, SectionComponent } from 'components/Form'
 import { FormNavigation } from 'components/FormNavigation'
-import { FormSelector } from 'components/FormSelector'
 import { useAppConfig } from 'hooks/useAppConfig'
 import { isHidden, useResponse } from 'hooks/useResponse'
 import { useStoredForm } from 'hooks/useStoredForm'
@@ -68,7 +67,7 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 
 	return (
 		<>
-			<section className="col-md-6">
+			<section className="col-md-8 col-lg-6">
 				<form
 					className="form"
 					onSubmit={(event) => {
@@ -157,7 +156,6 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 				</form>
 			</section>
 			<aside className="col-md-4">
-				<FormSelector />
 				<FormNavigation
 					form={form}
 					navigate={(id) => {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export const Instructions = () => (
 	<main className="container mt-4">
 		<div className="row justify-content-center">
-			<section className="col-md-6">
+			<section className="col-md-8 col-lg-6">
 				<h1>Instructions</h1>
 				<ol>
 					<li>

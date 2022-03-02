@@ -15,6 +15,16 @@ const { defaultFormUrl } = fromEnv({
 	defaultFormUrl: `PUBLIC_DEFAULT_FORM_URL`,
 })(import.meta.env)
 
+let formUrlBoot = new URL(defaultFormUrl)
+try {
+	const formUrlFromQuery = new URLSearchParams(document.location.search).get(
+		'form',
+	)
+	if (formUrlFromQuery !== null) formUrlBoot = new URL(formUrlFromQuery)
+} catch {
+	console.debug(`Failed to load form URL from query!`)
+}
+
 export const StoredFormContext = createContext<{
 	form?: StoredForm
 	setFormUrl: (formUrl: URL) => void
@@ -22,15 +32,15 @@ export const StoredFormContext = createContext<{
 	error?: Error
 }>({
 	setFormUrl: () => undefined,
-	formUrl: new URL(defaultFormUrl),
+	formUrl: formUrlBoot,
 })
 
 export const useStoredForm = () => useContext(StoredFormContext)
 
 export const StoredFormProvider: FunctionComponent = ({ children }) => {
-	const { storageUrl, defaultFormUrl } = useAppConfig()
+	const { storageUrl } = useAppConfig()
 	const [form, setForm] = useState<StoredForm>()
-	const [formUrl, setFormUrl] = useState<URL>(defaultFormUrl)
+	const [formUrl, setFormUrl] = useState<URL>(formUrlBoot)
 	const [error, setError] = useState<Error>()
 	const validateForm = useFormValidator()
 
