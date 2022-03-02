@@ -95,16 +95,34 @@ export const Login = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
 									fetch(new URL('/login', storageUrl).toString(), {
 										method: 'POST',
 										body: JSON.stringify({ email, token }),
+										mode: 'cors',
 										credentials: 'include',
 										headers: {
 											'content-type': 'application/json',
 										},
 									})
-										.then((res) => {
+										.then(async (res) => {
 											if (res.ok) {
 												return onLoggedIn()
 											}
-											setError(new Error(`Login failed: ${res.status}`))
+											if (
+												res.headers
+													.get('content-type')
+													?.includes('application/problem+json') ??
+												false
+											) {
+												const text = await res.text()
+												const problem = JSON.parse(text)
+												setError(
+													new Error(
+														`${problem.title} (${
+															problem.status ?? res.status
+														})`,
+													),
+												)
+											} else {
+												setError(new Error(`Login failed: ${res.status}`))
+											}
 										})
 										.catch(setError)
 								}}
