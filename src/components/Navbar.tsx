@@ -64,6 +64,11 @@ export const Navbar = () => {
 									Form Generator
 								</Link>
 							</li>
+							<li className="nav-item">
+								<Link className="nav-link" to="/export" onClick={close}>
+									Export
+								</Link>
+							</li>
 						</ul>
 					</div>
 				</div>

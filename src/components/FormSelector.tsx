@@ -21,7 +21,7 @@ export const FormSelector = () => {
 				event.preventDefault()
 			}}
 		>
-			<div className="input-group mb-3">
+			<div className="input-group">
 				<span className="input-group-text" id="form-url-addon">
 					Form ID
 				</span>
