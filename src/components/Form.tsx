@@ -584,10 +584,8 @@ export const FormFooter = ({
 					<label className="form-check-label" htmlFor="data-usage-consent">
 						By continuing with this form and submitting it, you agree that you
 						understand and consent to how{' '}
-						<Link to="/privacy" target="_blank">
-							we will use your data
-						</Link>{' '}
-						and who we will share it with.
+						<Link to="/privacy">we will use your data</Link> and who we will
+						share it with.
 					</label>
 				</div>
 			</div>
