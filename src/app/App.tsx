@@ -1,3 +1,4 @@
+import { AssessmentDone } from 'app//pages/AssessmentDone'
 import { Assessment } from 'app/pages/Assessment'
 import { FormGenerator } from 'app/pages/FormGenerator'
 import { Instructions } from 'app/pages/Instructions'
@@ -22,6 +23,7 @@ export const App = () => {
 							<Route index element={<Welcome />} />
 							<Route path="/instructions" element={<Instructions />} />
 							<Route path="/assessment" element={<Assessment />} />
+							<Route path="/assessment/done" element={<AssessmentDone />} />
 							<Route path="/privacy" element={<Privacy />} />
 							<Route path="/generator" element={<FormGenerator />} />
 						</Routes>

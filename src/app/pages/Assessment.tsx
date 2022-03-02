@@ -11,6 +11,7 @@ import { isHidden, useResponse } from 'hooks/useResponse'
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { Section, StoredForm } from 'schema/types'
 
 export const Assessment = () => {
@@ -34,6 +35,7 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 	const { sectionValidation } = useValidation({ form, response })
 	const { storageUrl } = useAppConfig()
 	const [savedAssessmentUrl, setSavedAssessmentUrl] = useState<URL>()
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (form === undefined) return
@@ -139,16 +141,25 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 												setSavedAssessmentUrl(
 													new URL(res.headers.get('Location') as string),
 												)
+												navigate('/assessment/done', {
+													state: {
+														savedAssessmentUrl: res.headers.get(
+															'Location',
+														) as string,
+													},
+												})
 											})
 											.catch(console.error)
 									}}
 								/>
 								{savedAssessmentUrl && (
-									<div className="alert alert-success mt-4">
-										Assessment stored!
-										<br />
-										<code>{savedAssessmentUrl.toString()}</code>
-									</div>
+									<>
+										<div className="alert alert-success mt-4">
+											Assessment stored!
+											<br />
+											<code>{savedAssessmentUrl.toString()}</code>
+										</div>
+									</>
 								)}
 							</>
 						)}

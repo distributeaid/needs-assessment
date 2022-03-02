@@ -493,7 +493,7 @@ export const SectionComponent = ({
 
 	return (
 		<fieldset>
-			{section.description && (
+			{section.description !== undefined && (
 				<legend className="fs-6">{section.description}</legend>
 			)}
 			{section.questions.map((question) => {
