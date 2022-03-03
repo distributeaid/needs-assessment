@@ -6,6 +6,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PUBLIC_STORAGE_URL: https://storage.needs-assessment.distributeaid.dev/
   PUBLIC_DEFAULT_FORM_URL: https://storage.needs-assessment.distributeaid.dev/form/01FX5CZCM5FZ0K0EPKJJB1RPS6
+  DOMAIN: needs-assessment.distributeaid.dev
 
 jobs:
   test-and-release:
@@ -38,7 +39,6 @@ jobs:
       - name: Build
         env:
           PUBLIC_VERSION: ${{ github.sha }}
-          BASE_URL: /needs-assessment/
         run: npm run build
 
       - uses: actions/upload-artifact@v3
@@ -55,6 +55,7 @@ jobs:
           git config --global user.name "GitHub Actions"
           cd build
           touch .nojekyll
+          echo ${{ env.DOMAIN }} > CNAME
           git init
           git add -A
           git commit -m "update web app"
