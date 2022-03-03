@@ -6,6 +6,7 @@ import logo from '/logo.svg'
 export const Navbar = () => {
 	const {
 		manifest: { backgroundColor, shortName, name },
+		homepage,
 	} = useAppConfig()
 	const [navbarOpen, setNavbarOpen] = useState<boolean>(false)
 
@@ -68,6 +69,17 @@ export const Navbar = () => {
 								<Link className="nav-link" to="/export" onClick={close}>
 									Export
 								</Link>
+							</li>
+
+							<li className="nav-item">
+								<a
+									className="nav-link"
+									href={homepage.toString()}
+									target={'_blank'}
+									onClick={close}
+								>
+									GitHub
+								</a>
 							</li>
 						</ul>
 					</div>

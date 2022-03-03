@@ -4,6 +4,7 @@ import { createContext, useContext } from 'react'
 const {
 	version,
 	homepage,
+	issues,
 	shortName,
 	name,
 	themeColor,
@@ -12,6 +13,7 @@ const {
 } = fromEnv({
 	version: 'PUBLIC_VERSION',
 	homepage: 'PUBLIC_HOMEPAGE',
+	issues: 'PUBLIC_ISSUES',
 	shortName: 'PUBLIC_MANIFEST_SHORT_NAME',
 	name: 'PUBLIC_MANIFEST_NAME',
 	themeColor: 'PUBLIC_MANIFEST_THEME_COLOR',
@@ -22,7 +24,8 @@ const {
 export const AppConfigContext = createContext<{
 	basename: string
 	version: string
-	homepage: string
+	homepage: URL
+	issues: URL
 	manifest: {
 		shortName: string
 		name: string
@@ -34,7 +37,8 @@ export const AppConfigContext = createContext<{
 }>({
 	basename: import.meta.env.BASE_URL ?? '/',
 	version,
-	homepage,
+	homepage: new URL(homepage),
+	issues: new URL(issues),
 	manifest: {
 		shortName,
 		name,

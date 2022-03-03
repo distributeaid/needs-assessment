@@ -4,7 +4,11 @@ import Handlebars from 'handlebars'
 import path from 'path'
 import { defineConfig } from 'vite'
 
-const { version, homepage } = JSON.parse(
+const {
+	version,
+	homepage,
+	bugs: { url: issuesUrl },
+} = JSON.parse(
 	fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'),
 )
 
@@ -14,6 +18,7 @@ const { short_name, name, theme_color, background_color } = JSON.parse(
 
 process.env.PUBLIC_VERSION = process.env.PUBLIC_VERSION ?? version ?? Date.now()
 process.env.PUBLIC_HOMEPAGE = process.env.PUBLIC_HOMEPAGE ?? homepage
+process.env.PUBLIC_ISSUES = issuesUrl
 process.env.PUBLIC_MANIFEST_SHORT_NAME = short_name
 process.env.PUBLIC_MANIFEST_NAME = name
 process.env.PUBLIC_MANIFEST_THEME_COLOR = theme_color

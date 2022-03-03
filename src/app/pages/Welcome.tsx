@@ -1,9 +1,9 @@
 import { FormSelector } from 'components/FormSelector'
-import { useStoredForm } from 'hooks/useStoredForm'
+import { useAppConfig } from 'hooks/useAppConfig'
 import { Link } from 'react-router-dom'
 
 export const Welcome = () => {
-	const { formUrl } = useStoredForm()
+	const { issues } = useAppConfig()
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
@@ -31,6 +31,13 @@ export const Welcome = () => {
 						If you have any questions, please contact Nicole Tingle at{' '}
 						<a href="mailto:needs@distributeaid.org">needs@distributeaid.org</a>
 						. Thank you for your participation!
+					</p>
+					<p>
+						For technical feedback or improvements, please consider{' '}
+						<a href={issues.toString()} target="_blank">
+							opening an issue
+						</a>{' '}
+						in the GitHub repository for this project.
 					</p>
 					<p className="d-flex justify-content-end">
 						<Link className="btn btn-primary" to="/instructions">

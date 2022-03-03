@@ -20,7 +20,8 @@ interface ImportMeta {
 		BASE_URL?: string
 		// Custom
 		PUBLIC_VERSION: string
-		PUBLIC_HOMEPAGE?: string
+		PUBLIC_HOMEPAGE: string
+		PUBLIC_ISSUES: string
 		PUBLIC_MANIFEST_NAME: string
 		PUBLIC_MANIFEST_SHORT_NAME: string
 		PUBLIC_MANIFEST_THEME_COLOR: string
