@@ -4,8 +4,8 @@ on: push
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PUBLIC_STORAGE_URL: https://app-1d62a5a7-c07f-469f-9258-26623b53170c.cleverapps.io/
-  PUBLIC_DEFAULT_FORM_URL: https://app-1d62a5a7-c07f-469f-9258-26623b53170c.cleverapps.io/form/01FWA6ERG0CTY569NAKCQ7YMG6
+  PUBLIC_STORAGE_URL: https://storage.needs-assessment.distributeaid.dev/
+  PUBLIC_DEFAULT_FORM_URL: https://storage.needs-assessment.distributeaid.dev/form/01FX5CZCM5FZ0K0EPKJJB1RPS6
 
 jobs:
   test-and-release:
