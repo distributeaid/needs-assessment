@@ -1,5 +1,5 @@
 import { useAppConfig } from 'hooks/useAppConfig'
-import { useState } from 'react'
+import { FocusEvent, useState } from 'react'
 
 export const Login = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
 	const { storageUrl } = useAppConfig()
@@ -83,6 +83,9 @@ export const Login = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
 								pattern="^[0-9]{6}$"
 								value={token}
 								onChange={({ target: { value } }) => setToken(value)}
+								onWheel={(e) => {
+									;(e as unknown as FocusEvent<HTMLInputElement>).target.blur()
+								}}
 							/>
 						</div>
 						<div className="mb-3 d-flex justify-content-end">

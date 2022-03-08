@@ -3,7 +3,12 @@ import { Collapsable } from 'components/Collapsable'
 import { OkIcon, WarningIcon } from 'components/FeatherIcons'
 import { isHidden, isRequired, useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
-import { FunctionComponent, PropsWithChildren, useState } from 'react'
+import {
+	FocusEvent,
+	FunctionComponent,
+	PropsWithChildren,
+	useState,
+} from 'react'
 import { Link } from 'react-router-dom'
 import type {
 	Form as FormDefinition,
@@ -158,6 +163,9 @@ const IntegerInput = ({
 				<input
 					required={required}
 					type="number"
+					onWheel={(e) => {
+						;(e as unknown as FocusEvent<HTMLInputElement>).target.blur()
+					}}
 					min={Math.max(
 						lowerBound ?? Number.MIN_SAFE_INTEGER,
 						Math.abs(min ?? lowerBound ?? Number.MIN_SAFE_INTEGER),
