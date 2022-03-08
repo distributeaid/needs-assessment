@@ -2,7 +2,11 @@ import { useAppConfig } from 'hooks/useAppConfig'
 import { FocusEvent, useState } from 'react'
 import { handleResponse } from 'utils/handleResponse'
 
-export const Login = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
+export const Login = ({
+	onLoggedIn,
+}: {
+	onLoggedIn: (userInfo: { isAdmin: boolean; email: string }) => void
+}) => {
 	const { storageUrl } = useAppConfig()
 	const [email, setEmail] = useState<string>('')
 	const [token, setToken] = useState<string>('')
@@ -105,7 +109,12 @@ export const Login = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
 											'content-type': 'application/json',
 										},
 									})
-										.then(handleResponse(() => onLoggedIn(), setError))
+										.then(
+											handleResponse(
+												async (res) => onLoggedIn(await res.json()),
+												setError,
+											),
+										)
 										.catch(setError)
 								}}
 							>
