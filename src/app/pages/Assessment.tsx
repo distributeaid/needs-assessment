@@ -13,6 +13,7 @@ import { useValidation } from 'hooks/useValidation'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { Section, StoredForm } from 'schema/types'
+import { handleResponse } from 'utils/handleResponse'
 
 export const Assessment = () => {
 	const { form, error } = useStoredForm()
@@ -36,6 +37,8 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 	const { storageUrl } = useAppConfig()
 	const [savedAssessmentUrl, setSavedAssessmentUrl] = useState<URL>()
 	const navigate = useNavigate()
+	const [error, setError] = useState<Error>()
+	const { issues } = useAppConfig()
 
 	useEffect(() => {
 		if (form === undefined) return
@@ -126,6 +129,7 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 								<FormFooter
 									form={form}
 									onSubmit={() => {
+										setError(undefined)
 										fetch(new URL('./assessment', storageUrl).toString(), {
 											method: 'POST',
 											mode: 'cors',
@@ -137,21 +141,43 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 												response,
 											}),
 										})
-											.then((res) => {
-												setSavedAssessmentUrl(
-													new URL(res.headers.get('Location') as string),
-												)
-												navigate('/assessment/done', {
-													state: {
-														savedAssessmentUrl: res.headers.get(
-															'Location',
-														) as string,
-													},
-												})
-											})
-											.catch(console.error)
+											.then(
+												handleResponse((res) => {
+													try {
+														setSavedAssessmentUrl(
+															new URL(res.headers.get('Location') as string),
+														)
+														navigate('/assessment/done', {
+															state: {
+																savedAssessmentUrl: res.headers.get(
+																	'Location',
+																) as string,
+															},
+														})
+													} catch (error) {
+														setError(error as Error)
+													}
+												}, setError),
+											)
+											.catch(setError)
 									}}
 								/>
+								{error && (
+									<div className="alert alert-danger mt-4">
+										{error.message}
+										<br />
+										An unexpected technical error has occured. This is a bug,
+										please consider{' '}
+										<a
+											href={issues.toString()}
+											target="_blank"
+											rel="noreferrer"
+										>
+											opening an issue
+										</a>{' '}
+										in the GitHub repository for this project.
+									</div>
+								)}
 								{savedAssessmentUrl && (
 									<>
 										<div className="alert alert-success mt-4">

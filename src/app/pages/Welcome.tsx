@@ -34,7 +34,7 @@ export const Welcome = () => {
 					</p>
 					<p>
 						For technical feedback or improvements, please consider{' '}
-						<a href={issues.toString()} target="_blank">
+						<a href={issues.toString()} target="_blank" rel="noreferrer">
 							opening an issue
 						</a>{' '}
 						in the GitHub repository for this project.

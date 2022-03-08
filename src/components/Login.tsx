@@ -1,5 +1,6 @@
 import { useAppConfig } from 'hooks/useAppConfig'
 import { FocusEvent, useState } from 'react'
+import { handleResponse } from 'utils/handleResponse'
 
 export const Login = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
 	const { storageUrl } = useAppConfig()
@@ -104,29 +105,7 @@ export const Login = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
 											'content-type': 'application/json',
 										},
 									})
-										.then(async (res) => {
-											if (res.ok) {
-												return onLoggedIn()
-											}
-											if (
-												res.headers
-													.get('content-type')
-													?.includes('application/problem+json') ??
-												false
-											) {
-												const text = await res.text()
-												const problem = JSON.parse(text)
-												setError(
-													new Error(
-														`${problem.title} (${
-															problem.status ?? res.status
-														})`,
-													),
-												)
-											} else {
-												setError(new Error(`Login failed: ${res.status}`))
-											}
-										})
+										.then(handleResponse(() => onLoggedIn(), setError))
 										.catch(setError)
 								}}
 							>
