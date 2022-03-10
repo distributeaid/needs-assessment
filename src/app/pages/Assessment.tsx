@@ -17,16 +17,20 @@ import type { Section, StoredForm } from 'schema/types'
 import { handleResponse } from 'utils/handleResponse'
 
 export const Assessment = () => {
-	const { form, error } = useStoredForm()
+	const { form, fetchError: error } = useStoredForm()
 
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
 				{form !== undefined && <SectionizedForm form={form} />}
-				{error !== undefined && (
-					<div className="alert alert-danger">{error.message}</div>
-				)}
 			</div>
+			{error !== undefined && (
+				<div className="row">
+					<section className="col-md-8 col-lg-6 offset-lg-1">
+						<div className="alert alert-danger">{error.message}</div>
+					</section>
+				</div>
+			)}
 		</main>
 	)
 }

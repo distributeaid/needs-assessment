@@ -34,6 +34,10 @@ export const AppConfigContext = createContext<{
 	}
 	storageUrl: URL
 	schemaUrl: URL
+	contact: {
+		name: string
+		email: string
+	}
 }>({
 	basename: import.meta.env.BASE_URL ?? '/',
 	version,
@@ -47,6 +51,10 @@ export const AppConfigContext = createContext<{
 	},
 	storageUrl: new URL(storageUrl),
 	schemaUrl: new URL('./schema', storageUrl),
+	contact: {
+		name: 'Nicole Tingle',
+		email: `needs@distributeaid.org`,
+	},
 })
 
 export const useAppConfig = () => useContext(AppConfigContext)

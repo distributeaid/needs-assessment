@@ -1,7 +1,7 @@
 export const Privacy = () => (
 	<main className="container mt-4">
 		<div className="row justify-content-center">
-			<section className="col-md-8 col-lg-6">
+			<section className="col-md-10 col-lg-6">
 				<h1>Privacy Policy</h1>
 				<p>
 					This privacy policy will explain how our organization uses the

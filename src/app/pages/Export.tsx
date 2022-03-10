@@ -11,7 +11,7 @@ export const Export = () => {
 		return (
 			<main className="container mt-4">
 				<div className="row justify-content-center">
-					<section className="col-md-8 col-lg-6">
+					<section className="col-md-10 col-lg-6">
 						<div className="alert alert-success d-flex justify-content-between align-items-center">
 							<span>
 								Successfully logged in as <code>{userInfo?.email}</code>.
@@ -36,7 +36,7 @@ export const Export = () => {
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
-				<section className="col-md-8 col-lg-6">
+				<section className="col-md-10 col-lg-6">
 					<Login
 						onLoggedIn={(userInfo) => {
 							setIsLoggedIn(true)

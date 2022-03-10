@@ -1,13 +1,16 @@
 import { FormSelector } from 'components/FormSelector'
 import { useAppConfig } from 'hooks/useAppConfig'
-import { Link } from 'react-router-dom'
+import { useStoredForm } from 'hooks/useStoredForm'
+import { useNavigate } from 'react-router-dom'
 
 export const Welcome = () => {
-	const { issues } = useAppConfig()
+	const { issues, contact } = useAppConfig()
+	const { fetchError, formError, form, formUrl } = useStoredForm()
+	const navigate = useNavigate()
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
-				<section className="col-md-8 col-lg-6">
+				<section className="col-md-10 col-lg-6">
 					<h1>Welcome</h1>
 					<p>
 						Thank you for filling out our regional needs assessment survey! The
@@ -28,9 +31,9 @@ export const Welcome = () => {
 						individual group responses will be anonymized to protect privacy.
 					</p>
 					<p>
-						If you have any questions, please contact Nicole Tingle at{' '}
-						<a href="mailto:needs@distributeaid.org">needs@distributeaid.org</a>
-						. Thank you for your participation!
+						If you have any questions, please contact {contact.name} at{' '}
+						<a href={`mailto:${contact.email}`}>{contact.email}</a>. Thank you
+						for your participation!
 					</p>
 					<p>
 						For technical feedback or improvements, please consider{' '}
@@ -40,17 +43,61 @@ export const Welcome = () => {
 						in the GitHub repository for this project.
 					</p>
 					<p className="d-flex justify-content-end">
-						<Link className="btn btn-primary" to="/instructions">
+						<button
+							type="button"
+							className="btn btn-primary"
+							onClick={() => {
+								navigate('/instructions')
+							}}
+							disabled={fetchError !== undefined || formError !== undefined}
+						>
 							Start needs assessment
-						</Link>
+						</button>
 					</p>
 				</section>
 			</div>
-			<footer className="row justify-content-center">
-				<section className="col-md-8 col-lg-6">
-					<hr />
-					<FormSelector />
+			<footer>
+				<section className="row justify-content-center">
+					<div className="col-md-10 col-lg-6">
+						<hr />
+						<FormSelector />
+					</div>
 				</section>
+				{fetchError !== undefined && (
+					<div className="row justify-content-center mt-2">
+						<section className="col-md-10 col-lg-6">
+							<div className="alert alert-danger">{fetchError.message}</div>
+						</section>
+					</div>
+				)}
+				{formError !== undefined && (
+					<div className="row justify-content-center mt-2">
+						<section className="col-md-10 col-lg-6">
+							<div className="alert alert-danger">
+								<p>{formError.message}</p>
+								{formError.reason === 'idMismatch' && (
+									<>
+										<p>
+											You will not be able to submit this form, because the $id
+											of the fetched form <code>{form?.$id ?? ''}</code> does
+											not match the ID it was loaded from{' '}
+											<code>{formUrl.toString()}</code>.
+										</p>
+										<p>
+											This can happen if you are using a wrong or outdate link
+											to this application.
+										</p>
+										<p className="mb-0">
+											Please contact {contact.name} at{' '}
+											<a href={`mailto:${contact.email}`}>{contact.email}</a> to
+											request an up-to-date link.
+										</p>
+									</>
+								)}
+							</div>
+						</section>
+					</div>
+				)}
 			</footer>
 		</main>
 	)

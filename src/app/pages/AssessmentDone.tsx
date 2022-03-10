@@ -5,13 +5,13 @@ export const AssessmentDone = () => {
 	return (
 		<main className="container mt-4">
 			<div className="row justify-content-center">
-				<section className="col-md-8 col-lg-6">
+				<section className="col-md-10 col-lg-6">
 					<h1>Thank you!</h1>
 					<p>Your assessment has been recorded.</p>
 				</section>
 			</div>
 			<div className="row justify-content-center">
-				<footer className="col-md-8 col-lg-6">
+				<footer className="col-md-10 col-lg-6">
 					<hr />
 					<p>
 						<small>

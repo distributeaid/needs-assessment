@@ -10,8 +10,14 @@ export const handleResponse =
 		) {
 			const text = await res.text()
 			const problem = JSON.parse(text)
-			onError(new Error(`${problem.title} (${problem.status ?? res.status})`))
+			onError(
+				new Error(
+					`${problem.title} (${problem.status ?? res.status}). ${
+						problem.detail !== undefined ? problem.detail : ''
+					}`,
+				),
+			)
 		} else {
-			onError(new Error(`Request failed: ${res.status}`))
+			onError(new Error(`Request failed (${res.status}).`))
 		}
 	}
