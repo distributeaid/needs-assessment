@@ -6,6 +6,7 @@ import { Instructions } from 'app/pages/Instructions'
 import { Privacy } from 'app/pages/Privacy'
 import { Welcome } from 'app/pages/Welcome'
 import { Navbar } from 'components/Navbar'
+import { RedirectFrom404 } from 'components/RedirectFrom404'
 import { useAppConfig } from 'hooks/useAppConfig'
 import { FormProvider } from 'hooks/useForm'
 import { ResponseProvider } from 'hooks/useResponse'
@@ -29,6 +30,7 @@ export const App = () => {
 							<Route path="/generator" element={<FormGenerator />} />
 							<Route path="/export" element={<Export />} />
 						</Routes>
+						<RedirectFrom404 />
 					</Router>
 				</ResponseProvider>
 			</StoredFormProvider>
