@@ -104,8 +104,13 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 									type="button"
 									className="btn btn-outline-secondary d-flex align-items-center"
 									onClick={() => {
-										if (prevSection !== undefined)
+										if (prevSection !== undefined) {
+											window.scrollTo({
+												top: 0,
+												behavior: 'smooth',
+											})
 											setCurrentSection(prevSection.id)
+										}
 									}}
 								>
 									<PrevIcon />
@@ -119,8 +124,13 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 									className="btn btn-primary  d-flex align-items-center"
 									disabled={!sectionValidation[section.id]}
 									onClick={() => {
-										if (nextSection !== undefined)
+										if (nextSection !== undefined) {
+											window.scrollTo({
+												top: 0,
+												behavior: 'smooth',
+											})
 											setCurrentSection(nextSection.id)
+										}
 									}}
 								>
 									<span>{nextSection.title}</span>
