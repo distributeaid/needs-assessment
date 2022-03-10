@@ -1,3 +1,4 @@
+import { TechFeedback } from 'components/TechFeedback'
 import { useLocation } from 'react-router-dom'
 
 export const AssessmentDone = () => {
@@ -20,6 +21,13 @@ export const AssessmentDone = () => {
 							<code>{(state as any).savedAssessmentUrl}</code>
 						</small>
 					</p>
+					<div className="alert alert-warning">
+						<strong>Note:</strong> The URL above does not work. It is the unique
+						submission URL of your assessment, but only accessible for
+						Distribute Aid Needs Assessment administrators. You may use it to
+						reference your submission.
+					</div>
+					<TechFeedback />
 				</footer>
 			</div>
 		</main>

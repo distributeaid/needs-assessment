@@ -1,10 +1,11 @@
 import { FormSelector } from 'components/FormSelector'
+import { TechFeedback } from 'components/TechFeedback'
 import { useAppConfig } from 'hooks/useAppConfig'
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useNavigate } from 'react-router-dom'
 
 export const Welcome = () => {
-	const { issues, contact } = useAppConfig()
+	const { contact } = useAppConfig()
 	const { fetchError, formError, form, formUrl } = useStoredForm()
 	const navigate = useNavigate()
 	return (
@@ -35,13 +36,7 @@ export const Welcome = () => {
 						<a href={`mailto:${contact.email}`}>{contact.email}</a>. Thank you
 						for your participation!
 					</p>
-					<p>
-						For technical feedback or improvements, please consider{' '}
-						<a href={issues.toString()} target="_blank" rel="noreferrer">
-							opening an issue
-						</a>{' '}
-						in the GitHub repository for this project.
-					</p>
+					<TechFeedback />
 					<p className="d-flex justify-content-end">
 						<button
 							type="button"
