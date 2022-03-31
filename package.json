@@ -42,7 +42,7 @@
     "jsonata": "1.8.6",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-router-dom": "6.2.2"
+    "react-router-dom": "6.3.0"
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.47",
