@@ -93,7 +93,7 @@ export const Privacy = () => (
 				</p>
 				<h2 className="mt-4">How do we store your data?</h2>
 				<p>
-					Distribute Aid securely stores your data in Google Suite (Gmail,
+					Distribute Aid securely stores your data in Clever Cloud, Google Suite (Gmail,
 					Sheets, Docs), Prezi, Qualtrics, Notion, and Contentful. Access to
 					these platforms is only available to relevant Distribute Aid
 					volunteers who have signed an agreement in line with our privacy
