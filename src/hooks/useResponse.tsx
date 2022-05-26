@@ -1,5 +1,11 @@
 import { useForm } from 'hooks/useForm'
-import { createContext, FunctionComponent, useContext, useState } from 'react'
+import {
+	createContext,
+	FunctionComponent,
+	ReactNode,
+	useContext,
+	useState,
+} from 'react'
 import { evaluateJSONataExpression } from 'utils/evaluateJSONataExpression'
 import { withLocalStorage } from 'utils/withLocalStorage'
 
@@ -58,7 +64,9 @@ export const isRequired = (
 	})
 }
 
-export const ResponseProvider: FunctionComponent = ({ children }) => {
+export const ResponseProvider: FunctionComponent<{ children: ReactNode }> = ({
+	children,
+}) => {
 	const [response, update] = useState<Response>(storedResponse.get())
 	const { form } = useForm()
 

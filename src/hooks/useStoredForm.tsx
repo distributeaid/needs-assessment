@@ -4,6 +4,7 @@ import { useFormValidator } from 'hooks/useFormValidator'
 import {
 	createContext,
 	FunctionComponent,
+	ReactNode,
 	useContext,
 	useEffect,
 	useState,
@@ -48,7 +49,9 @@ export const StoredFormContext = createContext<{
 
 export const useStoredForm = () => useContext(StoredFormContext)
 
-export const StoredFormProvider: FunctionComponent = ({ children }) => {
+export const StoredFormProvider: FunctionComponent<{ children: ReactNode }> = ({
+	children,
+}) => {
 	const { storageUrl } = useAppConfig()
 	const [form, setForm] = useState<StoredForm>()
 	const [formUrl, setFormUrl] = useState<URL>(formUrlBoot)
