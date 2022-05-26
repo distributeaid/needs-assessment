@@ -1,4 +1,10 @@
-import { createContext, FunctionComponent, useContext, useState } from 'react'
+import {
+	createContext,
+	FunctionComponent,
+	ReactNode,
+	useContext,
+	useState,
+} from 'react'
 import type { Form } from 'schema/types'
 
 export const FormContext = createContext<{
@@ -10,7 +16,9 @@ export const FormContext = createContext<{
 
 export const useForm = () => useContext(FormContext)
 
-export const FormProvider: FunctionComponent = ({ children }) => {
+export const FormProvider: FunctionComponent<{ children: ReactNode }> = ({
+	children,
+}) => {
 	const [form, setForm] = useState<Form>()
 
 	return (
