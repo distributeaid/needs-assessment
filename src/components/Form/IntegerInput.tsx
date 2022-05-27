@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { QuestionInfo } from 'components/Form/QuestionInfo'
 import { useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
-import type { FocusEvent } from 'react'
+import { FocusEvent, useEffect, useState } from 'react'
 import type {
 	Form as FormDefinition,
 	Option,
@@ -30,18 +30,32 @@ export const IntegerInput = ({
 	units: Option[]
 }) => {
 	const { response, update } = useResponse()
-	const [value, unit] = response?.[section.id]?.[question.id] ?? []
 	const { validation } = useValidation({ response, form })
-	const setValue = ({ value, unit }: { value: string; unit: string }) => {
-		const v = parseInt(value, 10)
+	const [unit, setUnit] = useState<string>(
+		response?.[section.id]?.[question.id]?.[1] ?? units[0].id,
+	)
+	const [value, setValue] = useState<string>(
+		response?.[section.id]?.[question.id]?.[0] ?? '',
+	)
+
+	const setValueAndUnit = (v?: [number, string]) => {
 		update({
 			...response,
 			[section.id]: {
 				...response?.[section.id],
-				[question.id]: isNaN(v) ? undefined : [v, unit],
+				[question.id]: v,
 			},
 		})
 	}
+
+	useEffect(() => {
+		const v = parseInt(value, 10)
+		if (isNaN(v)) {
+			setValueAndUnit(undefined)
+		} else {
+			setValueAndUnit([v, unit])
+		}
+	}, [value, unit])
 
 	const hasInput = value !== undefined && unit !== undefined
 	const isValid = hasInput && (validation[section.id]?.[question.id] ?? true)
@@ -76,9 +90,7 @@ export const IntegerInput = ({
 							: undefined
 					}
 					value={value ?? ''}
-					onChange={({ target: { value } }) =>
-						setValue({ value, unit: unit ?? units[0].id })
-					}
+					onChange={({ target: { value } }) => setValue(value)}
 				/>
 				{units.length === 1 && (
 					<span className="input-group-text">{units[0].title}</span>
@@ -86,9 +98,9 @@ export const IntegerInput = ({
 				{units.length > 1 && (
 					<select
 						className="form-select"
-						value={unit ?? units[0].id}
+						value={unit}
 						onChange={({ target: { value: unit } }) => {
-							setValue({ value, unit })
+							setUnit(unit)
 						}}
 					>
 						{units.map((unit) => (
