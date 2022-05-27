@@ -4,7 +4,7 @@ import {
 	PrevIcon,
 	WarningIcon,
 } from 'components/FeatherIcons'
-import { SectionComponent } from 'components/Form'
+import { SectionComponent } from 'components/Form/Section'
 import { FormFooter } from 'components/FormFooter'
 import { FormNavigation } from 'components/FormNavigation'
 import { useAppConfig } from 'hooks/useAppConfig'
