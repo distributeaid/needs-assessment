@@ -4,8 +4,10 @@ import { useState } from 'react'
 
 export const Export = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-	const [userInfo, setUserInfo] =
-		useState<{ isAdmin: boolean; email: string }>()
+	const [userInfo, setUserInfo] = useState<{
+		isAdmin: boolean
+		email: string
+	}>()
 
 	if (isLoggedIn)
 		return (
