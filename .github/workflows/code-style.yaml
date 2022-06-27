@@ -3,7 +3,7 @@ name: Ensure source code is properly formatted
 on: pull_request
 
 jobs:
-  prettier:
+  style:
     runs-on: ubuntu-latest
 
     steps:
