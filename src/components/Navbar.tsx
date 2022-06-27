@@ -77,6 +77,7 @@ export const Navbar = () => {
 									href={homepage.toString()}
 									target={'_blank'}
 									onClick={close}
+									rel="noreferrer"
 								>
 									GitHub
 								</a>
