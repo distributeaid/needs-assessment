@@ -25,11 +25,19 @@ jobs:
       - name: Compile TypeScript
         run: npx tsc
 
-      - name: Run prettier
+      - name: Format source code with prettier
         run: npx prettier --write ./
 
-      - name: Fail if changes exist
-        run: git diff --exit-code --name-only
+      - name: Check source code with eslint
+        run: npx eslint --fix --ext .js,.ts,.jsx,.tsx 'src/**'
 
-      - name: Run eslint
-        run: npx eslint --ext .js,.ts,.jsx,.tsx 'src/**'
+      - name: Commit changes
+        run: |
+          if ! git diff --exit-code --name-only; then
+            echo "machine github.com login accesskey password ${{ secrets.GITHUB_TOKEN }}" > ~/.netrc
+            git config --global user.email "actions@example.com"
+            git config --global user.name "GitHub Actions"
+            git add -A
+            git commit -m "style: ensure source code is properly formatted"
+            git push
+          fi
