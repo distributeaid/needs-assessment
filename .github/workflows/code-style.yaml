@@ -26,10 +26,10 @@ jobs:
         run: npx tsc
 
       - name: Run prettier
-        run: |
-          npx prettier --write ./
-          # Fail if changes exist
-          git diff --exit-code --name-only
+        run: npx prettier --write ./
+
+      - name: Fail if changes exist
+        run: git diff --exit-code --name-only
 
       - name: Run eslint
         run: npx eslint --ext .js,.ts,.jsx,.tsx 'src/**'
