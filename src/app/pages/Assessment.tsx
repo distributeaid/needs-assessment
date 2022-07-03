@@ -8,6 +8,7 @@ import { SectionComponent } from 'components/Form/Section'
 import { FormFooter } from 'components/FormFooter'
 import { FormNavigation } from 'components/FormNavigation'
 import { useAppConfig } from 'hooks/useAppConfig'
+import { useCorrection } from 'hooks/useCorrection'
 import { isHidden, useResponse } from 'hooks/useResponse'
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useValidation } from 'hooks/useValidation'
@@ -18,9 +19,21 @@ import { handleResponse } from 'utils/handleResponse'
 
 export const Assessment = () => {
 	const { form, fetchError: error } = useStoredForm()
+	const { submission } = useCorrection()
 
 	return (
 		<main className="container mt-4">
+			{submission !== undefined && (
+				<header className="row">
+					<section className="col-md-12 col-lg-10 offset-lg-1">
+						<div className="alert alert-warning">
+							<strong>Correction mode!</strong> You are in the process of
+							providing a correction to the submission{' '}
+							<code>{submission.$id.toString()}</code>!
+						</div>
+					</section>
+				</header>
+			)}
 			<div className="row justify-content-center">
 				{form !== undefined && <SectionizedForm form={form} />}
 			</div>
@@ -44,6 +57,7 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 	const navigate = useNavigate()
 	const [error, setError] = useState<Error>()
 	const { issues } = useAppConfig()
+	const { submission } = useCorrection()
 
 	useEffect(() => {
 		if (form === undefined) return
@@ -145,17 +159,45 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 									form={form}
 									onSubmit={() => {
 										setError(undefined)
-										fetch(new URL('./assessment', storageUrl).toString(), {
-											method: 'POST',
-											mode: 'cors',
-											headers: {
-												'content-type': 'application/json',
-											},
-											body: JSON.stringify({
-												form: form.$id,
-												response,
-											}),
-										})
+
+										let fetchPromise: ReturnType<typeof fetch>
+
+										if (submission !== undefined) {
+											// Correction
+											fetchPromise = fetch(
+												new URL('./correction', storageUrl).toString(),
+												{
+													method: 'POST',
+													mode: 'cors',
+													credentials: 'include',
+													headers: {
+														'content-type': 'application/json',
+														'if-match': `${submission.version}`,
+													},
+													body: JSON.stringify({
+														submission: submission?.$id.toString(),
+														form: form.$id,
+														response,
+													}),
+												},
+											)
+										} else {
+											fetchPromise = fetch(
+												new URL('./assessment', storageUrl).toString(),
+												{
+													method: 'POST',
+													mode: 'cors',
+													headers: {
+														'content-type': 'application/json',
+													},
+													body: JSON.stringify({
+														form: form.$id,
+														response,
+													}),
+												},
+											)
+										}
+										fetchPromise
 											.then(
 												handleResponse((res) => {
 													try {
@@ -215,11 +257,20 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 					}}
 				/>
 				<hr />
-				<p>
-					<small>
-						Form: <code>{form.$id}</code>
-					</small>
-				</p>
+				<dl>
+					{submission !== undefined && (
+						<>
+							<dt>Submission</dt>
+							<dd>
+								<code>{submission.$id.toString()}</code>
+							</dd>
+						</>
+					)}
+					<dt>Form</dt>
+					<dd>
+						<code>{form.$id}</code>
+					</dd>
+				</dl>
 			</aside>
 		</>
 	)

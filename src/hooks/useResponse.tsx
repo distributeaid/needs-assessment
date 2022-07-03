@@ -19,9 +19,11 @@ const storedResponse = withLocalStorage<Response>({
 export const ResponseContext = createContext<{
 	response: Response
 	update: (response: Response) => void
+	clear: () => void
 }>({
 	response: {},
 	update: () => undefined,
+	clear: () => undefined,
 })
 
 export const useResponse = () => useContext(ResponseContext)
@@ -92,6 +94,10 @@ export const ResponseProvider: FunctionComponent<{ children: ReactNode }> = ({
 					})
 					update(response)
 					storedResponse.set(response)
+				},
+				clear: () => {
+					update({})
+					storedResponse.destroy()
 				},
 			}}
 		>

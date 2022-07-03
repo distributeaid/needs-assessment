@@ -69,11 +69,18 @@ export const Navbar = () => {
 								</Link>
 							</li>
 							{isLoggedIn && (
-								<li className="nav-item">
-									<Link className="nav-link" to="/export" onClick={close}>
-										Export
-									</Link>
-								</li>
+								<>
+									<li className="nav-item">
+										<Link className="nav-link" to="/correction" onClick={close}>
+											Correction
+										</Link>
+									</li>
+									<li className="nav-item">
+										<Link className="nav-link" to="/export" onClick={close}>
+											Export
+										</Link>
+									</li>
+								</>
 							)}
 							<li className="nav-item">
 								<a

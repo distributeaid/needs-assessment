@@ -1,14 +1,6 @@
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useState } from 'react'
-
-const isValidUrl = (url: string): boolean => {
-	try {
-		new URL(url)
-		return true
-	} catch {
-		return false
-	}
-}
+import { isValidUrl } from 'utils/isValidUrl'
 
 export const FormSelector = () => {
 	const { formUrl, setFormUrl } = useStoredForm()
