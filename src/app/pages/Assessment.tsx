@@ -214,6 +214,12 @@ const SectionizedForm = ({ form }: { form: StoredForm }) => {
 						setCurrentSection(id)
 					}}
 				/>
+				<hr />
+				<p>
+					<small>
+						Form: <code>{form.$id}</code>
+					</small>
+				</p>
 			</aside>
 		</>
 	)
