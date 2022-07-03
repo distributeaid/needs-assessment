@@ -4,20 +4,13 @@ import { useStoredForm } from 'hooks/useStoredForm'
 
 export const ulidRegEx = /[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}/
 
-export const Download = ({ isAdmin }: { isAdmin?: boolean }) => {
+export const Download = () => {
 	const { storageUrl } = useAppConfig()
 	const { formUrl } = useStoredForm()
 
 	return (
 		<>
 			<h1>Download submissions</h1>
-			{isAdmin !== true && (
-				<div className="alert alert-warning">
-					Your email is not recognized as an administrator.
-					<br />
-					Export is disabled.
-				</div>
-			)}
 			<p>
 				To download all submission for the current form, click <em>export</em>.
 			</p>
@@ -26,7 +19,6 @@ export const Download = ({ isAdmin }: { isAdmin?: boolean }) => {
 				<button
 					type="button"
 					className="btn btn-primary ms-3"
-					disabled={isAdmin !== true}
 					onClick={() => {
 						fetch(new URL('/assessment/export', storageUrl).toString(), {
 							method: 'POST',

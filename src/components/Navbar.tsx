@@ -1,4 +1,5 @@
 import { useAppConfig } from 'hooks/useAppConfig'
+import { useAuth } from 'hooks/useAuth'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '/logo.svg'
@@ -13,6 +14,8 @@ export const Navbar = () => {
 	const close = () => {
 		setNavbarOpen(false)
 	}
+
+	const { isLoggedIn, logout } = useAuth()
 
 	return (
 		<header>
@@ -65,12 +68,13 @@ export const Navbar = () => {
 									Form Generator
 								</Link>
 							</li>
-							<li className="nav-item">
-								<Link className="nav-link" to="/export" onClick={close}>
-									Export
-								</Link>
-							</li>
-
+							{isLoggedIn && (
+								<li className="nav-item">
+									<Link className="nav-link" to="/export" onClick={close}>
+										Export
+									</Link>
+								</li>
+							)}
 							<li className="nav-item">
 								<a
 									className="nav-link"
@@ -83,6 +87,33 @@ export const Navbar = () => {
 								</a>
 							</li>
 						</ul>
+						<nav className="d-flex">
+							<ul className="navbar-nav me-auto">
+								{!isLoggedIn && (
+									<li className="nav-item">
+										<Link className="nav-link" to="/login" onClick={close}>
+											Log in
+										</Link>
+									</li>
+								)}
+								{isLoggedIn && (
+									<li className="nav-item">
+										<button
+											className="btn btn-link nav-link"
+											type="button"
+											onClick={() => {
+												close()
+												logout().catch((err) =>
+													console.error(`[Navbar] logout failed!`, err),
+												)
+											}}
+										>
+											Log out
+										</button>
+									</li>
+								)}
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</nav>
