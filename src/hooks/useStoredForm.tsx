@@ -97,6 +97,8 @@ export const StoredFormProvider: FunctionComponent<{ children: ReactNode }> = ({
 		if (form === undefined) return
 		if (form.$id !== formUrl.toString()) {
 			setFormError(new FormError(`Form IDs do not match!`, 'idMismatch'))
+		} else {
+			setFormError(undefined)
 		}
 	}, [formUrl, form])
 
