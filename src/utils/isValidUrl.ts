@@ -1,4 +1,5 @@
-export const isValidUrl = (url: string): boolean => {
+export const isValidUrl = (url?: string): boolean => {
+	if (url === undefined) return false
 	try {
 		new URL(url)
 		return true

@@ -1,13 +1,24 @@
+import { useAppConfig } from 'hooks/useAppConfig'
 import { useCorrection } from 'hooks/useCorrection'
 import { useStoredForm } from 'hooks/useStoredForm'
 import { useState } from 'react'
-import { isValidUrl } from 'utils/isValidUrl'
 
 export const SubmissionLoader = () => {
-	const [submissionUrl, setSubmissionUrl] = useState<string>('')
-	const [error, setError] = useState<Error>()
 	const { load, submission } = useCorrection()
+	const [submissionId, setSubmissionId] = useState<string>('')
+	const [error, setError] = useState<Error>()
 	const { formUrl } = useStoredForm()
+	const { storageUrl } = useAppConfig()
+
+	let submissionUrl: URL | undefined
+	try {
+		submissionUrl = new URL(
+			submissionId,
+			`${storageUrl.toString().replace(/\$/, '')}assessment/`,
+		)
+	} catch (err) {
+		// Invalid URL
+	}
 
 	return (
 		<>
@@ -26,16 +37,18 @@ export const SubmissionLoader = () => {
 						className="form-control"
 						placeholder="The submission to load"
 						aria-describedby="submission-url-addon"
-						value={submissionUrl}
-						onChange={({ target: { value } }) => setSubmissionUrl(value)}
+						value={submissionId}
+						onChange={({ target: { value } }) => setSubmissionId(value)}
 					/>
 					<button
 						type="button"
 						className="btn btn-outline-secondary"
-						disabled={!isValidUrl(submissionUrl)}
+						disabled={submissionUrl === undefined}
 						onClick={() => {
-							setError(undefined)
-							load(new URL(submissionUrl)).catch(setError)
+							if (submissionUrl !== undefined) {
+								setError(undefined)
+								load(submissionUrl).catch(setError)
+							}
 						}}
 					>
 						load
