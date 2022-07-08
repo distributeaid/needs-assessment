@@ -59,7 +59,7 @@
     "eslint-plugin-no-restricted-imports": "0.0.0",
     "handlebars": "4.7.7",
     "jest": "28.1.2",
-    "vite": "2.9.13"
+    "vite": "2.9.14"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
