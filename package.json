@@ -47,7 +47,7 @@
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.100",
     "@nordicsemiconductor/object-to-env": "4.1.1",
-    "@swc/jest": "0.2.21",
+    "@swc/jest": "0.2.22",
     "@types/classnames": "2.3.1",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "28.1.6",
