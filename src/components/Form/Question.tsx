@@ -1,5 +1,6 @@
 import { IntegerInput } from 'components/Form/IntegerInput'
 import { MultiSelectInput } from 'components/Form/MultiSelectInput'
+import { RegionInput } from 'components/Form/RegionInput'
 import { SingleSelectInput } from 'components/Form/SingleSelectInput'
 import { TextInput } from 'components/Form/TextInput'
 import { isRequired, useResponse } from 'hooks/useResponse'
@@ -65,6 +66,15 @@ export const QuestionComponent = ({
 		case 'multi-select':
 			return (
 				<MultiSelectInput
+					form={form}
+					section={section}
+					question={question}
+					required={required}
+				/>
+			)
+		case 'region':
+			return (
+				<RegionInput
 					form={form}
 					section={section}
 					question={question}

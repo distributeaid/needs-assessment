@@ -41,6 +41,10 @@ const validateResponse = (
 			return (
 				((answer ?? [Number.MIN_SAFE_INTEGER, '']) as [number, string])[0] >= 0
 			)
+		case 'region':
+			return question.format.regions
+				.map(({ id }) => id)
+				.includes(answer as string)
 		default:
 			return false
 	}

@@ -1,3 +1,5 @@
+import type { countries } from 'schema/countries'
+
 export type JSONatatExpression = string
 
 export type Option = {
@@ -38,6 +40,15 @@ export type NonNegativeIntegerQuestionFormat = {
 	type: 'non-negative-integer'
 } & IntegerQuestionFormat
 
+export type RegionQuestionFormat = {
+	type: 'region'
+	regions: {
+		id: string
+		locality: string
+		countryCode: keyof typeof countries | '00' // 00 is reserved to provide an "other country" option
+	}[]
+}
+
 export type Question = {
 	id: string
 	title: string
@@ -53,6 +64,7 @@ export type Question = {
 		| NonNegativeIntegerQuestionFormat
 		| SingleSelectQuestionFormat
 		| MultiSelectQuestionFormat
+		| RegionQuestionFormat
 }
 
 export type Section = {
