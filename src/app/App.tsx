@@ -6,6 +6,7 @@ import { FormGenerator } from 'app/pages/FormGenerator'
 import { Instructions } from 'app/pages/Instructions'
 import { Login } from 'app/pages/Login'
 import { Privacy } from 'app/pages/Privacy'
+import { Summary } from 'app/pages/Summary'
 import { Welcome } from 'app/pages/Welcome'
 import { Navbar } from 'components/Navbar'
 import { RedirectFrom404 } from 'components/RedirectFrom404'
@@ -36,6 +37,7 @@ export const App = () => {
 									<Route path="/generator" element={<FormGenerator />} />
 									<Route path="/correction" element={<Correction />} />
 									<Route path="/export" element={<Export />} />
+									<Route path="/summary" element={<Summary />} />
 									<Route path="/login" element={<Login />} />
 								</Routes>
 								<RedirectFrom404 />

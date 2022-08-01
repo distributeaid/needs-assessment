@@ -68,6 +68,11 @@ export const Navbar = () => {
 									Form Generator
 								</Link>
 							</li>
+							<li className="nav-item">
+								<Link className="nav-link" to="/summary" onClick={close}>
+									Summary Charts
+								</Link>
+							</li>
 							{isLoggedIn && (
 								<>
 									<li className="nav-item">
