@@ -51,7 +51,7 @@
     "@swc/jest": "0.2.22",
     "@types/classnames": "2.3.1",
     "@types/feather-icons": "4.7.0",
-    "@types/jest": "28.1.7",
+    "@types/jest": "28.1.8",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
     "@vitejs/plugin-react": "2.0.1",
