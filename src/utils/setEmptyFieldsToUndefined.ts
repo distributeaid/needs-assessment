@@ -10,7 +10,7 @@
  * // returns { c: 123 }
  */
 export const setEmptyFieldsToUndefined = <T>(data: T): T => {
-	if (typeof data === 'object') {
+	if (data !== null && typeof data === 'object') {
 		const objectWithoutNulls = { ...data } as any
 		Object.keys(data).forEach((key) => {
 			if (objectWithoutNulls[key] == null || objectWithoutNulls[key] === '') {
