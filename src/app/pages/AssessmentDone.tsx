@@ -18,7 +18,7 @@ export const AssessmentDone = () => {
 						<small>
 							Submission ID:
 							<br />
-							<code>{(state as any).savedAssessmentUrl}</code>
+							<code>{state.savedAssessmentUrl}</code>
 						</small>
 					</p>
 					<div className="alert alert-warning">
