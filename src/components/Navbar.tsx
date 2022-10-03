@@ -1,3 +1,4 @@
+import { ExpiresCountdown } from 'components/ExpiresCountdown'
 import { useAppConfig } from 'hooks/useAppConfig'
 import { useAuth } from 'hooks/useAuth'
 import { useState } from 'react'
@@ -109,20 +110,25 @@ export const Navbar = () => {
 									</li>
 								)}
 								{isLoggedIn && (
-									<li className="nav-item">
-										<button
-											className="btn btn-link nav-link"
-											type="button"
-											onClick={() => {
-												close()
-												logout().catch((err) =>
-													console.error(`[Navbar] logout failed!`, err),
-												)
-											}}
-										>
-											Log out
-										</button>
-									</li>
+									<>
+										<li className="nav-item">
+											<ExpiresCountdown />
+										</li>
+										<li className="nav-item">
+											<button
+												className="btn btn-link nav-link"
+												type="button"
+												onClick={() => {
+													close()
+													logout().catch((err) =>
+														console.error(`[Navbar] logout failed!`, err),
+													)
+												}}
+											>
+												Log out
+											</button>
+										</li>
+									</>
 								)}
 							</ul>
 						</nav>

@@ -1,5 +1,6 @@
 import { useAuth } from 'hooks/useAuth'
 import { FocusEvent, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export const Login = () => {
 	const [email, setEmail] = useState<string>('')
@@ -11,6 +12,7 @@ export const Login = () => {
 	const tokenIsValid = /^[0-9]{6}$/.test(token)
 
 	const { isLoggedIn, login, register, user, logout } = useAuth()
+	const { state } = useLocation()
 
 	if (isLoggedIn)
 		return (
@@ -41,6 +43,11 @@ export const Login = () => {
 		<main className="container mt-4">
 			<div className="row justify-content-center">
 				<section className="col-md-10 col-lg-6">
+					{(state?.autoLogout ?? false) === true && (
+						<div className="alert alert-warning">
+							You have been automatically logged out because of inactivity.
+						</div>
+					)}
 					<h1>Login</h1>
 					<form
 						className="form"

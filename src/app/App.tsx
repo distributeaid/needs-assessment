@@ -8,6 +8,7 @@ import { Login } from 'app/pages/Login'
 import { Privacy } from 'app/pages/Privacy'
 import { Summary } from 'app/pages/Summary'
 import { Welcome } from 'app/pages/Welcome'
+import { AutoLogout } from 'components/AutoLogout'
 import { Navbar } from 'components/Navbar'
 import { RedirectFrom404 } from 'components/RedirectFrom404'
 import { useAppConfig } from 'hooks/useAppConfig'
@@ -41,6 +42,7 @@ export const App = () => {
 									<Route path="/login" element={<Login />} />
 								</Routes>
 								<RedirectFrom404 />
+								<AutoLogout />
 							</Router>
 						</CorrectionProvider>
 					</ResponseProvider>
