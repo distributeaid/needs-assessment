@@ -11,7 +11,7 @@ export const RedirectFrom404 = () => {
 	useEffect(() => {
 		if (redirect === null) return
 		navigate(redirect)
-	}, [redirect])
+	}, [navigate])
 
 	return null
 }

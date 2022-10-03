@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { QuestionInfo } from 'components/Form/QuestionInfo'
 import { useResponse } from 'hooks/useResponse'
 import { useValidation } from 'hooks/useValidation'
-import { FocusEvent, useEffect, useState } from 'react'
+import { FocusEvent, useCallback, useEffect, useState } from 'react'
 import type {
 	Form as FormDefinition,
 	Option,
@@ -38,15 +38,18 @@ export const IntegerInput = ({
 		response?.[section.id]?.[question.id]?.[0] ?? '',
 	)
 
-	const setValueAndUnit = (v?: [number, string]) => {
-		update({
-			...response,
-			[section.id]: {
-				...response?.[section.id],
-				[question.id]: v,
-			},
-		})
-	}
+	const setValueAndUnit = useCallback(
+		(v?: [number, string]) => {
+			update({
+				...response,
+				[section.id]: {
+					...response?.[section.id],
+					[question.id]: v,
+				},
+			})
+		},
+		[response, question, section, update],
+	)
 
 	useEffect(() => {
 		const v = parseInt(value, 10)
@@ -55,7 +58,7 @@ export const IntegerInput = ({
 		} else {
 			setValueAndUnit([v, unit])
 		}
-	}, [value, unit])
+	}, [value, unit, setValueAndUnit])
 
 	const hasInput = value !== undefined && unit !== undefined
 	const isValid = hasInput && (validation[section.id]?.[question.id] ?? true)

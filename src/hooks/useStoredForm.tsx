@@ -5,6 +5,7 @@ import {
 	createContext,
 	FunctionComponent,
 	ReactNode,
+	useCallback,
 	useContext,
 	useEffect,
 	useState,
@@ -59,12 +60,15 @@ export const StoredFormProvider: FunctionComponent<{ children: ReactNode }> = ({
 	const [formError, setFormError] = useState<FormError>()
 	const validateForm = useFormValidator()
 
-	const toFetchError = (error: Error) =>
-		setFetchError(
-			new Error(
-				`There was an error fetching the form ${formUrl}: ${error.message}`,
+	const toFetchError = useCallback(
+		(error: Error) =>
+			setFetchError(
+				new Error(
+					`There was an error fetching the form ${formUrl}: ${error.message}`,
+				),
 			),
-		)
+		[formUrl],
+	)
 
 	useEffect(() => {
 		if (validateForm === undefined) return
@@ -91,7 +95,7 @@ export const StoredFormProvider: FunctionComponent<{ children: ReactNode }> = ({
 		return () => {
 			isMounted = false
 		}
-	}, [formUrl, storageUrl, validateForm])
+	}, [formUrl, storageUrl, validateForm, toFetchError])
 
 	useEffect(() => {
 		if (form === undefined) return
