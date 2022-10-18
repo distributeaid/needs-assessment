@@ -29,7 +29,7 @@
   "author": "Distribute Aid | https://distributeaid.org/",
   "license": "AGPL-3.0-only",
   "dependencies": {
-    "@amcharts/amcharts5": "5.2.30",
+    "@amcharts/amcharts5": "5.2.31",
     "@nordicsemiconductor/from-env": "1.0.2",
     "ajv": "8.11.0",
     "ajv-formats": "2.1.1",
