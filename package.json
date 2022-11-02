@@ -30,7 +30,7 @@
   "license": "AGPL-3.0-only",
   "dependencies": {
     "@amcharts/amcharts5": "5.2.31",
-    "@nordicsemiconductor/from-env": "1.0.2",
+    "@nordicsemiconductor/from-env": "1.0.3",
     "ajv": "8.11.0",
     "ajv-formats": "2.1.1",
     "ajv-keywords": "5.1.0",
