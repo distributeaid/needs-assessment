@@ -50,7 +50,7 @@
     "@nordicsemiconductor/object-to-env": "4.1.2",
     "@swc/jest": "0.2.23",
     "@types/classnames": "2.3.1",
-    "@types/feather-icons": "4.7.0",
+    "@types/feather-icons": "4.29.0",
     "@types/jest": "29.2.3",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
