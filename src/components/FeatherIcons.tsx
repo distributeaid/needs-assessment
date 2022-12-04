@@ -1,5 +1,9 @@
 import styles from 'components/FeatherIcons.module.css'
-import { icons as featherIcons } from 'feather-icons'
+import {
+	FeatherAttributes,
+	FeatherIcon as FeatherIconType,
+	icons as featherIcons,
+} from 'feather-icons'
 
 type IconOptions = {
 	/** defaults to 1.5 */
@@ -13,7 +17,7 @@ type IconOptions = {
 }
 
 // Must be wrapped in an element: https://github.com/reactjs/rfcs/pull/129
-const wrapSvg = (options: IconOptions) => (f: typeof featherIcons[0]) =>
+const wrapSvg = (options: IconOptions) => (f: FeatherIconType) =>
 	(
 		<span
 			className={`${options.className ?? ''} ${
@@ -30,7 +34,7 @@ const wrapSvg = (options: IconOptions) => (f: typeof featherIcons[0]) =>
 					'stroke-width': `${options.strokeWidth ?? '1.5'}px`,
 					width: `${options.size ?? 20}px`,
 					height: `${options.size ?? 20}px`,
-				}),
+				} as FeatherAttributes),
 			}}
 		/>
 	)
