@@ -40,13 +40,13 @@
     "fast-deep-equal": "3.1.3",
     "feather-icons": "4.29.0",
     "inter-ui": "3.19.3",
-    "jsonata": "2.0.0",
+    "jsonata": ">=1.8.6 <2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.5.0"
   },
   "devDependencies": {
-    "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.159",
+    "@nordicsemiconductor/asset-tracker-cloud-code-style": "11.0.160",
     "@nordicsemiconductor/object-to-env": "4.1.2",
     "@swc/jest": "0.2.24",
     "@types/classnames": "2.3.1",
