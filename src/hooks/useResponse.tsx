@@ -1,8 +1,10 @@
 import { useForm } from 'hooks/useForm'
+import { isEqual } from 'lodash'
 import {
 	createContext,
 	FunctionComponent,
 	ReactNode,
+	useCallback,
 	useContext,
 	useState,
 } from 'react'
@@ -72,29 +74,37 @@ export const ResponseProvider: FunctionComponent<{ children: ReactNode }> = ({
 	const [response, update] = useState<Response>(storedResponse.get())
 	const { form } = useForm()
 
+	const updateResponse = useCallback(
+		(newResponse: Response) => {
+			// remove answers from all hidden sections and questions
+			form?.sections.forEach((section) => {
+				if (isHidden(section, newResponse)) {
+					newResponse[section.id] = undefined
+				} else {
+					section.questions.forEach((question) => {
+						if (
+							isHidden(question, newResponse) &&
+							newResponse[section.id]?.[question.id] !== undefined
+						) {
+							newResponse[section.id][question.id] = undefined
+						}
+					})
+				}
+			})
+
+			if (!isEqual(response, newResponse)) {
+				update(newResponse)
+				storedResponse.set(newResponse)
+			}
+		},
+		[update, form, response],
+	)
+
 	return (
 		<ResponseContext.Provider
 			value={{
 				response,
-				update: (response) => {
-					// remove answers from all hidden sections and questions
-					form?.sections.forEach((section) => {
-						if (isHidden(section, response)) {
-							response[section.id] = undefined
-						} else {
-							section.questions.forEach((question) => {
-								if (
-									isHidden(question, response) &&
-									response[section.id]?.[question.id] !== undefined
-								) {
-									response[section.id][question.id] = undefined
-								}
-							})
-						}
-					})
-					update(response)
-					storedResponse.set(response)
-				},
+				update: updateResponse,
 				clear: () => {
 					update({})
 					storedResponse.destroy()
