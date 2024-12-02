@@ -1,4 +1,5 @@
 import { ExpiresCountdown } from 'components/ExpiresCountdown'
+import { LanguageSelector } from 'components/LanguageSelector'
 import { useAppConfig } from 'hooks/useAppConfig'
 import { useAuth } from 'hooks/useAuth'
 import { useState } from 'react'
@@ -102,6 +103,9 @@ export const Navbar = () => {
 						</ul>
 						<nav className="d-flex">
 							<ul className="navbar-nav me-auto">
+								<li className="nav-item">
+									<LanguageSelector />
+								</li>
 								{!isLoggedIn && (
 									<li className="nav-item">
 										<Link className="nav-link" to="/login" onClick={close}>

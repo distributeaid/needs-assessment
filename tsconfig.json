@@ -12,7 +12,6 @@
     "noEmit": true,
     "jsx": "preserve",
     "noFallthroughCasesInSwitch": true,
-    "importsNotUsedAsValues": "error",
     "baseUrl": "src",
     "paths": {
       "app/*": ["app/*"],
